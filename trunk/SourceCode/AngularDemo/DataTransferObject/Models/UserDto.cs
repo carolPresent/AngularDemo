@@ -1,5 +1,8 @@
 ﻿namespace DataTransferObject.Models
 {
+    /// <summary>
+    /// UserDto containing information of user.
+    /// </summary>
     public class UserDto
     {
         public string FirstName { get; set; }

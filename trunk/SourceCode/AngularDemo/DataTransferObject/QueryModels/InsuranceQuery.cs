@@ -4,6 +4,9 @@ using System;
 
 namespace DataTransferObject.QueryModels
 {
+    /// <summary>
+    /// Class containing fields for querying on insurances.
+    /// </summary>
     public class InsuranceQuery : QueryInterface
     {
         public string _Id { get; set; }

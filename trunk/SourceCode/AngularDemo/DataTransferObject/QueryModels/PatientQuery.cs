@@ -4,6 +4,9 @@ using System;
 
 namespace DataTransferObject.QueryModels
 {
+    /// <summary>
+    /// Class containing fields for querying in patients.
+    /// </summary>
     public class PatientQuery : QueryInterface
     {
         public string _Id { get; set; }

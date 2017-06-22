@@ -2,6 +2,9 @@
 
 namespace DataTransferObject.Models
 {
+    /// <summary>
+    /// Login DTO class
+    /// </summary>
     public class LoginDto
     {
         public string LoginId { get; set; }

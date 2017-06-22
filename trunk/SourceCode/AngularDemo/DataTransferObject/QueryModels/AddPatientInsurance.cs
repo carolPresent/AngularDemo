@@ -2,6 +2,9 @@
 
 namespace DataTransferObject.QueryModels
 {
+    /// <summary>
+    /// Model to add a new patient insurance.
+    /// </summary>
     public class AddPatientInsurance
     {
         public int PatientId { get; set; }

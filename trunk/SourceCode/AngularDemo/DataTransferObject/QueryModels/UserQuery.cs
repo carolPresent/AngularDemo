@@ -3,6 +3,9 @@ using DataTransferObject.Interfaces;
 
 namespace DataTransferObject.QueryModels
 {
+    /// <summary>
+    /// Class containing fields for querying in users.
+    /// </summary>
     public class UserQuery : QueryInterface
     {
         public string Name { get; set; }

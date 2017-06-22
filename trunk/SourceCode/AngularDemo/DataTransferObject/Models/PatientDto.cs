@@ -1,5 +1,8 @@
 ﻿namespace DataTransferObject.Models
 {
+    /// <summary>
+    /// Patient DTO class
+    /// </summary>
     public class PatientDto
     {
         public int Id { get; set; }

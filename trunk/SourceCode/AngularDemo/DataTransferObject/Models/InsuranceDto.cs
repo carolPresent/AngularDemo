@@ -1,5 +1,8 @@
-﻿    namespace DataTransferObject.Models
+﻿namespace DataTransferObject.Models
 {
+    /// <summary>
+    /// Insurance DTO class
+    /// </summary>
     public class InsuranceDto
     {
         public int Id { get; set; }
