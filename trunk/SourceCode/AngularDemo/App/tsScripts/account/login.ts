@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿//This is the login component.
+
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppComponent } from '../app';
@@ -19,9 +21,11 @@ export class LoginComponent {
         }
     }
 
-    private userId: string = '';
-    private userPassword: string = '';
+    //Private variable of the component.
+    private userId: string = AppSettings.Empty;
+    private userPassword: string = AppSettings.Empty;
 
+    //Private functions of the component.
     private navigateToRegister() {
         this.router.navigate(['./register']);
     }
@@ -37,7 +41,7 @@ export class LoginComponent {
                     location.href = "/Home/Main";
                 }
                 else {
-                    alert('Id or password is wrong');
+                    alert(AppSettings.InvalidLoginRequest);
                     return;
                 }
             },

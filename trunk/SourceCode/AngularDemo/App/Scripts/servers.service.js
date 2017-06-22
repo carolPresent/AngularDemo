@@ -1,4 +1,5 @@
 "use strict";
+//This is the service module which interacts with HTTP and making AJAX request. All components can access its methods.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,10 +24,10 @@ var ServerService = (function () {
         if (!authCookie)
             return;
         var token = JSON.parse(this.appComponent.getKey(appSettings_1.AppSettings.AuthCookie));
-        headers.append('Authorization', 'Bearer ' + token.access_token);
+        headers.append(appSettings_1.AppSettings.Authorization, token.token_type + appSettings_1.AppSettings.Space + token.access_token);
     };
     ServerService.prototype.createLoginHeaders = function (headers) {
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append(appSettings_1.AppSettings.ContentType, appSettings_1.AppSettings.UrlEncoded);
     };
     ServerService.prototype.loginRequest = function (url, data) {
         var headers = new http_1.Headers();

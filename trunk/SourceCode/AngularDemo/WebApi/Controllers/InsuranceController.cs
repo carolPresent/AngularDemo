@@ -6,17 +6,20 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebApi.Constants;
+using WebApi.Utilities;
 
 namespace WebApi.Controllers
 {
     /// <summary>
     /// Web api controller for insurance services.
     /// </summary>
+    [CustomException]
     [Authorize]
     [Route(RouteNames.Insurance)]
     public class InsuranceController : ApiController
     {
         private readonly InsuranceService _services;
+
         public InsuranceController()
         {
             _services = new InsuranceService();

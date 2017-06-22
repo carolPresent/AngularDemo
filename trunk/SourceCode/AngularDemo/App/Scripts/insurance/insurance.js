@@ -1,4 +1,5 @@
 "use strict";
+//This is the insurance component.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,12 +20,14 @@ var InsuranceComponent = (function () {
         this.serverService = serverService;
         this.appComponent = appComponent;
         this.router = router;
+        //Insurance model to add/save a new insurance.
         this.insuranceModel = {
             Name: '',
             Address: '',
             PhoneNumber: 0,
             InsurancePublicId: ''
         };
+        //Private variables of component.
         this.insName = '';
         this.insAddress = '';
         this.insPublicId = '';
@@ -38,6 +41,7 @@ var InsuranceComponent = (function () {
             this.router.navigate(['./Home/Main']);
         }
     };
+    //Private functions of component.
     InsuranceComponent.prototype.saveInsurance = function () {
         var _this = this;
         this.setInsuranceModel();

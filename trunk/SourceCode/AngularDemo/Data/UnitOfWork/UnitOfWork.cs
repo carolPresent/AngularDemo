@@ -5,6 +5,9 @@ using System;
 
 namespace Data.UnitOfWork
 {
+    /// <summary>
+    /// Implements IDisposable and IUnitOfWork.
+    /// </summary>
     public class UnitOfWork : IUnitOFWork,IDisposable
     {
         private readonly AngularDemoContext _context;

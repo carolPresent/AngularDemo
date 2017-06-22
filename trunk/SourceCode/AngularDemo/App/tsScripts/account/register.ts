@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿//This is the register component.
+
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppComponent } from '../app';
@@ -13,12 +15,12 @@ import { AppSettings } from '../appSettings';
 export class RegisterComponent {
     constructor(private appComponent: AppComponent, private serverService: ServerService, private router: Router) { }
 
-    private firstName: string = '';
-    private middleName: string = '';
-    private lastName: string = '';
-    private userId: string = '';
-    private userPassword: string = '';
-
+    //Private variables of the component.
+    private firstName: string = AppSettings.Empty;
+    private middleName: string = AppSettings.Empty;
+    private lastName: string = AppSettings.Empty;
+    private userId: string = AppSettings.Empty;
+    private userPassword: string = AppSettings.Empty;
     private valFirstName: boolean = false;
     private valMiddleName: boolean = false;
     private valLastName: boolean = false;
@@ -26,14 +28,16 @@ export class RegisterComponent {
     private valUserPassword: boolean = false;
     private messageOnUserIdInput: string = '';
 
+    //User model to register.
     private userModel = {
-        FirstName: '',
-        MiddleName: '',
-        LastName: '',
-        UserId: '',
-        UserPassword: ''
+        FirstName: AppSettings.Empty,
+        MiddleName: AppSettings.Empty,
+        LastName: AppSettings.Empty,
+        UserId: AppSettings.Empty,
+        UserPassword: AppSettings.Empty
     }
 
+    //Private functions of the component.
     private sendRegisterRequest() {
         this.setUserModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.Account, this.userModel).subscribe(
@@ -46,7 +50,7 @@ export class RegisterComponent {
                         this.setValidationFlagOn(body.data);
                     }
                 } else {
-                    alert(`Error ${response.status}`);
+                    alert(`${AppSettings.Error} ${response.status}`);
                 }
             },
             (error) => {
@@ -61,19 +65,19 @@ export class RegisterComponent {
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
-            case "FirstName": this.valFirstName = true;
+            case AppSettings.FirstName: this.valFirstName = true;
                 break;
-            case "MiddleName": this.valMiddleName = true;
+            case AppSettings.MiddleName: this.valMiddleName = true;
                 break;
-            case "LastName": this.valLastName = true;
+            case AppSettings.LastName: this.valLastName = true;
                 break;
-            case "UserId": this.valUserId = true;
-                this.messageOnUserIdInput = 'Invalid';
+            case AppSettings.UserId: this.valUserId = true;
+                this.messageOnUserIdInput = AppSettings.Invalid;
                 break;
-            case "UserPassword": this.valUserPassword = true;
+            case AppSettings.UserPassword: this.valUserPassword = true;
                 break;
-            case "UserAlreadyExist": this.valUserId = true;
-                this.messageOnUserIdInput = 'Already taken';
+            case AppSettings.UserAlreadyExist: this.valUserId = true;
+                this.messageOnUserIdInput = AppSettings.AlreadyTaken;
                 break;
         }
     }
@@ -87,7 +91,7 @@ export class RegisterComponent {
     }
 
     private resetUserdata() {
-        this.firstName = this.middleName = this.lastName = this.userId = this.userPassword = '';
+        this.firstName = this.middleName = this.lastName = this.userId = this.userPassword = AppSettings.Empty;
     }
 
     private resetValidationKeys() {

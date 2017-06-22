@@ -1,4 +1,5 @@
 "use strict";
+//This is the point where './main.ts' hits
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,6 +24,7 @@ var servers_service_1 = require("./servers.service");
 var login_1 = require("./account/login");
 var logout_1 = require("./account/logout");
 var register_1 = require("./account/register");
+//Registering routes in angular router.
 var appRoutes = [
     {
         path: 'patient',
@@ -54,6 +56,7 @@ var appRoutes = [
         component: register_1.RegisterComponent
     }
 ];
+//Various imports, declarations, providers, injectables via NgModule
 var AppModule = (function () {
     function AppModule() {
     }

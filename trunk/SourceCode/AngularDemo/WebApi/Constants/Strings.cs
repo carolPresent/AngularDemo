@@ -1,5 +1,8 @@
 ﻿namespace WebApi.Constants
 {
+    /// <summary>
+    /// Constant class containing string constants used in API.
+    /// </summary>
     public class Strings
     {
         public const string All = "*";

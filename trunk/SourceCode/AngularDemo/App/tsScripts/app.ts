@@ -1,4 +1,6 @@
-﻿import { Component, Injectable } from '@angular/core';
+﻿//This is the initial template where all child templates are rendered.
+
+import { Component, Injectable } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 
 import { AppSettings } from './appSettings';
@@ -18,12 +20,14 @@ export class AppComponent {
 
     public loggedIn: boolean = false;
 
+    //Checking whether user is logged in or not.
     private checkCookie() {
         if (this.getObject(AppSettings.AuthCookie)) {
             this.loggedIn = true;
         }
     }
 
+    //Few methods for CRUD on cookies.
     removeKey(key: string) {
         this.__cookieService.remove(key);
     }

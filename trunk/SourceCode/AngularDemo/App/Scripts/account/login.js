@@ -1,4 +1,5 @@
 "use strict";
+//This is the login component.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,14 +20,16 @@ var LoginComponent = (function () {
         this.appComponent = appComponent;
         this.serverService = serverService;
         this.router = router;
-        this.userId = '';
-        this.userPassword = '';
+        //Private variable of the component.
+        this.userId = appSettings_1.AppSettings.Empty;
+        this.userPassword = appSettings_1.AppSettings.Empty;
     }
     LoginComponent.prototype.ngOnInit = function () {
         if (this.appComponent.loggedIn) {
             this.router.navigate(['./patient']);
         }
     };
+    //Private functions of the component.
     LoginComponent.prototype.navigateToRegister = function () {
         this.router.navigate(['./register']);
     };
@@ -41,7 +44,7 @@ var LoginComponent = (function () {
                 location.href = "/Home/Main";
             }
             else {
-                alert('Id or password is wrong');
+                alert(appSettings_1.AppSettings.InvalidLoginRequest);
                 return;
             }
         }, function (error) { return console.log(error); });

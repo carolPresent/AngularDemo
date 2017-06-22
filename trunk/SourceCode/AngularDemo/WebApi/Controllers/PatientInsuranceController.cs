@@ -13,11 +13,13 @@ namespace WebApi.Controllers
     /// <summary>
     /// Web Api controller for patient insurance.
     /// </summary>
+    [CustomException]
     [Authorize]
     [Route(RouteNames.PatientInsurance)]
     public class PatientInsuranceController : ApiController
     {
         private readonly PatientInsuranceService _services;
+
         public PatientInsuranceController()
         {
             _services = new PatientInsuranceService();

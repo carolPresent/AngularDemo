@@ -7,6 +7,11 @@ using System.Linq.Expressions;
 
 namespace Data.Respository
 {
+    /// <summary>
+    /// Class for implementing IRepository methods. Include basic CRUD operations.
+    /// </summary>
+    /// <typeparam name="TDBContext"></typeparam>
+    /// <typeparam name="TEntity"></typeparam>
     public class RepositoryBase<TDBContext,TEntity>:
         IRepository<TEntity>
         where TEntity:class

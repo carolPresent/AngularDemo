@@ -1,4 +1,6 @@
-﻿import { NgModule } from '@angular/core';
+﻿//This is the point where './main.ts' hits
+
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -17,6 +19,7 @@ import { LoginComponent } from './account/login';
 import { LogoutComponent } from './account/logout';
 import { RegisterComponent } from './account/register';
 
+//Registering routes in angular router.
 const appRoutes: Routes = [
     {
         path: 'patient',
@@ -49,6 +52,7 @@ const appRoutes: Routes = [
     }
 ];
 
+//Various imports, declarations, providers, injectables via NgModule
 @NgModule({
     imports: [BrowserModule,
         RouterModule.forRoot(appRoutes),
@@ -69,4 +73,5 @@ const appRoutes: Routes = [
         AppComponent],
     bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/21/2017 17:51:27</publishTime>
     </File>
     <File Include="bin/Business.dll">
-      <publishTime>06/21/2017 18:51:08</publishTime>
+      <publishTime>06/22/2017 12:09:55</publishTime>
     </File>
     <File Include="bin/Data.dll">
-      <publishTime>06/21/2017 18:36:03</publishTime>
+      <publishTime>06/22/2017 12:09:55</publishTime>
     </File>
     <File Include="bin/DataTransferObject.dll">
       <publishTime>06/21/2017 18:36:03</publishTime>
@@ -121,7 +121,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:03:46</publishTime>
     </File>
     <File Include="bin/WebApi.dll">
-      <publishTime>06/21/2017 18:51:13</publishTime>
+      <publishTime>06/22/2017 12:09:59</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>06/16/2017 11:22:57</publishTime>

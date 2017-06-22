@@ -6,12 +6,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebApi.Constants;
+using WebApi.Utilities;
 
 namespace WebApi.Controllers
 {
     /// <summary>
     /// Web Api controller for patient.
     /// </summary>
+    [CustomException]
     [Authorize]
     [Route(RouteNames.Patient)]
     public class PatientController : ApiController

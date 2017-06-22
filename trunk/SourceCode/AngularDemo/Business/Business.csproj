@@ -47,6 +47,10 @@
   <ItemGroup>
     <Compile Include="Constants\ApiRequestKeys.cs" />
     <Compile Include="Constants\Integers.cs" />
+    <Compile Include="Constants\RequestValidationConstant.cs" />
+    <Compile Include="Constants\StatusCodes.cs" />
+    <Compile Include="Constants\StatusMessages.cs" />
+    <Compile Include="Constants\StatusStrings.cs" />
     <Compile Include="Constants\Strings.cs" />
     <Compile Include="Mapper\DatabaseToDto.cs" />
     <Compile Include="Mapper\DtoToDatabase.cs" />

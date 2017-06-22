@@ -2,6 +2,9 @@
 
 namespace Business.Utilities
 {
+    /// <summary>
+    /// Class to create list for Data field in ResponseModel
+    /// </summary>
     internal class DynamicListForResponse
     {
         /// <summary>

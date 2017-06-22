@@ -1,6 +1,7 @@
-﻿export class AppSettings {
-    //public static API_END_POINT: string = "http://192.168.0.101:1300/";
-    public static API_END_POINT: string = "http://192.168.11.63:1300/";
+﻿//Contains all the constants of the application.
+export class AppSettings {
+    public static API_END_POINT: string = "http://192.168.0.102:1300/";
+    //public static API_END_POINT: string = "http://192.168.11.63:1300/";
     public static Patient: string = "patient";
     public static Insurance: string = "insurance";
     public static PatientInsurance: string = "patientinsurance";
@@ -16,4 +17,34 @@
     public static UnauthorizedRequestStatusCode: number = 401;
     public static SuccessStatus: string = 'Success';
     public static FailedStatus: string = 'Failed';
+    public static Empty: string = '';
+    public static InvalidLoginRequest: string = "Id or password is wrong";
+    public static FirstName: string = "FirstName";
+    public static MiddleName: string = "MiddleName";
+    public static LastName: string = "LastName";
+    public static UserId: string = "UserId";
+    public static UserPassword: string = "UserPassword";
+    public static UserAlreadyExist: string = "UserAlreadyExist";
+    public static Invalid: string = "FirstName";
+    public static AlreadyTaken: string = "Already taken";
+    public static Error: string = "Error";
+    public static Space: string = " ";
+    public static Authorization: string = "Authorization";
+    public static UrlEncoded: string = "application/x-www-form-urlencoded";
+    public static ContentType: string = "Content-Type";
+    public static PatientInsuranceAdded: string = "Patient insurance added.";
+    public static PatientAdded: string = "Patient added";
+    public static InsuranceAdded: string = "Insurance added";
+    public static SomeErrorOccured: string = "Somme error occured";
+    public static ListCouldNotLoad: string = " list could not load";
+    public static PatientId: string = "PatientId";
+    public static InsuranceId: string = "InsuranceId";
+    public static InsurancePublicId: string = "InsurancePublicId";
+    public static Name: string = "Name";
+    public static PhoneNumber: string = "PhoneNumber";
+    public static Address: string = "Address";
+    public static Zero: number = 0;
+    public static Male: string = "Male";
+    public static Female: string = "Female";
+    public static Gender: string = "Gender";
 }

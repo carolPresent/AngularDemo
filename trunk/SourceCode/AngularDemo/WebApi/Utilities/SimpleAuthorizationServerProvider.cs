@@ -20,18 +20,18 @@ namespace WebApi.Utilities
         /// <inheritdoc />
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add(Strings.AllowOrigin, new[] { Strings.All });
+            context.OwinContext.Response.Headers.Add(Constants.Strings.AllowOrigin, new[] { Constants.Strings.All });
             var services = new UserService();
             var userQuery = services.Login(new LoginDto(context.UserName, context.Password));
             if (userQuery.StatusCode.Equals(StatusCodes.Unauthorized))
             {
-                context.SetError(Strings.InvalidGrant, Strings.InvalidCredentials);
+                context.SetError(Constants.Strings.InvalidGrant, Constants.Strings.InvalidCredentials);
                 return;
             }
             var userId = Convert.ToInt32(userQuery.Data);
             //Add Claims identity after validation
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim(Strings.UserId, userId.ToString()));
+            identity.AddClaim(new Claim(Constants.Strings.UserId, userId.ToString()));
             context.Validated(identity);
         }
     }

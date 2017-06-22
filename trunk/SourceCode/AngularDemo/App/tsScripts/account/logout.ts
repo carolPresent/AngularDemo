@@ -1,9 +1,10 @@
-﻿import { Component } from '@angular/core';
+﻿//This is the logout component.
+
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppComponent } from '../app';
 import { AppSettings } from '../appSettings';
-//import { SidebarComponent } from '../side-bar/side-bar';
 
 @Component({
     selector: 'logout',
@@ -11,7 +12,7 @@ import { AppSettings } from '../appSettings';
 })
 
 export class LogoutComponent {
-    constructor(private appComponent: AppComponent, private router: Router/*, private sidebarComponent: SidebarComponent*/) { }
+    constructor(private appComponent: AppComponent, private router: Router) { }
 
     ngOnInit() {
         this.appComponent.removeKey(AppSettings.AuthCookie);

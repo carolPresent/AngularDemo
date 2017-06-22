@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿//Includes router-outlet seletor.
+
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-server',

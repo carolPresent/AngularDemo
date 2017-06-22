@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿//This is the patient component.
+
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ServerService } from '../servers.service';
@@ -19,24 +21,25 @@ export class PatientComponent {
         }
     }
 
+    //The patient model that can be used in saving a new patient.
     private patientModel = {
-        FirstName: '',
-        MiddleName: '',
-        LastName: '',
-        Address: '',
-        Gender: '',
-        Age: 0,
-        PhoneNumber: 0
+        FirstName: AppSettings.Empty,
+        MiddleName: AppSettings.Empty,
+        LastName: AppSettings.Empty,
+        Address: AppSettings.Empty,
+        Gender: AppSettings.Empty,
+        Age: AppSettings.Zero,
+        PhoneNumber: AppSettings.Zero
     }
 
-    private patFirstName: string = '';
-    private patMiddleName: string = '';
-    private patLastName: string = '';
-    private patAddress: string = '';
-    private patGender: string = '';
-    private patAge: number ;
-    private patPhone: number ;
-
+    //Private variables of the component.
+    private patFirstName: string = AppSettings.Empty;
+    private patMiddleName: string = AppSettings.Empty;
+    private patLastName: string = AppSettings.Empty;
+    private patAddress: string = AppSettings.Empty;
+    private patGender: string = AppSettings.Empty;
+    private patAge: number;
+    private patPhone: number;
     private valFirstName: boolean = false;
     private valMiddleName: boolean = false;
     private valLastName: boolean = false;
@@ -44,6 +47,7 @@ export class PatientComponent {
     private valGender: boolean = false;
     private valPhone: boolean = false;
 
+    //Private functions of the component.
     private savePatient() {
         this.setPatientModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.Patient, this.patientModel)
@@ -53,42 +57,42 @@ export class PatientComponent {
                     var body = response.json();
                     if (body.status === AppSettings.SuccessStatus) {
                         this.clearPatientData();
-                        alert('Patient added successfully.');
+                        alert(AppSettings.PatientAdded);
                     }
                     else {
                         this.setValidationFlagOn(body.data);
                     }
                 } else {
-                    alert(`Error ${response.status}`);
+                    alert(`${AppSettings.Error} ${response.status}`);
                 }
             },
             (error) => {
-                alert('Some error occured.');
+                alert(AppSettings.SomeErrorOccured);
             }
             );
     }
 
     private toggleGender(flag: number) {
         if (flag === 1)
-            this.patGender = "Male";
+            this.patGender = AppSettings.Male;
         else
-            this.patGender = "Female";
+            this.patGender = AppSettings.Female;
     }
 
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
-            case "FirstName": this.valFirstName = true;
+            case AppSettings.FirstName: this.valFirstName = true;
                 break;
-            case "MiddleName": this.valMiddleName = true;
+            case AppSettings.MiddleName: this.valMiddleName = true;
                 break;
-            case "LastName": this.valLastName = true;
+            case AppSettings.LastName: this.valLastName = true;
                 break;
-            case "Address": this.valAddress = true;
+            case AppSettings.Address: this.valAddress = true;
                 break;
-            case "PhoneNumber": this.valPhone = true;
+            case AppSettings.PhoneNumber: this.valPhone = true;
                 break;
-            case "Gender": this.valGender = true;
+            case AppSettings.Gender: this.valGender = true;
                 break;
         }
     }

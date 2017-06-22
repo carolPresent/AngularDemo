@@ -24,6 +24,7 @@ namespace Business.Services
             {
                 if (patientQuery == null)
                     patientQuery = new PatientQuery(id: CommonString.OptionalStringParamInteger, name: CommonString.OptionalStringParam, phoneNumber: CommonString.OptionalStringParam);
+
                 patientQuery.SetTypedVariables();
                 var result = unitOfWork.Patients.FindAll(QueryExpressions.Patient(patientQuery));
                 return ReturnStatements.SuccessResponse(CollectionConversions.ListPatient(result));
@@ -48,8 +49,10 @@ namespace Business.Services
                 var dbPatient = DtoToDatabase.Patient(newPatientDto);
                 unitOfWork.Patients.Add(dbPatient);
                 var saveResponse = unitOfWork.Complete();
+
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(newPatientDto));
+
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(newPatientDto));
             }
         }

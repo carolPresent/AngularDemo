@@ -42,7 +42,6 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
-
             newUserDto = validationStatus.Second;
             using (var unitOfWork = new UnitOfWork())
             {
@@ -50,19 +49,31 @@ namespace Business.Services
 
                 if (checkIfUserAlreadyExist)
                     return ReturnStatements.BadRequestResponse(Strings.UserAlreadyExist);
-
                 var dbUser = DtoToDatabase.User(newUserDto);
                 unitOfWork.Users.Add(dbUser);
                 var saveResponse = unitOfWork.Complete();
 
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(newUserDto));
-
                 //Save credentials
                 var loginDto = new LoginDto(loginId: newUserDto.UserId, loginPassword: newUserDto.UserPassword);
-                var dbUserPassword = DtoToDatabase.UserPassword(loginDto, dbUser.PK_Users);
+                return AddLoginDetails(loginDto, dbUser.PK_Users);
+            }
+        }
+
+        /// <summary>
+        /// Private class to add login details of a new user.
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        private ResponseModel AddLoginDetails(LoginDto loginDto, int userId)
+        {
+            var dbUserPassword = DtoToDatabase.UserPassword(loginDto, userId);
+            using (var unitOfWork = new UnitOfWork())
+            {
                 unitOfWork.UserPasswords.Add(dbUserPassword);
-                saveResponse = unitOfWork.Complete();
+                var saveResponse = unitOfWork.Complete();
 
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(loginDto));

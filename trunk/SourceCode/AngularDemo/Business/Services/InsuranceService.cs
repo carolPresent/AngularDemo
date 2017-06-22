@@ -24,6 +24,7 @@ namespace Business.Services
             {
                 if (insuranceQuery == null)
                     insuranceQuery = new InsuranceQuery(id: CommonString.OptionalStringParamInteger, name: CommonString.OptionalStringParam, phoneNumber: CommonString.OptionalStringParam, pubId: CommonString.OptionalStringParam);
+
                 insuranceQuery.SetTypedVariables();
                 var result = unitOfWork.Insurances.FindAll(QueryExpressions.Insurance(insuranceQuery));
                 return ReturnStatements.SuccessResponse(CollectionConversions.ListInsurance(result));
@@ -48,8 +49,10 @@ namespace Business.Services
                 var dbInsurance = DtoToDatabase.Insurance(newInsuranceDto);
                 unitOfWork.Insurances.Add(dbInsurance);
                 var saveResponse = unitOfWork.Complete();
+
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(newInsuranceDto));
+
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(newInsuranceDto));
             }
         }

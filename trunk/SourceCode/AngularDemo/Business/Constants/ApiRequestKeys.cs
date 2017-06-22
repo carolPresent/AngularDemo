@@ -1,5 +1,8 @@
 ﻿namespace Business.Constants
 {
+    /// <summary>
+    /// Constants class having API key names.
+    /// </summary>
     internal class ApiRequestKeys
     {
         public const string Address = "Address";
@@ -16,15 +19,5 @@
         public const string InsuranceId = "InsuranceId";
         public const string UserPassword = "UserPassword";
         public const string UserId = "UserId";
-    }
-
-    internal class RequestValidationConstant
-    {
-        public const int MaximumAddressLength = 980;
-        public const int MaximumNameLength = 30;
-        public const int MaximumInsuranceNameLength = 95;
-        public const int PhoneNumberLength = 10;
-        public const int InsurancePublicIdLength = 30;
-        public const int MinimumId = 1;
     }
 }

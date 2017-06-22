@@ -1,12 +1,8 @@
 ﻿using Business.Constants;
 using DataTransferObject.Models;
 using Elmah;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http.Filters;
 using WebApi.Constants;
 
@@ -30,7 +26,7 @@ namespace WebApi.Utilities
             //return internal server error as response
             actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(HttpStatusCode.InternalServerError, new ResponseModel()
             {
-                Message=Strings.InternalServerError,
+                Message= Constants.Strings.InternalServerError,
                 Status=StatusStrings.Failed,
                 StatusCode= StatusCodes.InternalServerError
             });

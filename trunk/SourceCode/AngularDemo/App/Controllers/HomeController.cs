@@ -2,6 +2,9 @@
 
 namespace App.Controllers
 {
+    /// <summary>
+    /// The one and only controller. Since controllers are merely used for templating in angular, hence all view are included in a single controller.
+    /// </summary>
     public class HomeController : Controller
     {
         public ActionResult App()

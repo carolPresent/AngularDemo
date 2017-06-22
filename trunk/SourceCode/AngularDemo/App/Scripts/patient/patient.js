@@ -1,4 +1,5 @@
 "use strict";
+//This is the patient component.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,6 +20,7 @@ var PatientComponent = (function () {
         this.serverService = serverService;
         this.appComponent = appComponent;
         this.router = router;
+        //The patient model that can be used in saving a new patient.
         this.patientModel = {
             FirstName: '',
             MiddleName: '',
@@ -28,6 +30,7 @@ var PatientComponent = (function () {
             Age: 0,
             PhoneNumber: 0
         };
+        //Private variables of the component.
         this.patFirstName = '';
         this.patMiddleName = '';
         this.patLastName = '';
@@ -45,6 +48,7 @@ var PatientComponent = (function () {
             this.router.navigate(['./Home/Main']);
         }
     };
+    //Private functions of the component.
     PatientComponent.prototype.savePatient = function () {
         var _this = this;
         this.setPatientModel();

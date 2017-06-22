@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿//This is the insurance component.
+
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ServerService } from '../servers.service';
@@ -19,6 +21,7 @@ export class InsuranceComponent {
         }
     }
 
+    //Insurance model to add/save a new insurance.
     private insuranceModel = {
         Name: '',
         Address: '',
@@ -26,16 +29,17 @@ export class InsuranceComponent {
         InsurancePublicId: ''
     }
 
-    private insName: string = '';
+    //Private variables of component.
+    private insName: string = AppSettings.Empty;
     private insPhone: number;
-    private insAddress: string = '';
-    private insPublicId: string = '';
-
+    private insAddress: string = AppSettings.Empty;
+    private insPublicId: string = AppSettings.Empty;
     private valName: boolean = false;
     private valPhone: boolean = false;
     private valAddress: boolean = false;
     private valPublicId: boolean = false;
 
+    //Private functions of component.
     private saveInsurance() {
         this.setInsuranceModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.Insurance, this.insuranceModel).subscribe(
@@ -44,15 +48,17 @@ export class InsuranceComponent {
                     var body = response.json();
                     if (body.status === AppSettings.SuccessStatus) {
                         this.clearInsuranceData();
-                        alert('Insurance added successfully.');
+                        alert(AppSettings.InsuranceAdded);
                     }
                     else {
                         this.setValidationFlagOn(body.data);
                     }
+                } else {
+                    alert(`${AppSettings.Error, response.status}`);
                 }
             },
             (error) => {
-                console.log('Some error occured.');
+                console.log(AppSettings.SomeErrorOccured);
             }
         );
     }
@@ -60,13 +66,13 @@ export class InsuranceComponent {
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
-            case "Name": this.valName = true;
+            case AppSettings.Name: this.valName = true;
                 break;
-            case "Address": this.valAddress = true;
+            case AppSettings.Address: this.valAddress = true;
                 break;
-            case "PhoneNumber": this.valPhone = true;
+            case AppSettings.PhoneNumber: this.valPhone = true;
                 break;
-            case "InsurancePublicId": this.valPublicId = true;
+            case AppSettings.InsurancePublicId: this.valPublicId = true;
                 break;
         }
     }
@@ -83,7 +89,7 @@ export class InsuranceComponent {
     }
 
     private clearInsuranceData() {
-        this.insAddress = this.insPublicId = this.insName = '';
+        this.insAddress = this.insPublicId = this.insName = AppSettings.Empty;
         this.insPhone = null;
         this.resetValidationKeys();
     }

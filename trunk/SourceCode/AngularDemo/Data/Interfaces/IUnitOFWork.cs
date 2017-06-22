@@ -1,5 +1,8 @@
 ﻿namespace Data.Interfaces
 {
+    /// <summary>
+    /// IUnitOfWork interface. To to be implemented in UnitOfWork class
+    /// </summary>
     interface IUnitOFWork
     {
         IRepository<Patient> Patients { get; }

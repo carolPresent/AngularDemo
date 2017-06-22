@@ -1,5 +1,8 @@
 ﻿namespace Data.Contexts
 {
+    /// <summary>
+    /// DB context of database.
+    /// </summary>
     public class AngularDemoContext : AngularDemoEntities
     {
         public AngularDemoContext()

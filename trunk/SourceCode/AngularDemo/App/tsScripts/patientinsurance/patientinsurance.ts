@@ -1,4 +1,6 @@
-﻿import { Component, ViewChild } from '@angular/core';
+﻿//This is the patient insurance component.
+
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
@@ -19,7 +21,7 @@ export class PatientInsuranceComponent {
             this.router.navigate(['./Home/Main']);
         }
     }
-
+    //Viewchild is the angular core component which can be used in getting angular modals on template.
     @ViewChild('patientModal')
     private patientModal: ModalComponent;
 
@@ -29,29 +31,31 @@ export class PatientInsuranceComponent {
     @ViewChild('patientInsuranceModal')
     private patientinsuranceModal: ModalComponent;
 
+    //The patient insurance model
     private patientInsuranceModel = {
         PatientId: 0,
         InsuranceId: 0,
-        InsurancePublicId: ''
+        InsurancePublicId: AppSettings.Empty
     }
 
+    //Private variables used in component.
     private patId: number;
     private insId: number;
-    private insPubId: string = '';
+    private insPubId: string = AppSettings.Empty;
     private patientList: any = [];
     private insuranceList: any = [];
     private patientInsuranceList: any = [];
-    private searchPatient: string = '';
-    private searchInsurance: string = '';
-    private searchPatientInsurance: string = '';
+    private searchPatient: string = AppSettings.Empty;
+    private searchInsurance: string = AppSettings.Empty;
+    private searchPatientInsurance: string = AppSettings.Empty;
     private currentPatList: any[];
     private currentInsList: any[];
     private currentPatInsList: any[];
-
     private valPatId: boolean = false;
     private valInsId: boolean = false;
     private valInsPubId: boolean = false;
 
+    //Private functions used in component.
     private savePatientInsurance() {
         this.setPatientInsuranceModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.PatientInsurance, this.patientInsuranceModel).subscribe(
@@ -60,18 +64,18 @@ export class PatientInsuranceComponent {
                     var body = response.json();
                     if (body.status == AppSettings.SuccessStatus) {
                         this.clearPatientInsuranceData();
-                        alert('Patient insurance added.');
+                        alert(AppSettings.PatientInsuranceAdded);
                     }
                     else {
                         this.setValidationFlagOn(body.data);
                     }
                 }
                 else {
-                    alert(`Error ${response.status}`);
+                    alert(`${AppSettings.Error} ${response.status}`);
                 }
             },
             (error) => {
-                alert('Some error occured.')
+                alert(AppSettings.SomeErrorOccured)
             }
         )
     }
@@ -85,14 +89,14 @@ export class PatientInsuranceComponent {
                         this.patientList = JSON.parse(body.data);
                         this.currentPatList = this.patientList;
                     } else {
-                        alert('Patients list could not load.');
+                        alert(`${AppSettings.Patient, AppSettings.ListCouldNotLoad}`);
                     }
                 } else {
-                    alert(`Error ${response.status}.`);
+                    alert(`${AppSettings.Error} ${response.status}`);
                 }
             },
             (error) => {
-                alert('Some error occurred.')
+                alert(AppSettings.SomeErrorOccured)
             }
         )
     }
@@ -106,14 +110,14 @@ export class PatientInsuranceComponent {
                         this.insuranceList = JSON.parse(body.data);
                         this.currentInsList = this.insuranceList;
                     } else {
-                        alert('Insurances list could not load.');
+                        alert(`${AppSettings.Insurance, AppSettings.ListCouldNotLoad}`);
                     }
                 } else {
-                    alert(`Error ${response.status}.`);
+                    alert(`${AppSettings.Error} ${response.status}`);
                 }
             },
             (error) => {
-                alert('Some problem occured.');
+                alert(AppSettings.SomeErrorOccured)
             }
         )
     }
@@ -127,14 +131,14 @@ export class PatientInsuranceComponent {
                         this.patientInsuranceList = JSON.parse(body.data);
                         this.currentPatInsList = this.patientInsuranceList;
                     } else {
-                        alert('Patient insurance list could not be fetched.');
+                        alert(`${AppSettings.Insurance, AppSettings.ListCouldNotLoad}`);
                     }
                 } else {
-                    alert(`Error ${response.status}.`);
+                    alert(`${AppSettings.Error} ${response.status}`);
                 }
             },
             (error) => {
-                alert('Some error occured.');
+                alert(AppSettings.SomeErrorOccured)
             }
         )
     }
@@ -201,17 +205,17 @@ export class PatientInsuranceComponent {
     }
 
     private concatNames(firstName: string, lastName: string) {
-        return firstName + ' ' + lastName;
+        return firstName + AppSettings.Space + lastName;
     }
 
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
-            case "PatientId": this.valPatId = true;
+            case AppSettings.PatientId: this.valPatId = true;
                 break;
-            case "InsuranceId": this.valInsId = true;
+            case AppSettings.InsuranceId: this.valInsId = true;
                 break;
-            case "InsurancePublicId": this.valInsPubId = true;
+            case AppSettings.InsurancePublicId: this.valInsPubId = true;
                 break;
         }
     }
@@ -229,7 +233,7 @@ export class PatientInsuranceComponent {
     private clearPatientInsuranceData() {
         this.patientInsuranceModel.InsuranceId = this.patientInsuranceModel.PatientId = 0;
         this.insId = this.patId = null;
-        this.patientInsuranceModel.InsurancePublicId = this.insPubId = '';
+        this.patientInsuranceModel.InsurancePublicId = this.insPubId = AppSettings.Empty;
         this.resetValidationKeys();
     }
 

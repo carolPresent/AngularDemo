@@ -66,8 +66,10 @@ namespace Business.Services
         private List<Pair> ConvertPatientInsuranceToPairList(List<PatientInsurance> patientInsuranceList)
         {
             var returnItem = new List<Pair>();
+
             foreach (var patientInsurance in patientInsuranceList)
                 returnItem.Add(new Pair { First = patientInsurance.Patient, Second = patientInsurance.Insurance });
+
             return returnItem;
         }
     }

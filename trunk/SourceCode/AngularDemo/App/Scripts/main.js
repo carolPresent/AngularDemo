@@ -1,4 +1,5 @@
 "use strict";
+//Entry point for angular application
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_dynamic_1 = require("@angular/platform-browser-dynamic");
 var boot_1 = require("./boot");

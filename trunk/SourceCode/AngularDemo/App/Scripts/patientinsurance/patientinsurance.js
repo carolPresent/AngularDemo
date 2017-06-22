@@ -1,4 +1,5 @@
 "use strict";
+//This is the patient insurance component.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,18 +21,19 @@ var PatientInsuranceComponent = (function () {
         this.appComponent = appComponent;
         this.serverService = serverService;
         this.router = router;
+        //The patient insurance model
         this.patientInsuranceModel = {
             PatientId: 0,
             InsuranceId: 0,
-            InsurancePublicId: ''
+            InsurancePublicId: appSettings_1.AppSettings.Empty
         };
-        this.insPubId = '';
+        this.insPubId = appSettings_1.AppSettings.Empty;
         this.patientList = [];
         this.insuranceList = [];
         this.patientInsuranceList = [];
-        this.searchPatient = '';
-        this.searchInsurance = '';
-        this.searchPatientInsurance = '';
+        this.searchPatient = appSettings_1.AppSettings.Empty;
+        this.searchInsurance = appSettings_1.AppSettings.Empty;
+        this.searchPatientInsurance = appSettings_1.AppSettings.Empty;
         this.valPatId = false;
         this.valInsId = false;
         this.valInsPubId = false;
@@ -41,6 +43,7 @@ var PatientInsuranceComponent = (function () {
             this.router.navigate(['./Home/Main']);
         }
     };
+    //Private functions used in component.
     PatientInsuranceComponent.prototype.savePatientInsurance = function () {
         var _this = this;
         this.setPatientInsuranceModel();
@@ -49,17 +52,17 @@ var PatientInsuranceComponent = (function () {
                 var body = response.json();
                 if (body.status == appSettings_1.AppSettings.SuccessStatus) {
                     _this.clearPatientInsuranceData();
-                    alert('Patient insurance added.');
+                    alert(appSettings_1.AppSettings.PatientInsuranceAdded);
                 }
                 else {
                     _this.setValidationFlagOn(body.data);
                 }
             }
             else {
-                alert("Error " + response.status);
+                alert(appSettings_1.AppSettings.Error + " " + response.status);
             }
         }, function (error) {
-            alert('Some error occured.');
+            alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
     PatientInsuranceComponent.prototype.getPatientList = function () {
@@ -72,14 +75,14 @@ var PatientInsuranceComponent = (function () {
                     _this.currentPatList = _this.patientList;
                 }
                 else {
-                    alert('Patients list could not load.');
+                    alert("" + (appSettings_1.AppSettings.Patient, appSettings_1.AppSettings.ListCouldNotLoad));
                 }
             }
             else {
-                alert("Error " + response.status + ".");
+                alert(appSettings_1.AppSettings.Error + " " + response.status);
             }
         }, function (error) {
-            alert('Some error occurred.');
+            alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
     PatientInsuranceComponent.prototype.getInsuranceList = function () {
@@ -92,14 +95,14 @@ var PatientInsuranceComponent = (function () {
                     _this.currentInsList = _this.insuranceList;
                 }
                 else {
-                    alert('Insurances list could not load.');
+                    alert("" + (appSettings_1.AppSettings.Insurance, appSettings_1.AppSettings.ListCouldNotLoad));
                 }
             }
             else {
-                alert("Error " + response.status + ".");
+                alert(appSettings_1.AppSettings.Error + " " + response.status);
             }
         }, function (error) {
-            alert('Some problem occured.');
+            alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
     PatientInsuranceComponent.prototype.getPatientInsuranceList = function () {
@@ -112,14 +115,14 @@ var PatientInsuranceComponent = (function () {
                     _this.currentPatInsList = _this.patientInsuranceList;
                 }
                 else {
-                    alert('Patient insurance list could not be fetched.');
+                    alert("" + (appSettings_1.AppSettings.Insurance, appSettings_1.AppSettings.ListCouldNotLoad));
                 }
             }
             else {
-                alert("Error " + response.status + ".");
+                alert(appSettings_1.AppSettings.Error + " " + response.status);
             }
         }, function (error) {
-            alert('Some error occured.');
+            alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
     PatientInsuranceComponent.prototype.filterPatientList = function () {
@@ -178,18 +181,18 @@ var PatientInsuranceComponent = (function () {
         this.patientinsuranceModal.close();
     };
     PatientInsuranceComponent.prototype.concatNames = function (firstName, lastName) {
-        return firstName + ' ' + lastName;
+        return firstName + appSettings_1.AppSettings.Space + lastName;
     };
     PatientInsuranceComponent.prototype.setValidationFlagOn = function (key) {
         this.resetValidationKeys();
         switch (key) {
-            case "PatientId":
+            case appSettings_1.AppSettings.PatientId:
                 this.valPatId = true;
                 break;
-            case "InsuranceId":
+            case appSettings_1.AppSettings.InsuranceId:
                 this.valInsId = true;
                 break;
-            case "InsurancePublicId":
+            case appSettings_1.AppSettings.InsurancePublicId:
                 this.valInsPubId = true;
                 break;
         }
@@ -205,7 +208,7 @@ var PatientInsuranceComponent = (function () {
     PatientInsuranceComponent.prototype.clearPatientInsuranceData = function () {
         this.patientInsuranceModel.InsuranceId = this.patientInsuranceModel.PatientId = 0;
         this.insId = this.patId = null;
-        this.patientInsuranceModel.InsurancePublicId = this.insPubId = '';
+        this.patientInsuranceModel.InsurancePublicId = this.insPubId = appSettings_1.AppSettings.Empty;
         this.resetValidationKeys();
     };
     return PatientInsuranceComponent;

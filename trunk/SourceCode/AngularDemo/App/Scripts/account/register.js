@@ -1,4 +1,5 @@
 "use strict";
+//This is the register component.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,25 +20,28 @@ var RegisterComponent = (function () {
         this.appComponent = appComponent;
         this.serverService = serverService;
         this.router = router;
-        this.firstName = '';
-        this.middleName = '';
-        this.lastName = '';
-        this.userId = '';
-        this.userPassword = '';
+        //Private variables of the component.
+        this.firstName = appSettings_1.AppSettings.Empty;
+        this.middleName = appSettings_1.AppSettings.Empty;
+        this.lastName = appSettings_1.AppSettings.Empty;
+        this.userId = appSettings_1.AppSettings.Empty;
+        this.userPassword = appSettings_1.AppSettings.Empty;
         this.valFirstName = false;
         this.valMiddleName = false;
         this.valLastName = false;
         this.valUserId = false;
         this.valUserPassword = false;
         this.messageOnUserIdInput = '';
+        //User model to register.
         this.userModel = {
-            FirstName: '',
-            MiddleName: '',
-            LastName: '',
-            UserId: '',
-            UserPassword: ''
+            FirstName: appSettings_1.AppSettings.Empty,
+            MiddleName: appSettings_1.AppSettings.Empty,
+            LastName: appSettings_1.AppSettings.Empty,
+            UserId: appSettings_1.AppSettings.Empty,
+            UserPassword: appSettings_1.AppSettings.Empty
         };
     }
+    //Private functions of the component.
     RegisterComponent.prototype.sendRegisterRequest = function () {
         var _this = this;
         this.setUserModel();
@@ -52,7 +56,7 @@ var RegisterComponent = (function () {
                 }
             }
             else {
-                alert("Error " + response.status);
+                alert(appSettings_1.AppSettings.Error + " " + response.status);
             }
         }, function (error) {
         });
@@ -63,25 +67,25 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.setValidationFlagOn = function (key) {
         this.resetValidationKeys();
         switch (key) {
-            case "FirstName":
+            case appSettings_1.AppSettings.FirstName:
                 this.valFirstName = true;
                 break;
-            case "MiddleName":
+            case appSettings_1.AppSettings.MiddleName:
                 this.valMiddleName = true;
                 break;
-            case "LastName":
+            case appSettings_1.AppSettings.LastName:
                 this.valLastName = true;
                 break;
-            case "UserId":
+            case appSettings_1.AppSettings.UserId:
                 this.valUserId = true;
-                this.messageOnUserIdInput = 'Invalid';
+                this.messageOnUserIdInput = appSettings_1.AppSettings.Invalid;
                 break;
-            case "UserPassword":
+            case appSettings_1.AppSettings.UserPassword:
                 this.valUserPassword = true;
                 break;
-            case "UserAlreadyExist":
+            case appSettings_1.AppSettings.UserAlreadyExist:
                 this.valUserId = true;
-                this.messageOnUserIdInput = 'Already taken';
+                this.messageOnUserIdInput = appSettings_1.AppSettings.AlreadyTaken;
                 break;
         }
     };
@@ -93,7 +97,7 @@ var RegisterComponent = (function () {
         this.userModel.UserPassword = this.userPassword;
     };
     RegisterComponent.prototype.resetUserdata = function () {
-        this.firstName = this.middleName = this.lastName = this.userId = this.userPassword = '';
+        this.firstName = this.middleName = this.lastName = this.userId = this.userPassword = appSettings_1.AppSettings.Empty;
     };
     RegisterComponent.prototype.resetValidationKeys = function () {
         this.valFirstName = this.valLastName = this.valMiddleName = this.valUserId = this.valUserPassword = false;

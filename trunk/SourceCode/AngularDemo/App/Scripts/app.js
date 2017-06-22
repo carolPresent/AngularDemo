@@ -1,4 +1,5 @@
 "use strict";
+//This is the initial template where all child templates are rendered.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,11 +21,13 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.checkCookie();
     };
+    //Checking whether user is logged in or not.
     AppComponent.prototype.checkCookie = function () {
         if (this.getObject(appSettings_1.AppSettings.AuthCookie)) {
             this.loggedIn = true;
         }
     };
+    //Few methods for CRUD on cookies.
     AppComponent.prototype.removeKey = function (key) {
         this.__cookieService.remove(key);
     };

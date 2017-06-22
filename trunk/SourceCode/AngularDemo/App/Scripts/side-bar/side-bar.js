@@ -1,4 +1,5 @@
 "use strict";
+//This component is the side bar of the application.Only active when user is logged in.
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -14,9 +15,11 @@ var app_1 = require("../app");
 var SidebarComponent = (function () {
     function SidebarComponent(appComponent) {
         this.appComponent = appComponent;
+        //Side bars tab list.
         this.sideBarTabs = [];
     }
     SidebarComponent.prototype.ngOnInit = function () {
+        //If user logged then sidebar tabs will have links for navigation.
         if (this.appComponent.loggedIn) {
             this.sideBarTabs = [{
                     routerLink: '/patient',

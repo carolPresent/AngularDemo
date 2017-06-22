@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿//This component is the side bar of the application.Only active when user is logged in.
+
+import { Component } from '@angular/core';
 
 import { AppComponent } from '../app';
 
@@ -10,9 +12,11 @@ import { AppComponent } from '../app';
 export class SidebarComponent {
     constructor(private appComponent: AppComponent) { }
 
+    //Side bars tab list.
     private sideBarTabs = [];
 
     ngOnInit() {
+        //If user logged then sidebar tabs will have links for navigation.
         if (this.appComponent.loggedIn) {
             this.sideBarTabs = [{
                 routerLink: '/patient',
