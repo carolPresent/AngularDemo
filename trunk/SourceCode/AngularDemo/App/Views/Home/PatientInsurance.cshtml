@@ -1,0 +1,148 @@
+﻿<modal #patientModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Search patients</h4>
+    </modal-header>
+    <modal-body>
+        <div class="listDiv">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="name/phone/address" (input)="filterPatientList()" [(ngModel)]="searchPatient" />
+                </div>
+                <div class="col-md-offset-5 col-md-3">
+                    <button type="button" class="btn btn-primary" (click)="getPatientList()">Refresh</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-4"><b>Name</b></div>
+                <div class="col-md-4"><b>Address</b></div>
+                <div class="col-md-4"><b>Phone</b></div>
+            </div>
+            <hr />
+            <div class="row" *ngFor="let patient of currentPatList">
+                <div class="col-md-4">
+                    <a style="cursor:pointer;" (click)="selectPatient(patient.Id)">{{concatNames(patient.FirstName,patient.LastName)}}</a>
+                </div>
+                <div class="col-md-4">
+                    {{patient.Address}}
+                </div>
+                <div class="col-md-4">
+                    {{patient.PhoneNumber}}
+                </div>
+            </div>
+        </div>
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
+
+<modal #insuranceModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Search insurances</h4>
+    </modal-header>
+    <modal-body>
+        <div class="listDiv">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" [(ngModel)]="searchInsurance" (input)="filterInsuranceList()" />
+                </div>
+                <div class="col-md-offset-5 col-md-3">
+                    <button type="button" class="btn btn-primary" (click)="getInsuranceList()">Refresh</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6"><b>Public id</b></div>
+                <div class="col-md-6"><b>Name</b></div>
+            </div>
+            <hr />
+            <div class="row" *ngFor="let insurance of currentInsList">
+                <div class="col-md-6">
+                    <a style="cursor:pointer;" (click)="selectInsurance(insurance.Id,insurance.InsurancePublicId)">{{insurance.InsurancePublicId}}</a>
+                </div>
+                <div class="col-md-6">{{insurance.Name}}</div>
+            </div>
+        </div>
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
+
+<modal #patientInsuranceModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Select patient insurance</h4>
+    </modal-header>
+    <modal-body>
+        <div class="listDiv">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" [(ngModel)]="searchPatientInsurance" (input)="filterPatientInsuranceList()" />
+                </div>
+                <div class="col-md-offset-5 col-md-3">
+                    <button type="button" class="btn btn-primary" (click)="getPatientInsuranceList()">Refresh</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6"><b>Patient name</b></div>
+                <div class="col-md-6"><b>Insurance name</b></div>
+            </div>
+            <hr />
+            <div class="row" *ngFor="let patientInsurance of currentPatInsList">
+                <div class="col-md-6">
+                    <a style="cursor:pointer;" (click)="selectPatientInsurance(patientInsurance.PatientInfo,patientInsurance.InsuranceInfo)">{{concatNames(patientInsurance.PatientInfo.FirstName,patientInsurance.PatientInfo.LastName)}}</a>
+                </div>
+                <div class="col-md-6">{{patientInsurance.InsuranceInfo.Name}}</div>
+            </div>
+        </div>
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
+
+<div class="form form-horizontal">
+    <div class="form-group">
+        <div class="col-md-3">
+            <label>Patient id</label>
+        </div>
+        <div class="col-md-3">
+            <label>{{patId}}</label>
+        </div>
+        <div class="col-md-3">
+            <label [hidden]="!valPatId" class="text-danger">Invalid</label>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-default" (click)="openPatientModal()">Patient</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <label>Insurance id</label>
+        </div>
+        <div class="col-md-3">
+            <label>{{insId}}</label>
+        </div>
+        <div class="col-md-3">
+            <label [hidden]="!valInsId" class="text-danger">Invalid</label>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-default" (click)="openInsuranceModal()">Insurance</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <label>Insurance public id</label>
+        </div>
+        <div class="col-md-3">
+            <label>{{insPubId}}</label>
+        </div>
+        <div class="col-md-3">
+            <label [hidden]="!valInsPubId" class="text-danger">Invalid</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-default" (click)="openPatientInsuranceModal()">Old patient insurance</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" (click)="savePatientInsurance()" class="btn btn-success">Save</button>
+        </div>
+    </div>
+</div>

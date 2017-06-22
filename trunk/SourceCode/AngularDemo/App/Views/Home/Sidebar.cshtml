@@ -1,0 +1,8 @@
+﻿<div class="col-md-3">
+    <ul class="nav nav-stacked">
+        <li *ngFor="let sideTab of sideBarTabs">
+            <a routerLink="{{sideTab.routerLink}}" routerLinkActive="{{sideTab.routerLinkActive}}" class="{{sideTab.classes}}">{{sideTab.text}}</a>
+        </li>
+    </ul>
+</div>
+

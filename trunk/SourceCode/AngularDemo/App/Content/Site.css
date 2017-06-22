@@ -1,0 +1,6 @@
+﻿.listDiv{
+    max-height:450px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overflow-wrap:break-word;
+}

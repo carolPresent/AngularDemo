@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <base href="/">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular demo</title>
+    <!-- 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="~/libs/core-js/client/shim.min.js"></script>
+    <script src="~/libs/zone.js/dist/zone.js"></script>
+    <script src="~/libs/systemjs/dist/system.src.js"></script>
+    <!-- 2. Configure SystemJS -->
+
+    <script src="~/Scripts/systemjs.config.js"></script>
+
+    <script type="text/javascript">
+        System.import('../Scripts/main.js').catch(function (err)
+        {
+            console.error(err);
+        });
+    </script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="/Home/Main" title="click to go to main page"><h3><b>Demo application</b></h3></a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <my-app>Loading...</my-app>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

@@ -1,0 +1,13 @@
+trunk/SourceCode/AngularDemo/packages
+trunk/SourceCode/AngularDemo/App/bin
+trunk/SourceCode/AngularDemo/App/obj
+trunk/SourceCode/AngularDemo/App/libs
+trunk/SourceCode/AngularDemo/App/node_modules
+trunk/SourceCode/AngularDemo/Business/bin
+trunk/SourceCode/AngularDemo/Business/obj
+trunk/SourceCode/AngularDemo/Data/bin
+trunk/SourceCode/AngularDemo/Data/obj
+trunk/SourceCode/AngularDemo/DataTransferObject/bin
+trunk/SourceCode/AngularDemo/DataTransferObject/obj
+trunk/SourceCode/AngularDemo/WebApi/bin
+trunk/SourceCode/AngularDemo/WebApi/obj

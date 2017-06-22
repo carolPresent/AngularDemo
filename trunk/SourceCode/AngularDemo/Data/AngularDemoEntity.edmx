@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AngularDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Application" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+          <Property Name="TimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="Sequence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllXml" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Insurances">
+          <Key>
+            <PropertyRef Name="PK_Insurances" />
+          </Key>
+          <Property Name="PK_Insurances" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DF_Insurances_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DF_Insurances_Address" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="DF_Insurances_Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Insurances_PublicId" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientInsurances">
+          <Key>
+            <PropertyRef Name="PK_PatientInsurances" />
+          </Key>
+          <Property Name="PK_PatientInsurances" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_PatientInsurances_Patients" Type="int" Nullable="false" />
+          <Property Name="FK_PatientInsurances_Users" Type="int" Nullable="false" />
+          <Property Name="FK_PatientInsurances_Insurances" Type="int" Nullable="false" />
+          <Property Name="DF_PatientInsurances_CreationDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_PatientInsurances_CreationTime" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="PK_Patients" />
+          </Key>
+          <Property Name="PK_Patients" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DF_Patients_FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Patients_MiddleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Patients_LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Patients_Address" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="DF_Patients_Gender" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DF_Patients_Age" Type="tinyint" Nullable="false" />
+          <Property Name="DF_Patients_Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPasswords">
+          <Key>
+            <PropertyRef Name="PK_UserPasswords" />
+          </Key>
+          <Property Name="PK_UserPasswords" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_UserPasswords_Users" Type="int" Nullable="false" />
+          <Property Name="DF_UserPasswords_UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_UserPasswords_UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="PK_Users" />
+          </Key>
+          <Property Name="PK_Users" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DF_Users_FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Users_MiddleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Users_LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Users_CreationDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DF_Users_CreationTime" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PatientInsurances_Insurances">
+          <End Role="Insurances" Type="Self.Insurances" Multiplicity="1" />
+          <End Role="PatientInsurances" Type="Self.PatientInsurances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insurances">
+              <PropertyRef Name="PK_Insurances" />
+            </Principal>
+            <Dependent Role="PatientInsurances">
+              <PropertyRef Name="FK_PatientInsurances_Insurances" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInsurances_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="PatientInsurances" Type="Self.PatientInsurances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PK_Patients" />
+            </Principal>
+            <Dependent Role="PatientInsurances">
+              <PropertyRef Name="FK_PatientInsurances_Patients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInsurances_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="PatientInsurances" Type="Self.PatientInsurances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="PK_Users" />
+            </Principal>
+            <Dependent Role="PatientInsurances">
+              <PropertyRef Name="FK_PatientInsurances_Users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPasswords_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserPasswords" Type="Self.UserPasswords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="PK_Users" />
+            </Principal>
+            <Dependent Role="UserPasswords">
+              <PropertyRef Name="FK_UserPasswords_Users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AngularDemoModelStoreContainer">
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Insurances" EntityType="Self.Insurances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInsurances" EntityType="Self.PatientInsurances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPasswords" EntityType="Self.UserPasswords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PatientInsurances_Insurances" Association="Self.FK_PatientInsurances_Insurances">
+            <End Role="Insurances" EntitySet="Insurances" />
+            <End Role="PatientInsurances" EntitySet="PatientInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInsurances_Patients" Association="Self.FK_PatientInsurances_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientInsurances" EntitySet="PatientInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInsurances_Users" Association="Self.FK_PatientInsurances_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PatientInsurances" EntitySet="PatientInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPasswords_Users" Association="Self.FK_UserPasswords_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserPasswords" EntitySet="UserPasswords" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AngularDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="Guid" Nullable="false" />
+          <Property Name="Application" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Source" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <Property Name="TimeUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllXml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Insurance">
+          <Key>
+            <PropertyRef Name="PK_Insurances" />
+          </Key>
+          <Property Name="PK_Insurances" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DF_Insurances_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Insurances_Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Insurances_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Insurances_PublicId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PatientInsurances" Relationship="Self.FK_PatientInsurances_Insurances" FromRole="Insurances" ToRole="PatientInsurances" />
+        </EntityType>
+        <EntityType Name="PatientInsurance">
+          <Key>
+            <PropertyRef Name="PK_PatientInsurances" />
+          </Key>
+          <Property Name="PK_PatientInsurances" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_PatientInsurances_Patients" Type="Int32" Nullable="false" />
+          <Property Name="FK_PatientInsurances_Users" Type="Int32" Nullable="false" />
+          <Property Name="FK_PatientInsurances_Insurances" Type="Int32" Nullable="false" />
+          <Property Name="DF_PatientInsurances_CreationDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_PatientInsurances_CreationTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Insurance" Relationship="Self.FK_PatientInsurances_Insurances" FromRole="PatientInsurances" ToRole="Insurances" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_PatientInsurances_Patients" FromRole="PatientInsurances" ToRole="Patients" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PatientInsurances_Users" FromRole="PatientInsurances" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PK_Patients" />
+          </Key>
+          <Property Name="PK_Patients" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DF_Patients_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Patients_MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Patients_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Patients_Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Patients_Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Patients_Age" Type="Byte" Nullable="false" />
+          <Property Name="DF_Patients_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PatientInsurances" Relationship="Self.FK_PatientInsurances_Patients" FromRole="Patients" ToRole="PatientInsurances" />
+        </EntityType>
+        <EntityType Name="UserPassword">
+          <Key>
+            <PropertyRef Name="PK_UserPasswords" />
+          </Key>
+          <Property Name="PK_UserPasswords" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_UserPasswords_Users" Type="Int32" Nullable="false" />
+          <Property Name="DF_UserPasswords_UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_UserPasswords_UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserPasswords_Users" FromRole="UserPasswords" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="PK_Users" />
+          </Key>
+          <Property Name="PK_Users" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DF_Users_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Users_MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Users_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Users_CreationDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DF_Users_CreationTime" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PatientInsurances" Relationship="Self.FK_PatientInsurances_Users" FromRole="Users" ToRole="PatientInsurances" />
+          <NavigationProperty Name="UserPasswords" Relationship="Self.FK_UserPasswords_Users" FromRole="Users" ToRole="UserPasswords" />
+        </EntityType>
+        <Association Name="FK_PatientInsurances_Insurances">
+          <End Role="Insurances" Type="Self.Insurance" Multiplicity="1" />
+          <End Role="PatientInsurances" Type="Self.PatientInsurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insurances">
+              <PropertyRef Name="PK_Insurances" />
+            </Principal>
+            <Dependent Role="PatientInsurances">
+              <PropertyRef Name="FK_PatientInsurances_Insurances" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInsurances_Patients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientInsurances" Type="Self.PatientInsurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PK_Patients" />
+            </Principal>
+            <Dependent Role="PatientInsurances">
+              <PropertyRef Name="FK_PatientInsurances_Patients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientInsurances_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="PatientInsurances" Type="Self.PatientInsurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="PK_Users" />
+            </Principal>
+            <Dependent Role="PatientInsurances">
+              <PropertyRef Name="FK_PatientInsurances_Users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPasswords_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPasswords" Type="Self.UserPassword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="PK_Users" />
+            </Principal>
+            <Dependent Role="UserPasswords">
+              <PropertyRef Name="FK_UserPasswords_Users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AngularDemoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" />
+          <EntitySet Name="Insurances" EntityType="Self.Insurance" />
+          <EntitySet Name="PatientInsurances" EntityType="Self.PatientInsurance" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="UserPasswords" EntityType="Self.UserPassword" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_PatientInsurances_Insurances" Association="Self.FK_PatientInsurances_Insurances">
+            <End Role="Insurances" EntitySet="Insurances" />
+            <End Role="PatientInsurances" EntitySet="PatientInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInsurances_Patients" Association="Self.FK_PatientInsurances_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientInsurances" EntitySet="PatientInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientInsurances_Users" Association="Self.FK_PatientInsurances_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PatientInsurances" EntitySet="PatientInsurances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPasswords_Users" Association="Self.FK_UserPasswords_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserPasswords" EntitySet="UserPasswords" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AngularDemoModelStoreContainer" CdmEntityContainer="AngularDemoEntities">
+          <EntitySetMapping Name="ELMAH_Error">
+            <EntityTypeMapping TypeName="AngularDemoModel.ELMAH_Error">
+              <MappingFragment StoreEntitySet="ELMAH_Error">
+                <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Insurances">
+            <EntityTypeMapping TypeName="AngularDemoModel.Insurance">
+              <MappingFragment StoreEntitySet="Insurances">
+                <ScalarProperty Name="PK_Insurances" ColumnName="PK_Insurances" />
+                <ScalarProperty Name="DF_Insurances_Name" ColumnName="DF_Insurances_Name" />
+                <ScalarProperty Name="DF_Insurances_Address" ColumnName="DF_Insurances_Address" />
+                <ScalarProperty Name="DF_Insurances_Phone" ColumnName="DF_Insurances_Phone" />
+                <ScalarProperty Name="DF_Insurances_PublicId" ColumnName="DF_Insurances_PublicId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientInsurances">
+            <EntityTypeMapping TypeName="AngularDemoModel.PatientInsurance">
+              <MappingFragment StoreEntitySet="PatientInsurances">
+                <ScalarProperty Name="PK_PatientInsurances" ColumnName="PK_PatientInsurances" />
+                <ScalarProperty Name="FK_PatientInsurances_Patients" ColumnName="FK_PatientInsurances_Patients" />
+                <ScalarProperty Name="FK_PatientInsurances_Users" ColumnName="FK_PatientInsurances_Users" />
+                <ScalarProperty Name="FK_PatientInsurances_Insurances" ColumnName="FK_PatientInsurances_Insurances" />
+                <ScalarProperty Name="DF_PatientInsurances_CreationDate" ColumnName="DF_PatientInsurances_CreationDate" />
+                <ScalarProperty Name="DF_PatientInsurances_CreationTime" ColumnName="DF_PatientInsurances_CreationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="AngularDemoModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="PK_Patients" ColumnName="PK_Patients" />
+                <ScalarProperty Name="DF_Patients_FirstName" ColumnName="DF_Patients_FirstName" />
+                <ScalarProperty Name="DF_Patients_MiddleName" ColumnName="DF_Patients_MiddleName" />
+                <ScalarProperty Name="DF_Patients_LastName" ColumnName="DF_Patients_LastName" />
+                <ScalarProperty Name="DF_Patients_Address" ColumnName="DF_Patients_Address" />
+                <ScalarProperty Name="DF_Patients_Gender" ColumnName="DF_Patients_Gender" />
+                <ScalarProperty Name="DF_Patients_Age" ColumnName="DF_Patients_Age" />
+                <ScalarProperty Name="DF_Patients_Phone" ColumnName="DF_Patients_Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPasswords">
+            <EntityTypeMapping TypeName="AngularDemoModel.UserPassword">
+              <MappingFragment StoreEntitySet="UserPasswords">
+                <ScalarProperty Name="PK_UserPasswords" ColumnName="PK_UserPasswords" />
+                <ScalarProperty Name="FK_UserPasswords_Users" ColumnName="FK_UserPasswords_Users" />
+                <ScalarProperty Name="DF_UserPasswords_UserId" ColumnName="DF_UserPasswords_UserId" />
+                <ScalarProperty Name="DF_UserPasswords_UserPassword" ColumnName="DF_UserPasswords_UserPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AngularDemoModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="PK_Users" ColumnName="PK_Users" />
+                <ScalarProperty Name="DF_Users_FirstName" ColumnName="DF_Users_FirstName" />
+                <ScalarProperty Name="DF_Users_MiddleName" ColumnName="DF_Users_MiddleName" />
+                <ScalarProperty Name="DF_Users_LastName" ColumnName="DF_Users_LastName" />
+                <ScalarProperty Name="DF_Users_CreationDate" ColumnName="DF_Users_CreationDate" />
+                <ScalarProperty Name="DF_Users_CreationTime" ColumnName="DF_Users_CreationTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
