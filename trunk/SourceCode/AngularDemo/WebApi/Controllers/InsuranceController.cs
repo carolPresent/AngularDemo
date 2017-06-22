@@ -11,7 +11,8 @@ using WebApi.Utilities;
 namespace WebApi.Controllers
 {
     /// <summary>
-    /// Web api controller for insurance services.
+    /// Web api controller for insurance services.The controller interacts with business layer to perform CRUD operations on insurances.
+    /// An authorized api.
     /// </summary>
     [CustomException]
     [Authorize]
@@ -28,8 +29,8 @@ namespace WebApi.Controllers
         /// <summary>
         /// GET Api end point for insurance.
         /// </summary>
-        /// <param name="insuranceQuery"></param>
-        /// <returns></returns>
+        /// <param name="insuranceQuery">insuranceQuery contains query parameters to get insurances.</param>
+        /// <returns>HttpResponseMessage containing list of InsuranceDto.</returns>
         [HttpGet]
         public HttpResponseMessage Get([FromUri]InsuranceQuery insuranceQuery)
         {
@@ -47,8 +48,8 @@ namespace WebApi.Controllers
         /// <summary>
         /// POST Api end point for adding new insurance.
         /// </summary>
-        /// <param name="newInsuranceDto"></param>
-        /// <returns></returns>
+        /// <param name="newInsuranceDto">newInsuranceDto contains information of an insurance to add in database.</param>
+        /// <returns>HttpResponseMessage of addition of insurance in database.</returns>
         [HttpPost]
         public HttpResponseMessage Add(InsuranceDto newInsuranceDto)
         {

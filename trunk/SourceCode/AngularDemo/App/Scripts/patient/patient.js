@@ -22,20 +22,20 @@ var PatientComponent = (function () {
         this.router = router;
         //The patient model that can be used in saving a new patient.
         this.patientModel = {
-            FirstName: '',
-            MiddleName: '',
-            LastName: '',
-            Address: '',
-            Gender: '',
-            Age: 0,
-            PhoneNumber: 0
+            FirstName: appSettings_1.AppSettings.Empty,
+            MiddleName: appSettings_1.AppSettings.Empty,
+            LastName: appSettings_1.AppSettings.Empty,
+            Address: appSettings_1.AppSettings.Empty,
+            Gender: appSettings_1.AppSettings.Empty,
+            Age: appSettings_1.AppSettings.Zero,
+            PhoneNumber: appSettings_1.AppSettings.Zero
         };
         //Private variables of the component.
-        this.patFirstName = '';
-        this.patMiddleName = '';
-        this.patLastName = '';
-        this.patAddress = '';
-        this.patGender = '';
+        this.patFirstName = appSettings_1.AppSettings.Empty;
+        this.patMiddleName = appSettings_1.AppSettings.Empty;
+        this.patLastName = appSettings_1.AppSettings.Empty;
+        this.patAddress = appSettings_1.AppSettings.Empty;
+        this.patGender = appSettings_1.AppSettings.Empty;
         this.valFirstName = false;
         this.valMiddleName = false;
         this.valLastName = false;
@@ -48,7 +48,7 @@ var PatientComponent = (function () {
             this.router.navigate(['./Home/Main']);
         }
     };
-    //Private functions of the component.
+    //Private function to save patient by sending HTTP AJAX request.
     PatientComponent.prototype.savePatient = function () {
         var _this = this;
         this.setPatientModel();
@@ -58,56 +58,61 @@ var PatientComponent = (function () {
                 var body = response.json();
                 if (body.status === appSettings_1.AppSettings.SuccessStatus) {
                     _this.clearPatientData();
-                    alert('Patient added successfully.');
+                    alert(appSettings_1.AppSettings.PatientAdded);
                 }
                 else {
                     _this.setValidationFlagOn(body.data);
                 }
             }
             else {
-                alert("Error " + response.status);
+                alert(appSettings_1.AppSettings.Error + " " + response.status);
             }
         }, function (error) {
-            alert('Some error occured.');
+            alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
+    //Private function that toggles gender properties whenever 'gender' radio is clicked.
     PatientComponent.prototype.toggleGender = function (flag) {
         if (flag === 1)
-            this.patGender = "Male";
+            this.patGender = appSettings_1.AppSettings.Male;
         else
-            this.patGender = "Female";
+            this.patGender = appSettings_1.AppSettings.Female;
     };
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     PatientComponent.prototype.setValidationFlagOn = function (key) {
         this.resetValidationKeys();
         switch (key) {
-            case "FirstName":
+            case appSettings_1.AppSettings.FirstName:
                 this.valFirstName = true;
                 break;
-            case "MiddleName":
+            case appSettings_1.AppSettings.MiddleName:
                 this.valMiddleName = true;
                 break;
-            case "LastName":
+            case appSettings_1.AppSettings.LastName:
                 this.valLastName = true;
                 break;
-            case "Address":
+            case appSettings_1.AppSettings.Address:
                 this.valAddress = true;
                 break;
-            case "PhoneNumber":
+            case appSettings_1.AppSettings.PhoneNumber:
                 this.valPhone = true;
                 break;
-            case "Gender":
+            case appSettings_1.AppSettings.Gender:
                 this.valGender = true;
                 break;
         }
     };
+    //Private function to reset validation properties from template.
     PatientComponent.prototype.resetValidationKeys = function () {
         this.valAddress = this.valFirstName = this.valGender = this.valLastName = this.valMiddleName = this.valPhone = false;
     };
+    //Private function to clear patient properties from template.
     PatientComponent.prototype.clearPatientData = function () {
         this.patAddress = this.patFirstName = this.patMiddleName = this.patLastName = this.patGender = '';
         this.patAge = this.patPhone = null;
         this.resetValidationKeys();
     };
+    //Private function to set patient model from properties bounded to the template.
     PatientComponent.prototype.setPatientModel = function () {
         this.patientModel.FirstName = this.patFirstName;
         this.patientModel.MiddleName = this.patMiddleName;

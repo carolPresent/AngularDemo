@@ -21,25 +21,29 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.checkCookie();
     };
-    //Checking whether user is logged in or not.
+    //Private function for checking whether user is logged in or not.
     AppComponent.prototype.checkCookie = function () {
         if (this.getObject(appSettings_1.AppSettings.AuthCookie)) {
             this.loggedIn = true;
         }
     };
-    //Few methods for CRUD on cookies.
+    //Public method to remove cookie from browser
     AppComponent.prototype.removeKey = function (key) {
         this.__cookieService.remove(key);
     };
+    //Public method to get string from cookie from browser
     AppComponent.prototype.getKey = function (key) {
         return this.__cookieService.get(key);
     };
+    //Public method to get an object from cookie from browser
     AppComponent.prototype.getObject = function (key) {
         return this.__cookieService.getObject(key);
     };
+    //Public method to put a string to cookie to browser
     AppComponent.prototype.putKey = function (key, value) {
         this.__cookieService.put(key, value);
     };
+    //Public method to put an object to cookie to browser
     AppComponent.prototype.putObject = function (key, value) {
         this.__cookieService.putObject(key, value);
     };

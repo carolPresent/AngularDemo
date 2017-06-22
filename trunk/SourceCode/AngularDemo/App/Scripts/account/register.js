@@ -41,7 +41,7 @@ var RegisterComponent = (function () {
             UserPassword: appSettings_1.AppSettings.Empty
         };
     }
-    //Private functions of the component.
+    //Private functions to send register request
     RegisterComponent.prototype.sendRegisterRequest = function () {
         var _this = this;
         this.setUserModel();
@@ -61,9 +61,11 @@ var RegisterComponent = (function () {
         }, function (error) {
         });
     };
-    RegisterComponent.prototype.navigateToRegister = function () {
+    //Private function to navigate to login
+    RegisterComponent.prototype.navigateToLogin = function () {
         this.router.navigate(['./login']);
     };
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     RegisterComponent.prototype.setValidationFlagOn = function (key) {
         this.resetValidationKeys();
         switch (key) {
@@ -89,6 +91,7 @@ var RegisterComponent = (function () {
                 break;
         }
     };
+    //Private function to set user model from the properties bounded to the template.
     RegisterComponent.prototype.setUserModel = function () {
         this.userModel.FirstName = this.firstName;
         this.userModel.MiddleName = this.middleName;
@@ -96,9 +99,7 @@ var RegisterComponent = (function () {
         this.userModel.UserId = this.userId;
         this.userModel.UserPassword = this.userPassword;
     };
-    RegisterComponent.prototype.resetUserdata = function () {
-        this.firstName = this.middleName = this.lastName = this.userId = this.userPassword = appSettings_1.AppSettings.Empty;
-    };
+    //Private function to reset validation properties from template.
     RegisterComponent.prototype.resetValidationKeys = function () {
         this.valFirstName = this.valLastName = this.valMiddleName = this.valUserId = this.valUserPassword = false;
     };

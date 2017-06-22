@@ -10,8 +10,8 @@ namespace Business.Utilities
         /// <summary>
         /// Method to create list dynamic object. Attach this list to ResponseModel's Data parameter
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">obj is the dynamis type for creating list</param>
+        /// <returns>List of dynamic objects</returns>
         public static List<dynamic> Create(dynamic obj)
         {
             var returnItem = new List<dynamic>();

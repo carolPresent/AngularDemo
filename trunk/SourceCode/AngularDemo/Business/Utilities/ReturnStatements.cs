@@ -2,7 +2,6 @@
 using DataTransferObject.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System;
 
 namespace Business.Utilities
 {
@@ -14,8 +13,8 @@ namespace Business.Utilities
         /// <summary>
         /// Method for returning success response.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns>ResponseModel</returns>
+        /// <param name="data">dynamic data type for sending in Data field of response model</param>
+        /// <returns>ResponseModel of a success respponse</returns>
         public static ResponseModel SuccessResponse(dynamic data)
         {
             return new ResponseModel
@@ -29,9 +28,9 @@ namespace Business.Utilities
         }
 
         /// <summary>
-        /// Method for returning success response.
+        /// Method for returning failed response.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">dynamic data to send in failed response</param>
         /// <returns>ResponseModel</returns>
         public static ResponseModel FailedResponse(List<dynamic> data)
         {
@@ -45,6 +44,11 @@ namespace Business.Utilities
             };
         }
 
+        /// <summary>
+        /// Method for returning bad request type of response
+        /// </summary>
+        /// <param name="data">dynamic data to add in the Data field</param>
+        /// <returns>ResponseModel of bad request</returns>
         internal static ResponseModel BadRequestResponse(dynamic data)
         {
             return new ResponseModel
@@ -60,7 +64,7 @@ namespace Business.Utilities
         /// <summary>
         /// Method for returning failed login.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ResponseModel for failed login</returns>
         internal static ResponseModel FailedLogin()
         {
             return new ResponseModel
@@ -75,8 +79,8 @@ namespace Business.Utilities
         /// <summary>
         /// Method for returning success login.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">dynamic data to send in successful login</param>
+        /// <returns>ResponseModel for successful login</returns>
         internal static ResponseModel SuccessLogin(dynamic data)
         {
             return new ResponseModel

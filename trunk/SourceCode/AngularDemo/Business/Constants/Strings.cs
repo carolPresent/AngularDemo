@@ -1,7 +1,7 @@
 ﻿namespace Business.Constants
 {
     /// <summary>
-    /// String constants class used in business layer.
+    /// Constants class containing string constant used in business layer.
     /// </summary>
     public class Strings
     {

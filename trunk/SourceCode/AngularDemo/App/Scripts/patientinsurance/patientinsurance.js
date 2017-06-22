@@ -43,7 +43,7 @@ var PatientInsuranceComponent = (function () {
             this.router.navigate(['./Home/Main']);
         }
     };
-    //Private functions used in component.
+    //Private function to save patient insurance by sending AJAX using Server.Service component.
     PatientInsuranceComponent.prototype.savePatientInsurance = function () {
         var _this = this;
         this.setPatientInsuranceModel();
@@ -65,6 +65,7 @@ var PatientInsuranceComponent = (function () {
             alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
+    //Private function to get a list of patient from backend
     PatientInsuranceComponent.prototype.getPatientList = function () {
         var _this = this;
         this.serverService.getRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.Patient).subscribe(function (response) {
@@ -85,6 +86,7 @@ var PatientInsuranceComponent = (function () {
             alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
+    //Private function to get a list of insurance from backend
     PatientInsuranceComponent.prototype.getInsuranceList = function () {
         var _this = this;
         this.serverService.getRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.Insurance).subscribe(function (response) {
@@ -105,6 +107,7 @@ var PatientInsuranceComponent = (function () {
             alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
+    //Private function to get a list of patient insurance from backend
     PatientInsuranceComponent.prototype.getPatientInsuranceList = function () {
         var _this = this;
         this.serverService.getRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.PatientInsurance).subscribe(function (response) {
@@ -125,6 +128,7 @@ var PatientInsuranceComponent = (function () {
             alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
+    //Private function to filter patient list based on user input. Filter by FirstName/PhoneNumber/Address
     PatientInsuranceComponent.prototype.filterPatientList = function () {
         var _this = this;
         this.currentPatList = this.patientList.filter(function (patient) {
@@ -132,12 +136,14 @@ var PatientInsuranceComponent = (function () {
                 || patient.Address.toLowerCase().includes(_this.searchPatient);
         });
     };
+    //Private function to filter insurance list based on user input. Filter by NAme/InsurancePublicId
     PatientInsuranceComponent.prototype.filterInsuranceList = function () {
         var _this = this;
         this.currentInsList = this.insuranceList.filter(function (insurance) {
             return insurance.Name.toLowerCase().includes(_this.searchInsurance) || insurance.InsurancePublicId.includes(_this.searchInsurance);
         });
     };
+    //Private function to filter patient insurance list based on user input. Filter by patient FirstName, paitent Address, insruance Name and insurance InsurancePublicId
     PatientInsuranceComponent.prototype.filterPatientInsuranceList = function () {
         var _this = this;
         this.currentPatInsList = this.patientInsuranceList.filter(function (patientInsurance) {
@@ -147,32 +153,38 @@ var PatientInsuranceComponent = (function () {
                 insuranceInfo.Name.toLowerCase().includes(_this.searchPatientInsurance) || insuranceInfo.InsurancePublicId.includes(_this.searchPatientInsurance);
         });
     };
+    //Private function to open patient Modal to show list of patient.
     PatientInsuranceComponent.prototype.openPatientModal = function () {
         this.currentPatList = this.patientList;
         this.getPatientList();
         this.patientModal.open();
     };
+    //Private function to open insurance modal to show list of insurances.
     PatientInsuranceComponent.prototype.openInsuranceModal = function () {
         this.currentInsList = this.insuranceList;
         this.getInsuranceList();
         this.insuranceModal.open();
     };
+    //Private function to open patient insurance modal to show list of patient insurances.
     PatientInsuranceComponent.prototype.openPatientInsuranceModal = function () {
         this.currentPatInsList = this.patientInsuranceList;
         this.getPatientInsuranceList();
         this.patientinsuranceModal.open();
     };
+    //Private function to select patient when user click on a patient name in the user modal to select some patient.
     PatientInsuranceComponent.prototype.selectPatient = function (patientId) {
         this.resetValidationKeys();
         this.patId = patientId;
         this.patientModal.close();
     };
+    //Private function to select insurance when user click on a insurance name in the user modal to select some insurance.
     PatientInsuranceComponent.prototype.selectInsurance = function (insuranceId, insurancePublicId) {
         this.resetValidationKeys();
         this.insId = insuranceId;
         this.insPubId = insurancePublicId;
         this.insuranceModal.close();
     };
+    //Private function to select patient insurance when user click on a patient name in the user modal to select some patient insurance.
     PatientInsuranceComponent.prototype.selectPatientInsurance = function (patientInfo, insuranceInfo) {
         this.resetValidationKeys();
         this.patId = patientInfo.Id;
@@ -180,9 +192,11 @@ var PatientInsuranceComponent = (function () {
         this.insPubId = insuranceInfo.InsurancePublicId;
         this.patientinsuranceModal.close();
     };
+    //Private function to concatenate first name and last name and return it.
     PatientInsuranceComponent.prototype.concatNames = function (firstName, lastName) {
         return firstName + appSettings_1.AppSettings.Space + lastName;
     };
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     PatientInsuranceComponent.prototype.setValidationFlagOn = function (key) {
         this.resetValidationKeys();
         switch (key) {
@@ -197,14 +211,17 @@ var PatientInsuranceComponent = (function () {
                 break;
         }
     };
+    //Private function to reset validation properties to hide invalid test from template
     PatientInsuranceComponent.prototype.resetValidationKeys = function () {
         this.valInsId = this.valInsPubId = this.valPatId = false;
     };
+    //Private method to set patient insurance model when user clicks the save button
     PatientInsuranceComponent.prototype.setPatientInsuranceModel = function () {
         this.patientInsuranceModel.InsuranceId = this.insId;
         this.patientInsuranceModel.InsurancePublicId = this.insPubId;
         this.patientInsuranceModel.PatientId = this.patId;
     };
+    //Private method to clear patient insurance data when a request is made.
     PatientInsuranceComponent.prototype.clearPatientInsuranceData = function () {
         this.patientInsuranceModel.InsuranceId = this.patientInsuranceModel.PatientId = 0;
         this.insId = this.patId = null;

@@ -1,7 +1,7 @@
 ﻿namespace Business.Constants
 {
     /// <summary>
-    /// Status codes constant class used in ResponseModel
+    /// Constant class conatining status codes used in ResponseModel
     /// </summary>
     public class StatusCodes
     {

@@ -11,7 +11,8 @@ using WebApi.Utilities;
 namespace WebApi.Controllers
 {
     /// <summary>
-    /// Web Api controller for patient.
+    /// Web Api controller for patient.The controller executes basic CRUD operations of patient.
+    /// An authorized api.
     /// </summary>
     [CustomException]
     [Authorize]
@@ -28,8 +29,8 @@ namespace WebApi.Controllers
         /// <summary>
         /// GET Api end point for patient.
         /// </summary>
-        /// <param name="patientQuery"></param>
-        /// <returns></returns>
+        /// <param name="patientQuery">patientQuery contains query model to get patient from database</param>
+        /// <returns>HttpResponseMessage containing list of PatientDto</returns>
         [HttpGet]
         public HttpResponseMessage Get([FromUri]PatientQuery patientQuery)
         {
@@ -47,8 +48,8 @@ namespace WebApi.Controllers
         /// <summary>
         /// POST Api end point for adding new patient.
         /// </summary>
-        /// <param name="newPatientDto"></param>
-        /// <returns></returns>
+        /// <param name="newPatientDto">newPatientDto contains information of patient to be added.</param>
+        /// <returns>HttpResponseMessage containing patient addition status</returns>
         [HttpPost]
         public HttpResponseMessage Add(PatientDto newPatientDto)
         {

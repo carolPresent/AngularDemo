@@ -13,8 +13,8 @@ namespace WebApi.Utilities
         /// <summary>
         /// Method returns user id associated to the authtoken.
         /// </summary>
-        /// <param name="identity"></param>
-        /// <returns></returns>
+        /// <param name="identity">identity is the ClaimsIdentity variable that contains claims of authorized request.</param>
+        /// <returns>integer value being equal to userId</returns>
         public static int GetUserId(ClaimsIdentity identity)
         {
             var claims = identity.Claims.ToDictionary(m => m.Type, m => m.Value);

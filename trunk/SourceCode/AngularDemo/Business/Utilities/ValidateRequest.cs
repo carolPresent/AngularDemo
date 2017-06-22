@@ -5,11 +5,18 @@ using DataTransferObject.QueryModels;
 namespace Business.Utilities
 {
     /// <summary>
-    /// Internal class for validating request model manually. Data annotations can be used also.
+    /// Internal class for validating request model manually.
     /// All methods return a Pair, where First contains boolean value of validation status and Second contains Api key name where error occured.
+    /// If request succeeds it return the model passed in argument itself
+    /// Data annotations can be used also.
     /// </summary>
     internal class ValidateRequest
     {
+        /// <summary>
+        /// Validates PatientDto sent in POST request
+        /// </summary>
+        /// <param name="patientDto">patientDto contains information of a new patient to be added</param>
+        /// <returns>Pair of {status:boolean,ApiKeyName/PatientDto} </returns>
         public static Pair ValidatePatientDto(PatientDto patientDto)
         {
             var returnSuccessValidation = new Pair { First = true, Second = patientDto };
@@ -38,6 +45,11 @@ namespace Business.Utilities
             return returnSuccessValidation;
         }
 
+        /// <summary>
+        /// Validates InsuranceDto sent in POST request
+        /// </summary>
+        /// <param name="insuranceDto">insuranceDto contains information of a new insurance to be added</param>
+        /// <returns>Pair of {status:boolean,ApiKeyName/InsuranceDto} </returns>
         public static Pair ValidateInsuranceDto(InsuranceDto insuranceDto)
         {
             var returnSuccessValidation = new Pair { First = true, Second = insuranceDto };
@@ -57,6 +69,11 @@ namespace Business.Utilities
             return returnSuccessValidation;
         }
 
+        /// <summary>
+        /// Validates AddPatientInsurance sent in POST request
+        /// </summary>
+        /// <param name="patientInsuranceDto">patientInsuranceDto contains information of a new patient insurance to be added</param>
+        /// <returns>Pair of {status:boolean,ApiKeyName/AddPatientInsurance} </returns>
         public static Pair ValidatePatientInsuranceDto(AddPatientInsurance patientInsuranceDto)
         {
             var returnSuccessValidation = new Pair { First = true, Second = patientInsuranceDto };
@@ -73,6 +90,11 @@ namespace Business.Utilities
             return returnSuccessValidation;
         }
 
+        /// <summary>
+        /// Validates userDto sent in POST request
+        /// </summary>
+        /// <param name="userDto">userDto contains information of a new user to be added</param>
+        /// <returns>Pair of {status:boolean,ApiKeyName/userDto} </returns>
         public static Pair ValidateUserDto(UserDto userDto)
         {
             var returnSuccessValidation = new Pair { First = true, Second = userDto };

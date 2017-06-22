@@ -11,7 +11,7 @@ using WebApi.Utilities;
 namespace WebApi.Controllers
 {
     /// <summary>
-    /// Web Api controller for patient insurance.
+    /// Web Api controller for patient insurance. The controller performs basic CRUD operations on patient insurances.
     /// </summary>
     [CustomException]
     [Authorize]
@@ -28,8 +28,8 @@ namespace WebApi.Controllers
         /// <summary>
         /// GET Api end point for patient insurances.
         /// </summary>
-        /// <param name="patientInsuranceQuery"></param>
-        /// <returns></returns>
+        /// <param name="patientInsuranceQuery">patientInsuranceQuery containing query to get PatientInsuranceDto from database</param>
+        /// <returns>HttpResponseMessage containing list of PatientInsuranceDto</returns>
         [HttpGet]
         public HttpResponseMessage Get([FromUri]PatientInsuranceQuery patientInsuranceQuery)
         {
@@ -47,8 +47,8 @@ namespace WebApi.Controllers
         /// <summary>
         /// POST Api end point for adding new insurance to a patient.
         /// </summary>
-        /// <param name="newpatientInsurance"></param>
-        /// <returns></returns>
+        /// <param name="newpatientInsurance">newpatientInsurance containing required information of patient insurance</param>
+        /// <returns>HttpResponseMessage containing addition status of patient insurance</returns>
         [HttpPost]
         public HttpResponseMessage Add(AddPatientInsurance newpatientInsurance)
         {

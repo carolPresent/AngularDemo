@@ -6,8 +6,8 @@ var AppSettings = (function () {
     }
     return AppSettings;
 }());
-AppSettings.API_END_POINT = "http://192.168.0.102:1300/";
-//public static API_END_POINT: string = "http://192.168.11.63:1300/";
+//public static API_END_POINT: string = "http://192.168.0.102:1300/";
+AppSettings.API_END_POINT = "http://192.168.11.63:1300/";
 AppSettings.Patient = "patient";
 AppSettings.Insurance = "insurance";
 AppSettings.PatientInsurance = "patientinsurance";
@@ -46,5 +46,12 @@ AppSettings.ListCouldNotLoad = " list could not load";
 AppSettings.PatientId = "PatientId";
 AppSettings.InsuranceId = "InsuranceId";
 AppSettings.InsurancePublicId = "InsurancePublicId";
+AppSettings.Name = "Name";
+AppSettings.PhoneNumber = "PhoneNumber";
+AppSettings.Address = "Address";
+AppSettings.Zero = 0;
+AppSettings.Male = "Male";
+AppSettings.Female = "Female";
+AppSettings.Gender = "Gender";
 exports.AppSettings = AppSettings;
 //# sourceMappingURL=appSettings.js.map

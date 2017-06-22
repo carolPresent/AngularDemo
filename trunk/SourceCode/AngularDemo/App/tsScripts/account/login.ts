@@ -24,13 +24,18 @@ export class LoginComponent {
     //Private variable of the component.
     private userId: string = AppSettings.Empty;
     private userPassword: string = AppSettings.Empty;
+    private showLoggingInLabel: boolean = false;
+    private showUnsuccessfulLoginLabel: boolean = false;
 
-    //Private functions of the component.
+    //Private function to navigate to register template
     private navigateToRegister() {
         this.router.navigate(['./register']);
     }
 
+    //Private function to send login request
     private sendLoginRequest() {
+        this.showLoggingInLabel = true;
+        this.showUnsuccessfulLoginLabel = false;
         let data = `${AppSettings.UserName}=${this.userId}&${AppSettings.Password}=${this.userPassword}&${AppSettings.GrantType}=${AppSettings.Password}`;
         this.serverService.loginRequest(AppSettings.API_END_POINT + AppSettings.Login, data).subscribe(
             (response) => {
@@ -40,12 +45,11 @@ export class LoginComponent {
                     this.appComponent.putObject(AppSettings.AuthCookie, body);
                     location.href = "/Home/Main";
                 }
-                else {
-                    alert(AppSettings.InvalidLoginRequest);
-                    return;
-                }
             },
-            (error) => console.log(error)
+            (error) => {
+                this.showLoggingInLabel = false;
+                this.showUnsuccessfulLoginLabel = true;
+            }
         );
     }
 

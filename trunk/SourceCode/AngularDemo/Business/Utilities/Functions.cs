@@ -10,7 +10,7 @@ namespace Business.Utilities
         /// <summary>
         /// Common method to get date
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string having current date</returns>
         public static string GetCurrentDate()
         {
             return DateTime.Now.ToLongDateString();
@@ -19,7 +19,7 @@ namespace Business.Utilities
         /// <summary>
         /// Common method to get time
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string having current time</returns>
         public static string GetCurrentTime()
         {
             return DateTime.Now.ToLongTimeString();

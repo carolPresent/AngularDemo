@@ -9,15 +9,15 @@ using DataTransferObject.QueryModels;
 namespace Business.Services
 {
     /// <summary>
-    /// Business layer class for patient.
+    /// Business layer class for patient. Interacts with the Data layer to perform CRUD operations on Patients.
     /// </summary>
     public class PatientService
     {
         /// <summary>
         /// Method to get patient from database based on user query.
         /// </summary>
-        /// <param name="patientQuery"></param>
-        /// <returns></returns>
+        /// <param name="patientQuery">patientQuery contains query model to get patient from database</param>
+        /// <returns>ResponseModel containing list of PatientDto</returns>
         public ResponseModel Get(PatientQuery patientQuery)
         {
             using (var unitOfWork = new UnitOfWork())
@@ -34,8 +34,8 @@ namespace Business.Services
         /// <summary>
         /// Method to add patient to database.
         /// </summary>
-        /// <param name="newPatientDto"></param>
-        /// <returns></returns>
+        /// <param name="newPatientDto">newPatientDto contains information of patient to be added.</param>
+        /// <returns>ResponseModel containing patient addition status</returns>
         public ResponseModel Add(PatientDto newPatientDto)
         {
             var validationStatus = ValidateRequest.ValidatePatientDto(newPatientDto);

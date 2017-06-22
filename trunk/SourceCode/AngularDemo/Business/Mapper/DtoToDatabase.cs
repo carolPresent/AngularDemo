@@ -6,12 +6,18 @@ namespace Business.Mapper
 {
     /// <summary>
     /// /// <summary>
+    /// Class to convert Dto's to Database objects
     /// Since project is covering small number of classes in database , DTO's are mapped manually.
     /// When number of classes increase we can use third party package such as AutoMapper.
     /// </summary>
     /// </summary>
     internal class DtoToDatabase
     {
+        /// <summary>
+        /// Maps a DataTransferObject.PatientDto to Data.Patient
+        /// </summary>
+        /// <param name="patient">patient containing information of a patient</param>
+        /// <returns>Data.Patient having information mapped from DataTransferObject.PatientDto</returns>
         public static Patient Patient(PatientDto patient)
         {
             return new Patient
@@ -26,6 +32,11 @@ namespace Business.Mapper
             };
         }
 
+        /// <summary>
+        /// Maps a DataTransferObject.InsuranceDto to Data.Insurance
+        /// </summary>
+        /// <param name="insurance">insurance containing information of a insurance</param>
+        /// <returns>Data.Insurance having information mapped from DataTransferObject.InsuranceDto</returns>
         public static Insurance Insurance(InsuranceDto insurance)
         {
             return new Insurance
@@ -37,6 +48,11 @@ namespace Business.Mapper
             };
         }
 
+        /// <summary>
+        /// Maps a DataTransferObject.UserDto to Data.User
+        /// </summary>
+        /// <param name="user">user containing information of a user</param>
+        /// <returns>Data.User having information mapped from DataTransferObject.UserDto</returns>
         public static User User(UserDto user)
         {
             return new User
@@ -49,8 +65,15 @@ namespace Business.Mapper
             };
         }
 
+        /// <summary>
+        /// Maps a Pair of {DataTransferObject.PatientDto,userId} to Data.PatientInsurance
+        /// userId is the id of the user fetched from api using its Utilities.UserIdentity.GetUserId() method
+        /// </summary>
+        /// <param name="patientInsurance">patientInsurance containing information of a patientInsurance</param>
+        /// <returns>Data.PatientInsurance having information mapped from Pair of {DataTransferObject.PatientDto,userId}</returns>
         public static PatientInsurance PatientInsurance(Pair patientInsurance)
         {
+            //patientInsurance Pair's First value contains PatientDto and Second value contains userId who is adding the patient insurance
             var addPatientInsurance = patientInsurance.First;
             var userId = patientInsurance.Second;
             return new PatientInsurance
@@ -63,6 +86,13 @@ namespace Business.Mapper
             };
         }
 
+        /// <summary>
+        /// Maps a DataTransferObject.LoginDto to Data.UserPassword.
+        /// Uses userId as foreign key for Data.User table.
+        /// </summary>
+        /// <param name="loginDto">loginDto contains public userId and userPassword of new user.</param>
+        /// <param name="userId">userId of user from Data.User table</param>
+        /// <returns>Data.UserPassword having information mapped from DataTransferObject.LoginDto</returns>
         public static UserPassword UserPassword(LoginDto loginDto,int userId)
         {
             return new UserPassword

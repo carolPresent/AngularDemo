@@ -19,6 +19,7 @@ var ServerService = (function () {
         this.http = http;
         this.appComponent = appComponent;
     }
+    //Private function to create authorization headers.
     ServerService.prototype.createHeaders = function (headers) {
         var authCookie = this.appComponent.getKey(appSettings_1.AppSettings.AuthCookie);
         if (!authCookie)
@@ -26,19 +27,23 @@ var ServerService = (function () {
         var token = JSON.parse(this.appComponent.getKey(appSettings_1.AppSettings.AuthCookie));
         headers.append(appSettings_1.AppSettings.Authorization, token.token_type + appSettings_1.AppSettings.Space + token.access_token);
     };
+    //Private function to create login headers.
     ServerService.prototype.createLoginHeaders = function (headers) {
         headers.append(appSettings_1.AppSettings.ContentType, appSettings_1.AppSettings.UrlEncoded);
     };
+    //Public function to make a login request.
     ServerService.prototype.loginRequest = function (url, data) {
         var headers = new http_1.Headers();
         this.createLoginHeaders(headers);
         return this.http.post(url, data, { headers: headers });
     };
+    //Public function to make a post request.
     ServerService.prototype.postRequest = function (url, data) {
         var headers = new http_1.Headers();
         this.createHeaders(headers);
         return this.http.post(url, data, { headers: headers });
     };
+    //Public function to make a get request.
     ServerService.prototype.getRequest = function (url) {
         var headers = new http_1.Headers();
         this.createHeaders(headers);

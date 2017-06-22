@@ -181,10 +181,17 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="gulpfile.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\AngularDemoAppRelease.pubxml" />
+    <Content Include="Scripts\account\login.js" />
+    <Content Include="Scripts\account\logout.js" />
+    <Content Include="Scripts\account\register.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\appSettings.js" />
+    <Content Include="Scripts\boot.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\insurance\insurance.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -193,11 +200,17 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\patientinsurance\patientinsurance.js" />
+    <Content Include="Scripts\patient\patient.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\servers.service.js" />
+    <Content Include="Scripts\server\server.js" />
+    <Content Include="Scripts\side-bar\side-bar.js" />
     <Content Include="Scripts\systemjs.config.js" />
-    <Content Include="Scripts\_references.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -216,9 +229,24 @@
     <Content Include="Views\Home\Sidebar.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Scripts\account\login.js.map" />
+    <Content Include="Scripts\account\logout.js.map" />
+    <Content Include="Scripts\account\register.js.map" />
+    <Content Include="Scripts\app.js.map" />
+    <Content Include="Scripts\appSettings.js.map" />
+    <Content Include="Scripts\boot.js.map" />
+    <Content Include="Scripts\insurance\insurance.js.map" />
+    <Content Include="Scripts\main.js.map" />
+    <Content Include="Scripts\patientinsurance\patientinsurance.js.map" />
+    <Content Include="Scripts\patient\patient.js.map" />
+    <Content Include="Scripts\servers.service.js.map" />
+    <Content Include="Scripts\server\server.js.map" />
+    <Content Include="Scripts\side-bar\side-bar.js.map" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="libs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -226,7 +254,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="tsScripts\account\login.ts" />

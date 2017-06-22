@@ -1,7 +1,7 @@
 ﻿namespace Business.Constants
 {
     /// <summary>
-    /// Status strings related to status code in reponse.
+    /// Constants class containing status strings related to status code in reponse.
     /// </summary>
     public class StatusStrings
     {

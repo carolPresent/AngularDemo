@@ -1,4 +1,8 @@
 ﻿<div class="form form-horizontal">
+    <div class="form-group text-center ">
+        <label [hidden]="!showLoggingInLabel" class="text-success">Logging in...</label>
+        <label [hidden]="!showUnsuccessfulLoginLabel" class="text-danger">User id or password is incorrect</label>
+    </div>
     <div class="form-group">
         <div class="col-md-3">
             <label>User id</label>

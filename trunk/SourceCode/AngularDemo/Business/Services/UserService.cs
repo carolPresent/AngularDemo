@@ -9,33 +9,15 @@ using DataTransferObject.QueryModels;
 namespace Business.Services
 {
     /// <summary>
-    /// Business layer class for user.
+    /// Business layer class for user. The class interacts with Data layer to perform CRUD operations on Users.
     /// </summary>
     public class UserService
     {
         /// <summary>
-        /// Method to get user from database based on user query.
-        /// </summary>
-        /// <param name="userQuery"></param>
-        /// <returns></returns>
-        public ResponseModel Get(UserQuery userQuery)
-        {
-            using (var unitOfWork = new UnitOfWork())
-            {
-                if (userQuery == null)
-                    userQuery = new UserQuery(name: CommonString.OptionalStringParam, userId: CommonString.OptionalStringParam);
-
-                userQuery.SetTypedVariables();
-                var result = unitOfWork.Users.FindAll(QueryExpressions.User(userQuery));
-                return ReturnStatements.SuccessResponse(CollectionConversions.ListUser(result));
-            }
-        }
-
-        /// <summary>
         /// Method to add user to database.
         /// </summary>
-        /// <param name="newUserDto"></param>
-        /// <returns></returns>
+        /// <param name="newUserDto">newUserDto contains personal information of user and user id and password.</param>
+        /// <returns>ResponseModel of user addition in database.</returns>
         public ResponseModel Add(UserDto newUserDto)
         {
             var validationStatus = ValidateRequest.ValidateUserDto(newUserDto);

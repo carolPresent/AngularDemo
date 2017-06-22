@@ -1,7 +1,7 @@
 ﻿namespace Business.Constants
 {
     /// <summary>
-    /// Integer constants used in business layer.
+    /// Constants class containing integers used in business layer.
     /// </summary>
     internal class Integers
     {

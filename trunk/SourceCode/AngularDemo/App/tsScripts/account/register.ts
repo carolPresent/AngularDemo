@@ -37,7 +37,7 @@ export class RegisterComponent {
         UserPassword: AppSettings.Empty
     }
 
-    //Private functions of the component.
+    //Private functions to send register request
     private sendRegisterRequest() {
         this.setUserModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.Account, this.userModel).subscribe(
@@ -58,10 +58,12 @@ export class RegisterComponent {
         )
     }
 
-    private navigateToRegister() {
+    //Private function to navigate to login
+    private navigateToLogin() {
         this.router.navigate(['./login']);
     }
 
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
@@ -82,6 +84,7 @@ export class RegisterComponent {
         }
     }
 
+    //Private function to set user model from the properties bounded to the template.
     private setUserModel() {
         this.userModel.FirstName = this.firstName;
         this.userModel.MiddleName = this.middleName;
@@ -90,10 +93,7 @@ export class RegisterComponent {
         this.userModel.UserPassword = this.userPassword;
     }
 
-    private resetUserdata() {
-        this.firstName = this.middleName = this.lastName = this.userId = this.userPassword = AppSettings.Empty;
-    }
-
+    //Private function to reset validation properties from template.
     private resetValidationKeys() {
         this.valFirstName = this.valLastName = this.valMiddleName = this.valUserId = this.valUserPassword = false;
     }

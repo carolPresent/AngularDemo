@@ -55,7 +55,7 @@ export class PatientInsuranceComponent {
     private valInsId: boolean = false;
     private valInsPubId: boolean = false;
 
-    //Private functions used in component.
+    //Private function to save patient insurance by sending AJAX using Server.Service component.
     private savePatientInsurance() {
         this.setPatientInsuranceModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.PatientInsurance, this.patientInsuranceModel).subscribe(
@@ -80,6 +80,7 @@ export class PatientInsuranceComponent {
         )
     }
 
+    //Private function to get a list of patient from backend
     private getPatientList() {
         this.serverService.getRequest(AppSettings.API_END_POINT + AppSettings.Patient).subscribe(
             (response) => {
@@ -101,6 +102,7 @@ export class PatientInsuranceComponent {
         )
     }
 
+    //Private function to get a list of insurance from backend
     private getInsuranceList() {
         this.serverService.getRequest(AppSettings.API_END_POINT + AppSettings.Insurance).subscribe(
             (response) => {
@@ -122,6 +124,7 @@ export class PatientInsuranceComponent {
         )
     }
 
+    //Private function to get a list of patient insurance from backend
     private getPatientInsuranceList() {
         this.serverService.getRequest(AppSettings.API_END_POINT + AppSettings.PatientInsurance).subscribe(
             (response) => {
@@ -143,6 +146,7 @@ export class PatientInsuranceComponent {
         )
     }
 
+    //Private function to filter patient list based on user input. Filter by FirstName/PhoneNumber/Address
     private filterPatientList() {
         this.currentPatList = this.patientList.filter((patient) => {
             return patient.FirstName.toLowerCase().includes(this.searchPatient) || patient.PhoneNumber.includes(this.searchPatient)
@@ -150,12 +154,14 @@ export class PatientInsuranceComponent {
         });
     }
 
+    //Private function to filter insurance list based on user input. Filter by NAme/InsurancePublicId
     private filterInsuranceList() {
         this.currentInsList = this.insuranceList.filter((insurance) => {
             return insurance.Name.toLowerCase().includes(this.searchInsurance) || insurance.InsurancePublicId.includes(this.searchInsurance);
         });
     }
 
+    //Private function to filter patient insurance list based on user input. Filter by patient FirstName, paitent Address, insruance Name and insurance InsurancePublicId
     private filterPatientInsuranceList() {
         this.currentPatInsList = this.patientInsuranceList.filter((patientInsurance) => {
             var patientInfo = patientInsurance.PatientInfo;
@@ -165,30 +171,35 @@ export class PatientInsuranceComponent {
         });
     }
 
+    //Private function to open patient Modal to show list of patient.
     private openPatientModal() {
         this.currentPatList = this.patientList;
         this.getPatientList();
         this.patientModal.open();
     }
 
+    //Private function to open insurance modal to show list of insurances.
     private openInsuranceModal() {
         this.currentInsList = this.insuranceList;
         this.getInsuranceList();
         this.insuranceModal.open();
     }
 
+    //Private function to open patient insurance modal to show list of patient insurances.
     private openPatientInsuranceModal() {
         this.currentPatInsList = this.patientInsuranceList;
         this.getPatientInsuranceList();
         this.patientinsuranceModal.open();
     }
 
+    //Private function to select patient when user click on a patient name in the user modal to select some patient.
     private selectPatient(patientId: number) {
         this.resetValidationKeys();
         this.patId = patientId;
         this.patientModal.close();
     }
 
+    //Private function to select insurance when user click on a insurance name in the user modal to select some insurance.
     private selectInsurance(insuranceId: number, insurancePublicId: string) {
         this.resetValidationKeys();
         this.insId = insuranceId;
@@ -196,6 +207,7 @@ export class PatientInsuranceComponent {
         this.insuranceModal.close();
     }
 
+    //Private function to select patient insurance when user click on a patient name in the user modal to select some patient insurance.
     private selectPatientInsurance(patientInfo: any, insuranceInfo: any) {
         this.resetValidationKeys();
         this.patId = patientInfo.Id;
@@ -204,10 +216,12 @@ export class PatientInsuranceComponent {
         this.patientinsuranceModal.close();
     }
 
+    //Private function to concatenate first name and last name and return it.
     private concatNames(firstName: string, lastName: string) {
         return firstName + AppSettings.Space + lastName;
     }
 
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
@@ -220,16 +234,19 @@ export class PatientInsuranceComponent {
         }
     }
 
+    //Private function to reset validation properties to hide invalid test from template
     private resetValidationKeys() {
         this.valInsId = this.valInsPubId = this.valPatId = false;
     }
 
+    //Private method to set patient insurance model when user clicks the save button
     private setPatientInsuranceModel() {
         this.patientInsuranceModel.InsuranceId = this.insId;
         this.patientInsuranceModel.InsurancePublicId = this.insPubId;
         this.patientInsuranceModel.PatientId = this.patId;
     }
 
+    //Private method to clear patient insurance data when a request is made.
     private clearPatientInsuranceData() {
         this.patientInsuranceModel.InsuranceId = this.patientInsuranceModel.PatientId = 0;
         this.insId = this.patId = null;

@@ -39,7 +39,7 @@ export class InsuranceComponent {
     private valAddress: boolean = false;
     private valPublicId: boolean = false;
 
-    //Private functions of component.
+    //Private function to save insurance. Send a request Server.Service to interact with HTTP.
     private saveInsurance() {
         this.setInsuranceModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.Insurance, this.insuranceModel).subscribe(
@@ -63,6 +63,7 @@ export class InsuranceComponent {
         );
     }
 
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
@@ -77,10 +78,12 @@ export class InsuranceComponent {
         }
     }
 
+    //Private function to reset validation properties from template.
     private resetValidationKeys() {
         this.valAddress = this.valName = this.valPhone = this.valPublicId = false;
     }
 
+    //Private function to set insurance model from template properties.
     private setInsuranceModel() {
         this.insuranceModel.Address = this.insAddress;
         this.insuranceModel.Name = this.insName;
@@ -88,6 +91,7 @@ export class InsuranceComponent {
         this.insuranceModel.InsurancePublicId = this.insPublicId;
     }
 
+    //Private function to clear insurance properties and insurance model.
     private clearInsuranceData() {
         this.insAddress = this.insPublicId = this.insName = AppSettings.Empty;
         this.insPhone = null;

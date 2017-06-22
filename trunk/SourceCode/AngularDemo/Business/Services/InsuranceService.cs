@@ -9,15 +9,15 @@ using DataTransferObject.Constants;
 namespace Business.Services
 {
     /// <summary>
-    /// Business layer class for insurance.
+    /// Business layer class for insurance. Interacts with Data layer for CRUD operations.
     /// </summary>
     public class InsuranceService
     {
         /// <summary>
         /// Method to get insurance from database based on user query.
         /// </summary>
-        /// <param name="insuranceQuery"></param>
-        /// <returns></returns>
+        /// <param name="insuranceQuery">insuranceQuery contains query parameters to get insurances.</param>
+        /// <returns>ResponseModel containing list of InsuranceDto.</returns>
         public ResponseModel Get(InsuranceQuery insuranceQuery)
         {
             using (var unitOfWork = new UnitOfWork())
@@ -34,8 +34,8 @@ namespace Business.Services
         /// <summary>
         /// Method to add insurance to database.
         /// </summary>
-        /// <param name="newInsuranceDto"></param>
-        /// <returns></returns>
+        /// <param name="newInsuranceDto">newInsuranceDto contains information of an insurance to add in database.</param>
+        /// <returns>ResponseModel of addition of insurance in database.</returns>
         public ResponseModel Add(InsuranceDto newInsuranceDto)
         {
             var validationStatus = ValidateRequest.ValidateInsuranceDto(newInsuranceDto);

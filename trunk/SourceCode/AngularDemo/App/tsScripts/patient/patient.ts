@@ -47,7 +47,7 @@ export class PatientComponent {
     private valGender: boolean = false;
     private valPhone: boolean = false;
 
-    //Private functions of the component.
+    //Private function to save patient by sending HTTP AJAX request.
     private savePatient() {
         this.setPatientModel();
         this.serverService.postRequest(AppSettings.API_END_POINT + AppSettings.Patient, this.patientModel)
@@ -72,6 +72,7 @@ export class PatientComponent {
             );
     }
 
+    //Private function that toggles gender properties whenever 'gender' radio is clicked.
     private toggleGender(flag: number) {
         if (flag === 1)
             this.patGender = AppSettings.Male;
@@ -79,6 +80,7 @@ export class PatientComponent {
             this.patGender = AppSettings.Female;
     }
 
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     private setValidationFlagOn(key: string) {
         this.resetValidationKeys();
         switch (key) {
@@ -97,16 +99,19 @@ export class PatientComponent {
         }
     }
 
+    //Private function to reset validation properties from template.
     private resetValidationKeys() {
         this.valAddress = this.valFirstName = this.valGender = this.valLastName = this.valMiddleName = this.valPhone = false;
     }
 
+    //Private function to clear patient properties from template.
     private clearPatientData() {
         this.patAddress = this.patFirstName = this.patMiddleName = this.patLastName = this.patGender = '';
         this.patAge = this.patPhone = null;
         this.resetValidationKeys();
     }
 
+    //Private function to set patient model from properties bounded to the template.
     private setPatientModel() {
         this.patientModel.FirstName = this.patFirstName;
         this.patientModel.MiddleName = this.patMiddleName;

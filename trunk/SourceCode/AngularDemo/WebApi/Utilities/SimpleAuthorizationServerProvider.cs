@@ -5,7 +5,6 @@ using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WebApi.Constants;
 
 namespace WebApi.Utilities
 {

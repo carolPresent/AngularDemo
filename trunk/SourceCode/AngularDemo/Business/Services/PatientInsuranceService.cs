@@ -12,15 +12,15 @@ using System.Linq;
 namespace Business.Services
 {
     /// <summary>
-    /// Business layer class of patient insurance.
+    /// Business layer class of patient insurance. Interacts with the Data layer to perform CRUD operations on patient insurances.
     /// </summary>
     public class PatientInsuranceService
     {
         /// <summary>
         /// Method to get patient insurance from database based on user query.
         /// </summary>
-        /// <param name="patientInsuranceQuery"></param>
-        /// <returns></returns>
+        /// <param name="patientInsuranceQuery">patientInsuranceQuery containing query to get PatientInsuranceDto from database</param>
+        /// <returns>ResponseModel containing list of PatientInsuranceDto</returns>
         public ResponseModel Get(PatientInsuranceQuery patientInsuranceQuery)
         {
             using (var unitOfWork = new UnitOfWork())
@@ -36,9 +36,9 @@ namespace Business.Services
         /// <summary>
         /// Method to add patient insurance to database.
         /// </summary>
-        /// <param name="newPatientInsurance"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="newpatientInsurance">newpatientInsurance containing required information of patient insurance</param>
+        /// <param name="userId">userId is the id of the logged in user who made the request to add a patient insurance</param>
+        /// <returns>HttpResponseMessage containing addition status of patient insurance</returns>
         public ResponseModel Add(AddPatientInsurance newPatientInsurance, int userId)
         {
             var validationStatus = ValidateRequest.ValidatePatientInsuranceDto(newPatientInsurance);

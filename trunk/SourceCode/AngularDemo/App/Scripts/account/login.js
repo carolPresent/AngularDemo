@@ -23,18 +23,23 @@ var LoginComponent = (function () {
         //Private variable of the component.
         this.userId = appSettings_1.AppSettings.Empty;
         this.userPassword = appSettings_1.AppSettings.Empty;
+        this.showLoggingInLabel = false;
+        this.showUnsuccessfulLoginLabel = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
         if (this.appComponent.loggedIn) {
             this.router.navigate(['./patient']);
         }
     };
-    //Private functions of the component.
+    //Private function to navigate to register template
     LoginComponent.prototype.navigateToRegister = function () {
         this.router.navigate(['./register']);
     };
+    //Private function to send login request
     LoginComponent.prototype.sendLoginRequest = function () {
         var _this = this;
+        this.showLoggingInLabel = true;
+        this.showUnsuccessfulLoginLabel = false;
         var data = appSettings_1.AppSettings.UserName + "=" + this.userId + "&" + appSettings_1.AppSettings.Password + "=" + this.userPassword + "&" + appSettings_1.AppSettings.GrantType + "=" + appSettings_1.AppSettings.Password;
         this.serverService.loginRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.Login, data).subscribe(function (response) {
             if (response.status === appSettings_1.AppSettings.OkStatusCode) {
@@ -43,11 +48,10 @@ var LoginComponent = (function () {
                 _this.appComponent.putObject(appSettings_1.AppSettings.AuthCookie, body);
                 location.href = "/Home/Main";
             }
-            else {
-                alert(appSettings_1.AppSettings.InvalidLoginRequest);
-                return;
-            }
-        }, function (error) { return console.log(error); });
+        }, function (error) {
+            _this.showLoggingInLabel = false;
+            _this.showUnsuccessfulLoginLabel = true;
+        });
     };
     return LoginComponent;
 }());

@@ -1,5 +1,4 @@
-﻿using Business.Constants;
-using Data;
+﻿using Data;
 using DataTransferObject.Constants;
 using DataTransferObject.Models;
 using DataTransferObject.QueryModels;
@@ -21,8 +20,8 @@ namespace Business.Utilities
         /// <summary>
         /// Generic query expression for Patient service
         /// </summary>
-        /// <param name="patientQuery"></param>
-        /// <returns></returns>
+        /// <param name="patientQuery">patientQuery having query on patient</param>
+        /// <returns>Func delegate to return to the Entity framework of type Patient,bool</returns>
         public static Func<Patient, bool> Patient(PatientQuery patientQuery)
         {
             return new Func<Patient, bool>(m => (!patientQuery.Id.Equals(CommonInteger.OptionalIntegerParam) ? m.PK_Patients.Equals(patientQuery.Id) : true) &&
@@ -33,8 +32,8 @@ namespace Business.Utilities
         /// <summary>
         /// Generic query expression for Insurance service
         /// </summary>
-        /// <param name="insuranceQuery"></param>
-        /// <returns></returns>
+        /// <param name="insuranceQuery">insuranceQuery having query on insurance</param>
+        /// <returns>Func delegate to return to the Entity framework of type Insurance,bool</returns>
         public static Func<Insurance, bool> Insurance(InsuranceQuery insuranceQuery)
         {
             var ifInsuranceQueryIdIsZero = !insuranceQuery.Id.Equals(CommonInteger.OptionalIntegerParam);
@@ -48,8 +47,8 @@ namespace Business.Utilities
         /// <summary>
         /// Generic query expression for User service
         /// </summary>
-        /// <param name="userQuery"></param>
-        /// <returns></returns>
+        /// <param name="userQuery">userQuery having query on user</param>
+        /// <returns>Func delegate to return to the Entity framework of type User,bool</returns>
         public static Func<User, bool> User(UserQuery userQuery)
         {
             return new Func<User, bool>(m => (!string.IsNullOrWhiteSpace(userQuery.Name) ? string.Concat(m.DF_Users_FirstName, m.DF_Users_LastName).IndexOf(userQuery.Name, StringComparison.OrdinalIgnoreCase)>=0 : true) &&
@@ -59,8 +58,8 @@ namespace Business.Utilities
         /// <summary>
         /// Generic query expression for PatientInsurance service
         /// </summary>
-        /// <param name="patientInsuranceQuery"></param>
-        /// <returns></returns>
+        /// <param name="patientInsuranceQuery">patientInsuranceQuery having query on patient insurance</param>
+        /// <returns>Func delegate to return to the Entity framework of type PatientInsurance,bool</returns>
         public static Func<PatientInsurance, bool> PatientInsurance(PatientInsuranceQuery patientInsuranceQuery)
         {
             return new Func<PatientInsurance, bool>(m => (!patientInsuranceQuery.PatientId.Equals(CommonInteger.OptionalIntegerParam) ? m.FK_PatientInsurances_Patients.Equals(patientInsuranceQuery.PatientId) : true) &&

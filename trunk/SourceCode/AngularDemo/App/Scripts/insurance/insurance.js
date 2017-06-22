@@ -28,9 +28,9 @@ var InsuranceComponent = (function () {
             InsurancePublicId: ''
         };
         //Private variables of component.
-        this.insName = '';
-        this.insAddress = '';
-        this.insPublicId = '';
+        this.insName = appSettings_1.AppSettings.Empty;
+        this.insAddress = appSettings_1.AppSettings.Empty;
+        this.insPublicId = appSettings_1.AppSettings.Empty;
         this.valName = false;
         this.valPhone = false;
         this.valAddress = false;
@@ -41,7 +41,7 @@ var InsuranceComponent = (function () {
             this.router.navigate(['./Home/Main']);
         }
     };
-    //Private functions of component.
+    //Private function to save insurance. Send a request Server.Service to interact with HTTP.
     InsuranceComponent.prototype.saveInsurance = function () {
         var _this = this;
         this.setInsuranceModel();
@@ -50,44 +50,51 @@ var InsuranceComponent = (function () {
                 var body = response.json();
                 if (body.status === appSettings_1.AppSettings.SuccessStatus) {
                     _this.clearInsuranceData();
-                    alert('Insurance added successfully.');
+                    alert(appSettings_1.AppSettings.InsuranceAdded);
                 }
                 else {
                     _this.setValidationFlagOn(body.data);
                 }
             }
+            else {
+                alert("" + (appSettings_1.AppSettings.Error, response.status));
+            }
         }, function (error) {
-            console.log('Some error occured.');
+            console.log(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
+    //Private function to set validation flag associated to the ApiKey returned in case of bad request.
     InsuranceComponent.prototype.setValidationFlagOn = function (key) {
         this.resetValidationKeys();
         switch (key) {
-            case "Name":
+            case appSettings_1.AppSettings.Name:
                 this.valName = true;
                 break;
-            case "Address":
+            case appSettings_1.AppSettings.Address:
                 this.valAddress = true;
                 break;
-            case "PhoneNumber":
+            case appSettings_1.AppSettings.PhoneNumber:
                 this.valPhone = true;
                 break;
-            case "InsurancePublicId":
+            case appSettings_1.AppSettings.InsurancePublicId:
                 this.valPublicId = true;
                 break;
         }
     };
+    //Private function to reset validation properties from template.
     InsuranceComponent.prototype.resetValidationKeys = function () {
         this.valAddress = this.valName = this.valPhone = this.valPublicId = false;
     };
+    //Private function to set insurance model from template properties.
     InsuranceComponent.prototype.setInsuranceModel = function () {
         this.insuranceModel.Address = this.insAddress;
         this.insuranceModel.Name = this.insName;
         this.insuranceModel.PhoneNumber = this.insPhone;
         this.insuranceModel.InsurancePublicId = this.insPublicId;
     };
+    //Private function to clear insurance properties and insurance model.
     InsuranceComponent.prototype.clearInsuranceData = function () {
-        this.insAddress = this.insPublicId = this.insName = '';
+        this.insAddress = this.insPublicId = this.insName = appSettings_1.AppSettings.Empty;
         this.insPhone = null;
         this.resetValidationKeys();
     };
