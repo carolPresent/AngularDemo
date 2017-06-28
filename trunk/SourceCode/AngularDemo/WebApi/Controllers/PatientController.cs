@@ -4,6 +4,7 @@ using DataTransferObject.QueryModels;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using WebApi.Constants;
 using WebApi.Utilities;
@@ -55,10 +56,31 @@ namespace WebApi.Controllers
         {
             try
             {
-                var result = _services.Add(newPatientDto);
+                var userId = UserIdentity.GetUserId((ClaimsIdentity)User.Identity);
+                var result = _services.Add(newPatientDto,userId);
                 return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ex);
+            }
+        }
+
+        /// <summary>
+        /// PUT Api end point to update a patien data in database
+        /// </summary>
+        /// <param name="oldPatientDto">oldPatientDto contains information of patient to be modified.</param>
+        /// <returns>HttpResponseMessage regarding the modification status of the patient</returns>
+        [HttpPut]
+        public HttpResponseMessage Update(PatientDto oldPatientDto)
+        {
+            try
+            {
+                var userId = UserIdentity.GetUserId((ClaimsIdentity)User.Identity);
+                var result = _services.Update(oldPatientDto, userId);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch(Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, ex);
             }

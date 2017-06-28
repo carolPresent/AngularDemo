@@ -43,13 +43,17 @@
     <Compile Include="Constants\CommonInteger.cs" />
     <Compile Include="Constants\CommonString.cs" />
     <Compile Include="Interfaces\QueryInterface.cs" />
+    <Compile Include="Models\EmailServiceDto.cs" />
+    <Compile Include="Models\ForgotPasswordDto.cs" />
     <Compile Include="Models\InsuranceDto.cs" />
     <Compile Include="Models\LoginDto.cs" />
     <Compile Include="Models\Pair.cs" />
     <Compile Include="Models\PatientDto.cs" />
     <Compile Include="Models\PatientInsuranceDto.cs" />
+    <Compile Include="Models\ResetPasswordDto.cs" />
     <Compile Include="Models\UserDto.cs" />
     <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Models\VerificationDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryModels\AddPatientInsurance.cs" />
     <Compile Include="QueryModels\InsuranceQuery.cs" />

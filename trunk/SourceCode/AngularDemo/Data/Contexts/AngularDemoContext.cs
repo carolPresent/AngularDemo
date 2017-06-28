@@ -3,7 +3,7 @@
     /// <summary>
     /// DB context of database.
     /// </summary>
-    public class AngularDemoContext : AngularDemoEntities
+    public class AngularDemoContext : AngularDemoEntity
     {
         public AngularDemoContext()
         {

@@ -37,6 +37,12 @@ var ServerService = (function () {
         this.createLoginHeaders(headers);
         return this.http.post(url, data, { headers: headers });
     };
+    //Public function to make a put request
+    ServerService.prototype.putRequest = function (url, data) {
+        var headers = new http_1.Headers();
+        this.createHeaders(headers);
+        return this.http.put(url, data, { headers: headers });
+    };
     //Public function to make a post request.
     ServerService.prototype.postRequest = function (url, data) {
         var headers = new http_1.Headers();

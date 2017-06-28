@@ -16,5 +16,7 @@
         public const string LoginSuccessfull = "LoginSuccessfull";
 
         public const string InvalidParameter = "InvalidParameter";
+
+        public const string UserNotVerified = "UserNotVerified";
     }
 }

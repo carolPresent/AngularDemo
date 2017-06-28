@@ -28,10 +28,27 @@ namespace Business.Utilities
         }
 
         /// <summary>
+        /// Success response when data has to be string type
+        /// </summary>
+        /// <param name="data">data is the message to be sent</param>
+        /// <returns>ResponseModel of a success respponse</returns>
+        public static ResponseModel SuccessResponse(string data)
+        {
+            return new ResponseModel
+            {
+                Count = Integers.NoReturnCount,
+                Data = data,
+                Message = StatusMessages.CreatedSuccessfully,
+                Status = StatusStrings.Success,
+                StatusCode = StatusCodes.Success
+            };
+        }
+
+        /// <summary>
         /// Method for returning failed response.
         /// </summary>
         /// <param name="data">dynamic data to send in failed response</param>
-        /// <returns>ResponseModel</returns>
+        /// <returns>ResponseModel of a failed response</returns>
         public static ResponseModel FailedResponse(List<dynamic> data)
         {
             return new ResponseModel
@@ -45,6 +62,22 @@ namespace Business.Utilities
         }
 
         /// <summary>
+        /// Method for returning failed response.
+        /// </summary>
+        /// <param name="data">dynamic data to send a failed response</param>
+        /// <returns>ResponseModel of a failed response</returns>
+        public static ResponseModel FailedResponse(dynamic data)
+        {
+            return new ResponseModel
+            {
+                Count = Integers.NoReturnCount,
+                Data = data,
+                Message = StatusMessages.UnsuccessfulAddition,
+                Status = StatusStrings.Failed,
+                StatusCode = StatusCodes.InternalServerError
+            };
+        }
+        /// <summary>
         /// Method for returning bad request type of response
         /// </summary>
         /// <param name="data">dynamic data to add in the Data field</param>
@@ -53,7 +86,7 @@ namespace Business.Utilities
         {
             return new ResponseModel
             {
-                Count = 0,    //count is zero for bad request response
+                Count = Integers.NoReturnCount,    //count is zero for bad request response
                 Data = data,
                 Message = StatusMessages.InvalidParameter,
                 Status = StatusStrings.Failed,
@@ -62,17 +95,17 @@ namespace Business.Utilities
         }
 
         /// <summary>
-        /// Method for returning failed login.
+        /// Method for returning failed login in case when user handle is not found.
         /// </summary>
         /// <returns>ResponseModel for failed login</returns>
-        internal static ResponseModel FailedLogin()
+        internal static ResponseModel FailedLogin(string message, int statusCode)
         {
             return new ResponseModel
             {
                 Count = Integers.NoReturnCount,
-                Message = StatusMessages.LoginFailed,
+                Message = message,
                 Status = StatusStrings.Failed,
-                StatusCode = StatusCodes.Unauthorized
+                StatusCode = statusCode
             };
         }
 

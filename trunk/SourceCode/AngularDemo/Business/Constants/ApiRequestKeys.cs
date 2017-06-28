@@ -17,7 +17,10 @@
         public const string Name = "Name";
         public const string PatientId = "PatientId";
         public const string InsuranceId = "InsuranceId";
-        public const string UserPassword = "UserPassword";
+        public const string Password = "Password";
         public const string UserId = "UserId";
+        public const string EmailId = "EmailId";
+        public const string VerificationCode = "VerificationCode";
+        public const string Handle = "Handle";
     }
 }

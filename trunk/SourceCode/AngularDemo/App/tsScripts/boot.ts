@@ -18,6 +18,9 @@ import { ServerService } from './servers.service';
 import { LoginComponent } from './account/login';
 import { LogoutComponent } from './account/logout';
 import { RegisterComponent } from './account/register';
+import { VerifyComponent } from './account/verify';
+import { ForgotPasswordComponent } from './account/forgotpassword';
+import { CommonFunctionService } from './server/commonFunctions';
 
 //Registering routes in angular router.
 const appRoutes: Routes = [
@@ -49,6 +52,14 @@ const appRoutes: Routes = [
     {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'verify',
+        component: VerifyComponent
+    },
+    {
+        path: 'forgotPassword',
+        component: ForgotPasswordComponent
     }
 ];
 
@@ -67,10 +78,13 @@ const appRoutes: Routes = [
         SidebarComponent,
         LoginComponent,
         LogoutComponent,
-        RegisterComponent],
+        RegisterComponent,
+        VerifyComponent,
+        ForgotPasswordComponent],
     providers: [CookieService,
         ServerService,
-        AppComponent],
+        AppComponent,
+        CommonFunctionService],
     bootstrap: [AppComponent]
 })
 

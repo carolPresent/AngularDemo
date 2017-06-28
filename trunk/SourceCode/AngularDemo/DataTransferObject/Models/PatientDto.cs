@@ -13,5 +13,6 @@
         public string Gender { get; set; }
         public byte Age { get; set; }
         public string PhoneNumber { get; set; }
+        public string EmailId { get; set; }
     }
 }

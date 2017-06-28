@@ -2,13 +2,19 @@
     <div class="form-group text-center ">
         <label [hidden]="!showLoggingInLabel" class="text-success">Logging in...</label>
         <label [hidden]="!showUnsuccessfulLoginLabel" class="text-danger">User id or password is incorrect</label>
+        <label [hidden]="!showUnverifiedAccountLoginMessage" class="text-danger">Please verify your account first by clicking
+        <a routerLink="/verify" routerLinkActive="active" title="Verify account">here</a>
+        </label>
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            <label>User id</label>
+            <label>User handle</label>
         </div>
         <div class="col-md-6">
-            <input type="text" [(ngModel)]="userId" class="form-control" />
+            <input type="text" [(ngModel)]="userHandle" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label [hidden]="!valHandle" class="text-danger">Invalid</label>
         </div>
     </div>
     <div class="form-group">
@@ -18,13 +24,21 @@
         <div class="col-md-6">
             <input type="password" [(ngModel)]="userPassword" class="form-control" />
         </div>
+        <div class="col-md-3">
+            <label [hidden]="!valPassword" class="text-danger">Invalid</label>
+        </div>
     </div>
     <div class="form-group">
         <div class="col-md-1 col-md-offset-3">
             <input type="submit" class="btn btn-success" (click)="sendLoginRequest()" value="Login" />
         </div>
-        <div class="col-md-2">
-            <input type="button" class="btn btn-primary" (click)="navigateToRegister()" value="Register" />
+        <div class="col-md-offset-3 col-md-3">
+            <a routerLink="/forgotPassword" routerLinkActive="active">Forgot password?</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-5">
+            <input type="button" class="btn btn-primary" (click)="navigateToRegister()" value="Register with us" />
         </div>
     </div>
 </div>

@@ -10,6 +10,7 @@
         IRepository<Insurance> Insurances { get; }
         IRepository<User> Users { get; }
         IRepository<UserPassword> UserPasswords { get; }
+        IRepository<EmailLog> EmailLogs { get; }
 
         int Complete();
     }

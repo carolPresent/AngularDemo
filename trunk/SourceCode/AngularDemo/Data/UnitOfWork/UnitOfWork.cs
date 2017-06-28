@@ -16,6 +16,7 @@ namespace Data.UnitOfWork
         private readonly RepositoryBase<AngularDemoContext, Insurance> _insurances;
         private readonly RepositoryBase<AngularDemoContext, User> _users;
         private readonly RepositoryBase<AngularDemoContext, UserPassword> _userPasswords;
+        private readonly RepositoryBase<AngularDemoContext, EmailLog> _emailLogs;
 
         public UnitOfWork()
         {
@@ -25,6 +26,7 @@ namespace Data.UnitOfWork
             _insurances = new RepositoryBase<AngularDemoContext, Insurance>(_context);
             _users = new RepositoryBase<AngularDemoContext, User>(_context);
             _userPasswords = new RepositoryBase<AngularDemoContext, UserPassword>(_context);
+            _emailLogs = new RepositoryBase<AngularDemoContext, EmailLog>(_context);
         }
 
         public IRepository<Patient> Patients => _patients;
@@ -37,6 +39,12 @@ namespace Data.UnitOfWork
 
         public IRepository<UserPassword> UserPasswords => _userPasswords;
 
+        public IRepository<EmailLog> EmailLogs => _emailLogs;
+
+        /// <summary>
+        /// This the commit method which is called just once during a database transaction.
+        /// </summary>
+        /// <returns></returns>
         public int Complete()
         {
             try

@@ -19,14 +19,15 @@ namespace Business.Mapper
         {
             return new PatientDto
             {
-                Id=patient.PK_Patients,
-                Address = patient.DF_Patients_Address,
-                Age = patient.DF_Patients_Age,
-                FirstName = patient.DF_Patients_FirstName,
-                Gender = patient.DF_Patients_Gender,
-                LastName = patient.DF_Patients_LastName,
-                MiddleName = patient.DF_Patients_MiddleName,
-                PhoneNumber = patient.DF_Patients_Phone
+                Id=patient.Id,
+                Address = patient.Address,
+                Age = patient.Age,
+                FirstName = patient.FirstName,
+                Gender = patient.Gender,
+                LastName = patient.LastName,
+                MiddleName = patient.MiddleName,
+                PhoneNumber = patient.Phone,
+                EmailId=patient.EmailId
             };
         }
 
@@ -39,11 +40,11 @@ namespace Business.Mapper
         {
             return new InsuranceDto
             {
-                Id=insurance.PK_Insurances,
-                Address = insurance.DF_Insurances_Address,
-                Name = insurance.DF_Insurances_Name,
-                PhoneNumber = insurance.DF_Insurances_Phone,
-                InsurancePublicId=insurance.DF_Insurances_PublicId
+                Id=insurance.Id,
+                Address = insurance.Address,
+                Name = insurance.Name,
+                PhoneNumber = insurance.Phone,
+                InsurancePublicId=insurance.PublicId
             };
         }
 
@@ -56,25 +57,27 @@ namespace Business.Mapper
         {
             return new UserDto
             {
-                FirstName = user.DF_Users_FirstName,
-                MiddleName = user.DF_Users_MiddleName,
-                LastName = user.DF_Users_LastName
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName
             };
         }
 
         /// <summary>
-        /// Maps Pair of {Data.Patient and Data.Insurance} to DataTransferObjects.PatientInsuranceDto
+        /// Maps Pair of {Pair of {Data.Patient and Data.Insurance},Data.PatientInsurance.Id} to DataTransferObjects.PatientInsuranceDto
         /// </summary>
         /// <param name="patientInsurance">patientInsurance containing information of a patientInsurance stored in database</param>
         /// <returns>PatientInsuranceDto mapped from Data.Patient</returns>
         public static PatientInsuranceDto PatientInsurance(Pair patientInsurance)
         {
-            var patient = patientInsurance.First;
-            var insurance = patientInsurance.Second;
+            var patient = patientInsurance.First.First;
+            var insurance = patientInsurance.First.Second;
+            var patientInsuranceId = patientInsurance.Second;
             return new PatientInsuranceDto
             {
                 InsuranceInfo = Insurance(insurance),
-                PatientInfo = Patient(patient)
+                PatientInfo = Patient(patient),
+                Id= patientInsuranceId
             };
         }
     }

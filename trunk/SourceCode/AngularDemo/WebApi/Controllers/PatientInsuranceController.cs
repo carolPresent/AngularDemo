@@ -63,5 +63,25 @@ namespace WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+        /// <summary>
+        /// PUT Api end point to update patient insurance in database
+        /// </summary>
+        /// <param name="oldPatientInsurance">oldPatientInsurance contains the information required to update an old patient insurance</param>
+        /// <returns>HttpResponseMessage that contains the response of modifying a patient insurance in the database</returns>
+        [HttpPut]
+        public HttpResponseMessage Update(AddPatientInsurance oldPatientInsurance)
+        {
+            try
+            {
+                var userId = UserIdentity.GetUserId((ClaimsIdentity)User.Identity);
+                var result = _services.Update(oldPatientInsurance, userId);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
     }
 }

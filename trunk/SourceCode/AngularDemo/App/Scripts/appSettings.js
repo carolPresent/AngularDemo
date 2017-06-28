@@ -4,15 +4,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var AppSettings = (function () {
     function AppSettings() {
     }
+    //Public method to validate email id on UI
+    AppSettings.validateEmail = function (email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
     return AppSettings;
 }());
-//public static API_END_POINT: string = "http://192.168.0.102:1300/";
-AppSettings.API_END_POINT = "http://192.168.11.63:1300/";
+AppSettings.API_END_POINT = "http://192.168.0.101:1300/";
+//public static API_END_POINT: string = "http://localhost:56009/";
+//public static API_END_POINT: string = "http://192.168.11.63:1300/";
 AppSettings.Patient = "patient";
 AppSettings.Insurance = "insurance";
 AppSettings.PatientInsurance = "patientinsurance";
 AppSettings.Login = "login";
 AppSettings.Account = "account";
+AppSettings.ForgotPassword = "forgotpassword";
+AppSettings.ResetPassword = "resetpassword";
+AppSettings.Verify = "verify";
+AppSettings.LoginStatus = "loginstatus";
 AppSettings.AuthCookie = "httpCookie";
 AppSettings.UserName = "username";
 AppSettings.Password = "password";
@@ -31,7 +41,7 @@ AppSettings.LastName = "LastName";
 AppSettings.UserId = "UserId";
 AppSettings.UserPassword = "UserPassword";
 AppSettings.UserAlreadyExist = "UserAlreadyExist";
-AppSettings.Invalid = "FirstName";
+AppSettings.Invalid = "Invalid";
 AppSettings.AlreadyTaken = "Already taken";
 AppSettings.Error = "Error";
 AppSettings.Space = " ";
@@ -53,5 +63,28 @@ AppSettings.Zero = 0;
 AppSettings.Male = "Male";
 AppSettings.Female = "Female";
 AppSettings.Gender = "Gender";
+AppSettings.UserNotVerified = "UserNotVerified";
+AppSettings.Handle = "Handle";
+AppSettings.VerificationCode = "VerificationCode";
+AppSettings.EmailId = "EmailId";
+AppSettings.ForgotPasswordFormHeading = "Forgot password";
+AppSettings.ResetPasswordFormHeading = "Reset your password";
+AppSettings.TextDanger = "text-danger";
+AppSettings.TextSuccess = "text-success";
+AppSettings.ForgotPasswordRequestCreatedSuccessfully = "Successfully sent mail";
+AppSettings.ResetPasswordSuccessful = "Password is reset.";
+AppSettings.Save = "Save";
+AppSettings.NewPatient = "New patient";
+AppSettings.NewInsurance = "New insurance";
+AppSettings.ModifyPatient = "Modify patient";
+AppSettings.ModifyInsurance = "Modify insurance";
+AppSettings.Modify = "Modify";
+AppSettings.PatientUpdated = 'Patient updated successfully';
+AppSettings.InsuranceUpdated = 'Insurance updated successfully';
+AppSettings.PatientInsuranceUpdated = 'Patient insurance updated successfully';
+AppSettings.Unauthorized = "Unauthorized";
+AppSettings.UnauthorizedPatienEdit = "You can edit only patients created by you.";
+AppSettings.UnauthorizedInsuranceEdit = "You can edit only insurances created by you.";
+AppSettings.UnauthorizedPatientInsuranceEdit = "You can edit only patient insurances created by you.";
 exports.AppSettings = AppSettings;
 //# sourceMappingURL=appSettings.js.map

@@ -16,17 +16,13 @@ var ng2_bs3_modal_1 = require("ng2-bs3-modal/ng2-bs3-modal");
 var app_1 = require("../app");
 var servers_service_1 = require("../servers.service");
 var appSettings_1 = require("../appSettings");
+var commonFunctions_1 = require("../server/commonFunctions");
 var PatientInsuranceComponent = (function () {
-    function PatientInsuranceComponent(appComponent, serverService, router) {
+    function PatientInsuranceComponent(appComponent, serverService, router, commonFunctions) {
         this.appComponent = appComponent;
         this.serverService = serverService;
         this.router = router;
-        //The patient insurance model
-        this.patientInsuranceModel = {
-            PatientId: 0,
-            InsuranceId: 0,
-            InsurancePublicId: appSettings_1.AppSettings.Empty
-        };
+        this.commonFunctions = commonFunctions;
         this.insPubId = appSettings_1.AppSettings.Empty;
         this.patientList = [];
         this.insuranceList = [];
@@ -37,6 +33,14 @@ var PatientInsuranceComponent = (function () {
         this.valPatId = false;
         this.valInsId = false;
         this.valInsPubId = false;
+        this.buttonNameForPatientInsuranceSave = appSettings_1.AppSettings.Save;
+        //The patient insurance model
+        this.patientInsuranceModel = {
+            PatientId: this.patId,
+            InsuranceId: this.insId,
+            InsurancePublicId: this.insPubId,
+            Id: 0
+        };
     }
     PatientInsuranceComponent.prototype.ngOnInit = function () {
         if (!this.appComponent.loggedIn) {
@@ -46,6 +50,12 @@ var PatientInsuranceComponent = (function () {
     //Private function to save patient insurance by sending AJAX using Server.Service component.
     PatientInsuranceComponent.prototype.savePatientInsurance = function () {
         var _this = this;
+        if (!this.validateVariable())
+            return;
+        if (this.buttonNameForPatientInsuranceSave === appSettings_1.AppSettings.Modify) {
+            this.sendEditPatientInsuranceRequest();
+            return;
+        }
         this.setPatientInsuranceModel();
         this.serverService.postRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.PatientInsurance, this.patientInsuranceModel).subscribe(function (response) {
             if (response.status === appSettings_1.AppSettings.OkStatusCode) {
@@ -65,47 +75,22 @@ var PatientInsuranceComponent = (function () {
             alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
     };
-    //Private function to get a list of patient from backend
-    PatientInsuranceComponent.prototype.getPatientList = function () {
-        var _this = this;
-        this.serverService.getRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.Patient).subscribe(function (response) {
-            if (response.status === appSettings_1.AppSettings.OkStatusCode) {
-                var body = response.json();
-                if (body.status === appSettings_1.AppSettings.SuccessStatus) {
-                    _this.patientList = JSON.parse(body.data);
-                    _this.currentPatList = _this.patientList;
-                }
-                else {
-                    alert("" + (appSettings_1.AppSettings.Patient, appSettings_1.AppSettings.ListCouldNotLoad));
-                }
-            }
-            else {
-                alert(appSettings_1.AppSettings.Error + " " + response.status);
-            }
-        }, function (error) {
-            alert(appSettings_1.AppSettings.SomeErrorOccured);
-        });
-    };
-    //Private function to get a list of insurance from backend
-    PatientInsuranceComponent.prototype.getInsuranceList = function () {
-        var _this = this;
-        this.serverService.getRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.Insurance).subscribe(function (response) {
-            if (response.status === appSettings_1.AppSettings.OkStatusCode) {
-                var body = response.json();
-                if (body.status === appSettings_1.AppSettings.SuccessStatus) {
-                    _this.insuranceList = JSON.parse(body.data);
-                    _this.currentInsList = _this.insuranceList;
-                }
-                else {
-                    alert("" + (appSettings_1.AppSettings.Insurance, appSettings_1.AppSettings.ListCouldNotLoad));
-                }
-            }
-            else {
-                alert(appSettings_1.AppSettings.Error + " " + response.status);
-            }
-        }, function (error) {
-            alert(appSettings_1.AppSettings.SomeErrorOccured);
-        });
+    //Private function to validate patient insurance variables.
+    PatientInsuranceComponent.prototype.validateVariable = function () {
+        var returnItem = true;
+        if (this.patId == null || this.patId === 0) {
+            returnItem = false;
+            this.valPatId = true;
+        }
+        if (this.insId == null || this.insId === 0) {
+            returnItem = false;
+            this.valInsId = true;
+        }
+        if (this.insPubId.length === 0 || this.insPubId.length > 30) {
+            returnItem = false;
+            this.valInsPubId = true;
+        }
+        return returnItem;
     };
     //Private function to get a list of patient insurance from backend
     PatientInsuranceComponent.prototype.getPatientInsuranceList = function () {
@@ -127,6 +112,25 @@ var PatientInsuranceComponent = (function () {
         }, function (error) {
             alert(appSettings_1.AppSettings.SomeErrorOccured);
         });
+    };
+    //Private method to send a put request to modify patient insurance data
+    PatientInsuranceComponent.prototype.sendEditPatientInsuranceRequest = function () {
+        this.setPatientInsuranceModel();
+        this.serverService.putRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.PatientInsurance, this.patientInsuranceModel).subscribe(function (response) {
+            var body = response.json();
+            if (body.status === appSettings_1.AppSettings.SuccessStatus) {
+                alert(appSettings_1.AppSettings.PatientInsuranceUpdated);
+            }
+            else {
+                if (body.data === appSettings_1.AppSettings.Unauthorized)
+                    alert(appSettings_1.AppSettings.UnauthorizedPatienEdit);
+            }
+        }, function (error) {
+            alert(appSettings_1.AppSettings.SomeErrorOccured);
+        });
+        this.buttonNameForPatientInsuranceSave = appSettings_1.AppSettings.Save;
+        this.clearPatientInsuranceData();
+        this.patientinsuranceModal.close();
     };
     //Private function to filter patient list based on user input. Filter by FirstName/PhoneNumber/Address
     PatientInsuranceComponent.prototype.filterPatientList = function () {
@@ -155,14 +159,18 @@ var PatientInsuranceComponent = (function () {
     };
     //Private function to open patient Modal to show list of patient.
     PatientInsuranceComponent.prototype.openPatientModal = function () {
-        this.currentPatList = this.patientList;
-        this.getPatientList();
+        var _this = this;
+        this.commonFunctions.getPatientList(function (data) {
+            _this.patientList = _this.currentPatList = data;
+        });
         this.patientModal.open();
     };
     //Private function to open insurance modal to show list of insurances.
     PatientInsuranceComponent.prototype.openInsuranceModal = function () {
-        this.currentInsList = this.insuranceList;
-        this.getInsuranceList();
+        var _this = this;
+        this.commonFunctions.getInsuranceList(function (data) {
+            _this.insuranceList = _this.currentInsList = data;
+        });
         this.insuranceModal.open();
     };
     //Private function to open patient insurance modal to show list of patient insurances.
@@ -185,12 +193,14 @@ var PatientInsuranceComponent = (function () {
         this.insuranceModal.close();
     };
     //Private function to select patient insurance when user click on a patient name in the user modal to select some patient insurance.
-    PatientInsuranceComponent.prototype.selectPatientInsurance = function (patientInfo, insuranceInfo) {
+    PatientInsuranceComponent.prototype.selectPatientInsurance = function (patientInfo, insuranceInfo, patientInsuranceId) {
         this.resetValidationKeys();
         this.patId = patientInfo.Id;
         this.insId = insuranceInfo.Id;
         this.insPubId = insuranceInfo.InsurancePublicId;
+        this.patientInsuranceModel.Id = patientInsuranceId;
         this.patientinsuranceModal.close();
+        this.buttonNameForPatientInsuranceSave = appSettings_1.AppSettings.Modify;
     };
     //Private function to concatenate first name and last name and return it.
     PatientInsuranceComponent.prototype.concatNames = function (firstName, lastName) {
@@ -215,18 +225,18 @@ var PatientInsuranceComponent = (function () {
     PatientInsuranceComponent.prototype.resetValidationKeys = function () {
         this.valInsId = this.valInsPubId = this.valPatId = false;
     };
-    //Private method to set patient insurance model when user clicks the save button
-    PatientInsuranceComponent.prototype.setPatientInsuranceModel = function () {
-        this.patientInsuranceModel.InsuranceId = this.insId;
-        this.patientInsuranceModel.InsurancePublicId = this.insPubId;
-        this.patientInsuranceModel.PatientId = this.patId;
-    };
     //Private method to clear patient insurance data when a request is made.
     PatientInsuranceComponent.prototype.clearPatientInsuranceData = function () {
         this.patientInsuranceModel.InsuranceId = this.patientInsuranceModel.PatientId = 0;
         this.insId = this.patId = null;
         this.patientInsuranceModel.InsurancePublicId = this.insPubId = appSettings_1.AppSettings.Empty;
         this.resetValidationKeys();
+    };
+    //Private function set patient insurance model
+    PatientInsuranceComponent.prototype.setPatientInsuranceModel = function () {
+        this.patientInsuranceModel.InsuranceId = this.insId;
+        this.patientInsuranceModel.PatientId = this.patId;
+        this.patientInsuranceModel.InsurancePublicId = this.insPubId;
     };
     return PatientInsuranceComponent;
 }());
@@ -247,7 +257,7 @@ PatientInsuranceComponent = __decorate([
         selector: 'patientinsurance',
         templateUrl: '/Home/PatientInsurance'
     }),
-    __metadata("design:paramtypes", [app_1.AppComponent, servers_service_1.ServerService, router_1.Router])
+    __metadata("design:paramtypes", [app_1.AppComponent, servers_service_1.ServerService, router_1.Router, commonFunctions_1.CommonFunctionService])
 ], PatientInsuranceComponent);
 exports.PatientInsuranceComponent = PatientInsuranceComponent;
 //# sourceMappingURL=patientinsurance.js.map

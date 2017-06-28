@@ -22,10 +22,13 @@ export class LoginComponent {
     }
 
     //Private variable of the component.
-    private userId: string = AppSettings.Empty;
+    private userHandle: string = AppSettings.Empty;
     private userPassword: string = AppSettings.Empty;
     private showLoggingInLabel: boolean = false;
     private showUnsuccessfulLoginLabel: boolean = false;
+    private showUnverifiedAccountLoginMessage: boolean = false;
+    private valHandle: boolean = false;
+    private valPassword: boolean = false;
 
     //Private function to navigate to register template
     private navigateToRegister() {
@@ -34,9 +37,12 @@ export class LoginComponent {
 
     //Private function to send login request
     private sendLoginRequest() {
+        if (!this.validateVariables())
+            return;
         this.showLoggingInLabel = true;
         this.showUnsuccessfulLoginLabel = false;
-        let data = `${AppSettings.UserName}=${this.userId}&${AppSettings.Password}=${this.userPassword}&${AppSettings.GrantType}=${AppSettings.Password}`;
+        this.showUnverifiedAccountLoginMessage = false;
+        let data = `${AppSettings.UserName}=${this.userHandle}&${AppSettings.Password}=${this.userPassword}&${AppSettings.GrantType}=${AppSettings.Password}`;
         this.serverService.loginRequest(AppSettings.API_END_POINT + AppSettings.Login, data).subscribe(
             (response) => {
                 if (response.status === AppSettings.OkStatusCode) {
@@ -47,10 +53,28 @@ export class LoginComponent {
                 }
             },
             (error) => {
-                this.showLoggingInLabel = false;
-                this.showUnsuccessfulLoginLabel = true;
+                var body = JSON.parse(error._body);
+                this.showLoggingInLabel = false
+                if (body.error_description === AppSettings.UserNotVerified)
+                    this.showUnverifiedAccountLoginMessage = true;
+                else
+                    this.showUnsuccessfulLoginLabel = true;
             }
         );
     }
 
+    //Private function to validate parameters on view.
+    private validateVariables() {
+        this.valHandle = this.valPassword = false;
+        let returnItem: boolean = true;
+        if (this.userHandle.length === 0) {
+            returnItem = false;
+            this.valHandle = true;
+        }
+        if (this.userPassword.length === 0) {
+            returnItem = false;
+            this.valPassword = true;
+        }
+        return returnItem;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using Business.Constants;
 using DataTransferObject.Models;
 using DataTransferObject.QueryModels;
+using System.Text.RegularExpressions;
 
 namespace Business.Utilities
 {
@@ -42,6 +43,9 @@ namespace Business.Utilities
             if (string.IsNullOrWhiteSpace(patientDto.PhoneNumber) || patientDto.PhoneNumber.Length != RequestValidationConstant.PhoneNumberLength)
                 return new Pair { First = false, Second = ApiRequestKeys.PhoneNumber };
 
+            if (string.IsNullOrWhiteSpace(patientDto.EmailId) || !Regex.IsMatch(patientDto.EmailId, Strings.RegexEmail, RegexOptions.IgnoreCase))
+                return new Pair { First = false, Second = ApiRequestKeys.EmailId };
+
             return returnSuccessValidation;
         }
 
@@ -63,7 +67,7 @@ namespace Business.Utilities
             if (string.IsNullOrWhiteSpace(insuranceDto.PhoneNumber) || insuranceDto.PhoneNumber.Length != RequestValidationConstant.PhoneNumberLength)
                 return new Pair { First = false, Second = ApiRequestKeys.PhoneNumber };
 
-            if (string.IsNullOrWhiteSpace(insuranceDto.InsurancePublicId) || insuranceDto.InsurancePublicId.Length != RequestValidationConstant.InsurancePublicIdLength)
+            if (string.IsNullOrWhiteSpace(insuranceDto.InsurancePublicId) || insuranceDto.InsurancePublicId.Length > RequestValidationConstant.InsurancePublicIdLength)
                 return new Pair { First = false, Second = ApiRequestKeys.InsurancePublicId };
 
             return returnSuccessValidation;
@@ -84,7 +88,7 @@ namespace Business.Utilities
             if (patientInsuranceDto.PatientId < RequestValidationConstant.MinimumId)
                 return new Pair { First = false, Second = ApiRequestKeys.PatientId };
 
-            if (string.IsNullOrWhiteSpace(patientInsuranceDto.InsurancePublicId) || patientInsuranceDto.InsurancePublicId.Length != RequestValidationConstant.InsurancePublicIdLength)
+            if (string.IsNullOrWhiteSpace(patientInsuranceDto.InsurancePublicId) || patientInsuranceDto.InsurancePublicId.Length > RequestValidationConstant.InsurancePublicIdLength)
                 return new Pair { First = false, Second = ApiRequestKeys.InsurancePublicId };
 
             return returnSuccessValidation;
@@ -111,12 +115,69 @@ namespace Business.Utilities
             if (string.IsNullOrWhiteSpace(userDto.LastName) || userDto.LastName.Length > RequestValidationConstant.MaximumNameLength)
                 return new Pair { First = false, Second = ApiRequestKeys.LastName };
 
-            if (string.IsNullOrWhiteSpace(userDto.UserId) || userDto.UserId.Length > RequestValidationConstant.MaximumNameLength)
+            if (string.IsNullOrWhiteSpace(userDto.Handle) || userDto.Handle.Length > RequestValidationConstant.MaximumNameLength)
                 return new Pair { First = false, Second = ApiRequestKeys.UserId };
 
-            if (string.IsNullOrWhiteSpace(userDto.UserPassword) || userDto.UserPassword.Length > RequestValidationConstant.MaximumNameLength)
-                return new Pair { First = false, Second = ApiRequestKeys.UserPassword };
+            if (string.IsNullOrWhiteSpace(userDto.Password) || userDto.Password.Length > RequestValidationConstant.MaximumNameLength)
+                return new Pair { First = false, Second = ApiRequestKeys.Password };
 
+            if (string.IsNullOrWhiteSpace(userDto.EmailId) || !Regex.IsMatch(userDto.EmailId, Strings.RegexEmail, RegexOptions.IgnoreCase))
+                return new Pair { First = false, Second = ApiRequestKeys.EmailId };
+
+            return returnSuccessValidation;
+        }
+
+        /// <summary>
+        /// Method to validate verificationDto sent in POST request.
+        /// </summary>
+        /// <param name="verificationDto">verificationDto contains information related to verification procedure.</param>
+        /// <returns>Pair of {status:boolean,ApiKeyName/verificationDto} </returns>
+        public static Pair ValidateVerificationDto(VerificationDto verificationDto)
+        {
+            var returnSuccessValidation = new Pair { First = true, Second = verificationDto };
+
+            if (string.IsNullOrWhiteSpace(verificationDto.VerificationCode) || !verificationDto.VerificationCode.Length.Equals(RequestValidationConstant.VerficationCodeLength))
+                return new Pair { First = false, Second = ApiRequestKeys.VerificationCode };
+
+            if (string.IsNullOrWhiteSpace(verificationDto.Handle))
+                return new Pair { First = false, Second = ApiRequestKeys.Handle };
+
+            if (string.IsNullOrWhiteSpace(verificationDto.Password))
+                return new Pair { First = false, Second = ApiRequestKeys.Password };
+            return returnSuccessValidation;
+        }
+
+        /// <summary>
+        /// Method to validate forgot password dto sent in POST request.
+        /// </summary>
+        /// <param name="forgotPasswordDto">forgotpassword dto contains dtails required by system to generate a new forgot password request.</param>
+        /// <returns>Pair of {status:boolean,ApiKeyName/forgotPasswordDto} </returns>
+        public static Pair ValidateForgotPasswordDto(ForgotPasswordDto forgotPasswordDto)
+        {
+            var returnSuccessValidation = new Pair { First = true, Second = forgotPasswordDto };
+
+            if (string.IsNullOrWhiteSpace(forgotPasswordDto.Handle))
+                return new Pair { First = false, Second = ApiRequestKeys.Handle };
+            return returnSuccessValidation;
+        }
+
+        /// <summary>
+        /// Method to validate reset password dto sent in POST request.
+        /// </summary>
+        /// <param name="resetPasswordDto">resetPasswordDto dto contains dtails required by system to generate a new forgot password request.</param>
+        /// <returns>Pair of {status:boolean,ApiKeyName/resetPasswordDto} </returns>
+        public static Pair ValidateResetPasswordDto(ResetPasswordDto resetPasswordDto)
+        {
+            var returnSuccessValidation = new Pair { First = true, Second = resetPasswordDto };
+
+            if (string.IsNullOrWhiteSpace(resetPasswordDto.Handle))
+                return new Pair { First = false, Second = ApiRequestKeys.Handle };
+
+            if (string.IsNullOrWhiteSpace(resetPasswordDto.VerificationCode))
+                return new Pair { First = false, Second = ApiRequestKeys.VerificationCode };
+
+            if (string.IsNullOrWhiteSpace(resetPasswordDto.Password))
+                return new Pair { First = false, Second = ApiRequestKeys.Password };
             return returnSuccessValidation;
         }
     }

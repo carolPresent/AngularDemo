@@ -24,7 +24,7 @@ namespace WebApi.Utilities
             var userQuery = services.Login(new LoginDto(context.UserName, context.Password));
             if (userQuery.StatusCode.Equals(StatusCodes.Unauthorized))
             {
-                context.SetError(Constants.Strings.InvalidGrant, Constants.Strings.InvalidCredentials);
+                context.SetError(Constants.Strings.InvalidGrant, userQuery.Message);
                 return;
             }
             var userId = Convert.ToInt32(userQuery.Data);

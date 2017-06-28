@@ -15,17 +15,12 @@ export class AppComponent {
     constructor(private __cookieService: CookieService) { }
 
     ngOnInit() {
-        this.checkCookie();
-    }
-
-    public loggedIn: boolean = false;
-
-    //Private function for checking whether user is logged in or not.
-    private checkCookie() {
         if (this.getObject(AppSettings.AuthCookie)) {
             this.loggedIn = true;
         }
     }
+
+    public loggedIn: boolean = false;
 
     //Public method to remove cookie from browser
     removeKey(key: string) {

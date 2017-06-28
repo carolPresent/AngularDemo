@@ -24,32 +24,42 @@ var RegisterComponent = (function () {
         this.firstName = appSettings_1.AppSettings.Empty;
         this.middleName = appSettings_1.AppSettings.Empty;
         this.lastName = appSettings_1.AppSettings.Empty;
-        this.userId = appSettings_1.AppSettings.Empty;
+        this.userHandle = appSettings_1.AppSettings.Empty;
         this.userPassword = appSettings_1.AppSettings.Empty;
+        this.userConfirmPassword = appSettings_1.AppSettings.Empty;
+        this.userEmailId = appSettings_1.AppSettings.Empty;
         this.valFirstName = false;
         this.valMiddleName = false;
         this.valLastName = false;
-        this.valUserId = false;
+        this.valUserHandle = false;
         this.valUserPassword = false;
-        this.messageOnUserIdInput = '';
+        this.valUserEmail = false;
+        this.valUserConfirmPassword = false;
+        this.messageOnUserIdInput = appSettings_1.AppSettings.Empty;
+        this.showSuccessRegisterMessage = false;
         //User model to register.
         this.userModel = {
-            FirstName: appSettings_1.AppSettings.Empty,
-            MiddleName: appSettings_1.AppSettings.Empty,
-            LastName: appSettings_1.AppSettings.Empty,
-            UserId: appSettings_1.AppSettings.Empty,
-            UserPassword: appSettings_1.AppSettings.Empty
+            FirstName: this.firstName,
+            MiddleName: this.middleName,
+            LastName: this.lastName,
+            Handle: this.userHandle,
+            Password: this.userPassword,
+            EmailId: this.userEmailId
         };
     }
     //Private functions to send register request
     RegisterComponent.prototype.sendRegisterRequest = function () {
         var _this = this;
-        this.setUserModel();
+        if (!this.validateVariable())
+            return;
+        this.setRegisterModel();
+        this.showSuccessRegisterMessage = false;
         this.serverService.postRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.Account, this.userModel).subscribe(function (response) {
             if (response.status === appSettings_1.AppSettings.OkStatusCode) {
                 var body = response.json();
                 if (body.status === appSettings_1.AppSettings.SuccessStatus) {
-                    _this.router.navigate(['./login']);
+                    _this.resetRegisterData();
+                    _this.showSuccessRegisterMessage = true;
                 }
                 else {
                     _this.setValidationFlagOn(body.data);
@@ -60,6 +70,41 @@ var RegisterComponent = (function () {
             }
         }, function (error) {
         });
+    };
+    //Private function to validate parameters on view.
+    RegisterComponent.prototype.validateVariable = function () {
+        this.resetValidationKeys();
+        var returnItem = true;
+        if (this.firstName.length === 0 || this.firstName.length > 30) {
+            returnItem = false;
+            this.valFirstName = true;
+        }
+        if (this.lastName.length === 0 || this.lastName.length > 30) {
+            returnItem = false;
+            this.valLastName = true;
+        }
+        if (this.middleName.length > 40) {
+            returnItem = false;
+            this.valMiddleName = true;
+        }
+        if (this.userPassword.length === 0 || this.userPassword.length > 40) {
+            returnItem = false;
+            this.valUserPassword = true;
+        }
+        if (this.userHandle.length === 0 || this.userHandle.length > 40) {
+            returnItem = false;
+            this.messageOnUserIdInput = appSettings_1.AppSettings.Invalid;
+            this.valUserHandle = true;
+        }
+        if (this.userConfirmPassword !== this.userPassword) {
+            returnItem = false;
+            this.valUserConfirmPassword = true;
+        }
+        if (!appSettings_1.AppSettings.validateEmail(this.userEmailId)) {
+            returnItem = false;
+            this.valUserEmail = true;
+        }
+        return returnItem;
     };
     //Private function to navigate to login
     RegisterComponent.prototype.navigateToLogin = function () {
@@ -79,29 +124,37 @@ var RegisterComponent = (function () {
                 this.valLastName = true;
                 break;
             case appSettings_1.AppSettings.UserId:
-                this.valUserId = true;
+                this.valUserHandle = true;
                 this.messageOnUserIdInput = appSettings_1.AppSettings.Invalid;
                 break;
             case appSettings_1.AppSettings.UserPassword:
                 this.valUserPassword = true;
                 break;
             case appSettings_1.AppSettings.UserAlreadyExist:
-                this.valUserId = true;
+                this.valUserHandle = true;
                 this.messageOnUserIdInput = appSettings_1.AppSettings.AlreadyTaken;
+                break;
+            case appSettings_1.AppSettings.EmailId:
+                this.valUserEmail = true;
                 break;
         }
     };
-    //Private function to set user model from the properties bounded to the template.
-    RegisterComponent.prototype.setUserModel = function () {
-        this.userModel.FirstName = this.firstName;
-        this.userModel.MiddleName = this.middleName;
-        this.userModel.LastName = this.lastName;
-        this.userModel.UserId = this.userId;
-        this.userModel.UserPassword = this.userPassword;
-    };
     //Private function to reset validation properties from template.
     RegisterComponent.prototype.resetValidationKeys = function () {
-        this.valFirstName = this.valLastName = this.valMiddleName = this.valUserId = this.valUserPassword = false;
+        this.valFirstName = this.valLastName = this.valMiddleName = this.valUserHandle = this.valUserPassword = this.valUserEmail = this.valUserConfirmPassword = false;
+    };
+    //Private method to reset register data from view.
+    RegisterComponent.prototype.resetRegisterData = function () {
+        this.userHandle = this.userEmailId = this.userConfirmPassword = this.userPassword = this.firstName = this.middleName = this.lastName = appSettings_1.AppSettings.Empty;
+    };
+    //Private method to set register data from view.
+    RegisterComponent.prototype.setRegisterModel = function () {
+        this.userModel.EmailId = this.userEmailId;
+        this.userModel.FirstName = this.firstName;
+        this.userModel.Handle = this.userHandle;
+        this.userModel.LastName = this.lastName;
+        this.userModel.MiddleName = this.middleName;
+        this.userModel.Password = this.userPassword;
     };
     return RegisterComponent;
 }());

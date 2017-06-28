@@ -7,5 +7,6 @@
     {
         public PatientDto PatientInfo { get; set; }
         public InsuranceDto InsuranceInfo { get; set; }
+        public int Id { get; set; }
     }
 }

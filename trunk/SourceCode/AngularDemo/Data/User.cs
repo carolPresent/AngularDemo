@@ -17,19 +17,32 @@ namespace Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Insurances = new HashSet<Insurance>();
             this.PatientInsurances = new HashSet<PatientInsurance>();
+            this.Patients = new HashSet<Patient>();
             this.UserPasswords = new HashSet<UserPassword>();
         }
     
-        public int PK_Users { get; set; }
-        public string DF_Users_FirstName { get; set; }
-        public string DF_Users_MiddleName { get; set; }
-        public string DF_Users_LastName { get; set; }
-        public string DF_Users_CreationDate { get; set; }
-        public string DF_Users_CreationTime { get; set; }
+        public int Id { get; set; }
+        public string EmailId { get; set; }
+        public string Handle { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public System.TimeSpan CreationTime { get; set; }
+        public bool Status { get; set; }
+        public bool IsVerified { get; set; }
+        public string VerificationCode { get; set; }
+        public bool ForgotPasswordFlag { get; set; }
+        public string ForgotPasswordCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Insurance> Insurances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientInsurance> PatientInsurances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Patient> Patients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPassword> UserPasswords { get; set; }
     }

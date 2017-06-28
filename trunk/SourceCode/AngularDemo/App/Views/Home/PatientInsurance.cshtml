@@ -88,7 +88,7 @@
             <hr />
             <div class="row" *ngFor="let patientInsurance of currentPatInsList">
                 <div class="col-md-6">
-                    <a style="cursor:pointer;" (click)="selectPatientInsurance(patientInsurance.PatientInfo,patientInsurance.InsuranceInfo)">{{concatNames(patientInsurance.PatientInfo.FirstName,patientInsurance.PatientInfo.LastName)}}</a>
+                    <a style="cursor:pointer;" (click)="selectPatientInsurance(patientInsurance.PatientInfo,patientInsurance.InsuranceInfo,patientInsurance.Id)">{{concatNames(patientInsurance.PatientInfo.FirstName,patientInsurance.PatientInfo.LastName)}}</a>
                 </div>
                 <div class="col-md-6">{{patientInsurance.InsuranceInfo.Name}}</div>
             </div>
@@ -142,7 +142,7 @@
             <button type="button" class="btn btn-default" (click)="openPatientInsuranceModal()">Old patient insurance</button>
         </div>
         <div class="col-md-3">
-            <button type="button" (click)="savePatientInsurance()" class="btn btn-success">Save</button>
+            <button type="button" (click)="savePatientInsurance()" class="btn btn-success">{{buttonNameForPatientInsuranceSave}}</button>
         </div>
     </div>
 </div>

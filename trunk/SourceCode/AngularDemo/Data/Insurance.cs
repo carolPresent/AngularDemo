@@ -20,12 +20,17 @@ namespace Data
             this.PatientInsurances = new HashSet<PatientInsurance>();
         }
     
-        public int PK_Insurances { get; set; }
-        public string DF_Insurances_Name { get; set; }
-        public string DF_Insurances_Address { get; set; }
-        public string DF_Insurances_Phone { get; set; }
-        public string DF_Insurances_PublicId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string PublicId { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public System.TimeSpan CreationTime { get; set; }
+        public bool Status { get; set; }
     
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientInsurance> PatientInsurances { get; set; }
     }

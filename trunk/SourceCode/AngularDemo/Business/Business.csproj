@@ -61,6 +61,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utilities\CollectionConversions.cs" />
     <Compile Include="Utilities\DynamicListForResponse.cs" />
+    <Compile Include="Utilities\EmailSender.cs" />
     <Compile Include="Utilities\Functions.cs" />
     <Compile Include="Utilities\QueryExpressions.cs" />
     <Compile Include="Utilities\ReturnStatements.cs" />

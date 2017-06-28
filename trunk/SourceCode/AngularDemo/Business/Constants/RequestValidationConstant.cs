@@ -11,5 +11,7 @@
         public const int PhoneNumberLength = 10;
         public const int InsurancePublicIdLength = 30;
         public const int MinimumId = 1;
+        public const int MaximumEmailIdLength = 254;
+        public const int VerficationCodeLength = 6;
     }
 }

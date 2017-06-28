@@ -24,6 +24,9 @@ var servers_service_1 = require("./servers.service");
 var login_1 = require("./account/login");
 var logout_1 = require("./account/logout");
 var register_1 = require("./account/register");
+var verify_1 = require("./account/verify");
+var forgotpassword_1 = require("./account/forgotpassword");
+var commonFunctions_1 = require("./server/commonFunctions");
 //Registering routes in angular router.
 var appRoutes = [
     {
@@ -54,6 +57,14 @@ var appRoutes = [
     {
         path: 'register',
         component: register_1.RegisterComponent
+    },
+    {
+        path: 'verify',
+        component: verify_1.VerifyComponent
+    },
+    {
+        path: 'forgotPassword',
+        component: forgotpassword_1.ForgotPasswordComponent
     }
 ];
 //Various imports, declarations, providers, injectables via NgModule
@@ -77,10 +88,13 @@ AppModule = __decorate([
             side_bar_1.SidebarComponent,
             login_1.LoginComponent,
             logout_1.LogoutComponent,
-            register_1.RegisterComponent],
+            register_1.RegisterComponent,
+            verify_1.VerifyComponent,
+            forgotpassword_1.ForgotPasswordComponent],
         providers: [cookies_service_1.CookieService,
             servers_service_1.ServerService,
-            app_1.AppComponent],
+            app_1.AppComponent,
+            commonFunctions_1.CommonFunctionService],
         bootstrap: [app_1.AppComponent]
     })
 ], AppModule);

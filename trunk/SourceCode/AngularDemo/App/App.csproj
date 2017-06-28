@@ -243,10 +243,11 @@
     <Content Include="Scripts\server\server.js.map" />
     <Content Include="Scripts\side-bar\side-bar.js.map" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\Verify.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="libs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -256,9 +257,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="tsScripts\account\forgotpassword.ts" />
     <TypeScriptCompile Include="tsScripts\account\login.ts" />
     <TypeScriptCompile Include="tsScripts\account\logout.ts" />
     <TypeScriptCompile Include="tsScripts\account\register.ts" />
+    <TypeScriptCompile Include="tsScripts\account\verify.ts" />
     <TypeScriptCompile Include="tsScripts\app.ts" />
     <TypeScriptCompile Include="tsScripts\appSettings.ts" />
     <TypeScriptCompile Include="tsScripts\boot.ts" />
@@ -267,6 +270,7 @@
     <TypeScriptCompile Include="tsScripts\patientinsurance\patientinsurance.ts" />
     <TypeScriptCompile Include="tsScripts\patient\patient.ts" />
     <TypeScriptCompile Include="tsScripts\servers.service.ts" />
+    <TypeScriptCompile Include="tsScripts\server\commonFunctions.ts" />
     <TypeScriptCompile Include="tsScripts\server\server.ts" />
     <TypeScriptCompile Include="tsScripts\side-bar\side-bar.ts" />
   </ItemGroup>

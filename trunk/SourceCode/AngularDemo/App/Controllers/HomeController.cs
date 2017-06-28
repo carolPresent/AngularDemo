@@ -51,5 +51,15 @@ namespace App.Controllers
         {
             return View();
         }
+
+        public ActionResult Verify()
+        {
+            return View();
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
     }
 }

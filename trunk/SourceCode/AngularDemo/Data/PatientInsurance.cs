@@ -14,12 +14,13 @@ namespace Data
     
     public partial class PatientInsurance
     {
-        public int PK_PatientInsurances { get; set; }
-        public int FK_PatientInsurances_Patients { get; set; }
-        public int FK_PatientInsurances_Users { get; set; }
-        public int FK_PatientInsurances_Insurances { get; set; }
-        public string DF_PatientInsurances_CreationDate { get; set; }
-        public string DF_PatientInsurances_CreationTime { get; set; }
+        public int Id { get; set; }
+        public int PatientId { get; set; }
+        public int UserId { get; set; }
+        public int InsuranceId { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public System.TimeSpan CreationTime { get; set; }
+        public bool Status { get; set; }
     
         public virtual Insurance Insurance { get; set; }
         public virtual Patient Patient { get; set; }

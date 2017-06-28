@@ -4,16 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="09b5c29494ed452990d2d15d5a198e33" Name="Diagram1">
-        <EntityTypeShape EntityType="AngularDemoModel.ELMAH_Error" Width="1.5" PointX="5.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularDemoModel.Insurance" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularDemoModel.PatientInsurance" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularDemoModel.Patient" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularDemoModel.UserPassword" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularDemoModel.User" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="05c3797fb66942b7bd1192426b6f08f1" Name="Diagram1">
+        <EntityTypeShape EntityType="AngularDemoModel.ELMAH_Error" Width="1.5" PointX="6.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularDemoModel.EmailLog" Width="1.5" PointX="6.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularDemoModel.Insurance" Width="1.5" PointX="2.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularDemoModel.PatientInsurance" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularDemoModel.Patient" Width="1.5" PointX="4.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularDemoModel.UserPassword" Width="1.5" PointX="2.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularDemoModel.User" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="AngularDemoModel.FK_Insurances_Users" ManuallyRouted="false" />
         <AssociationConnector Association="AngularDemoModel.FK_PatientInsurances_Insurances" ManuallyRouted="false" />
         <AssociationConnector Association="AngularDemoModel.FK_PatientInsurances_Patients" ManuallyRouted="false" />
         <AssociationConnector Association="AngularDemoModel.FK_PatientInsurances_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularDemoModel.FK_Patients_Users" ManuallyRouted="false" />
         <AssociationConnector Association="AngularDemoModel.FK_UserPasswords_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

@@ -21,10 +21,13 @@ var LoginComponent = (function () {
         this.serverService = serverService;
         this.router = router;
         //Private variable of the component.
-        this.userId = appSettings_1.AppSettings.Empty;
+        this.userHandle = appSettings_1.AppSettings.Empty;
         this.userPassword = appSettings_1.AppSettings.Empty;
         this.showLoggingInLabel = false;
         this.showUnsuccessfulLoginLabel = false;
+        this.showUnverifiedAccountLoginMessage = false;
+        this.valHandle = false;
+        this.valPassword = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
         if (this.appComponent.loggedIn) {
@@ -38,9 +41,12 @@ var LoginComponent = (function () {
     //Private function to send login request
     LoginComponent.prototype.sendLoginRequest = function () {
         var _this = this;
+        if (!this.validateVariables())
+            return;
         this.showLoggingInLabel = true;
         this.showUnsuccessfulLoginLabel = false;
-        var data = appSettings_1.AppSettings.UserName + "=" + this.userId + "&" + appSettings_1.AppSettings.Password + "=" + this.userPassword + "&" + appSettings_1.AppSettings.GrantType + "=" + appSettings_1.AppSettings.Password;
+        this.showUnverifiedAccountLoginMessage = false;
+        var data = appSettings_1.AppSettings.UserName + "=" + this.userHandle + "&" + appSettings_1.AppSettings.Password + "=" + this.userPassword + "&" + appSettings_1.AppSettings.GrantType + "=" + appSettings_1.AppSettings.Password;
         this.serverService.loginRequest(appSettings_1.AppSettings.API_END_POINT + appSettings_1.AppSettings.Login, data).subscribe(function (response) {
             if (response.status === appSettings_1.AppSettings.OkStatusCode) {
                 var body = response.json();
@@ -49,9 +55,27 @@ var LoginComponent = (function () {
                 location.href = "/Home/Main";
             }
         }, function (error) {
+            var body = JSON.parse(error._body);
             _this.showLoggingInLabel = false;
-            _this.showUnsuccessfulLoginLabel = true;
+            if (body.error_description === appSettings_1.AppSettings.UserNotVerified)
+                _this.showUnverifiedAccountLoginMessage = true;
+            else
+                _this.showUnsuccessfulLoginLabel = true;
         });
+    };
+    //Private function to validate parameters on view.
+    LoginComponent.prototype.validateVariables = function () {
+        this.valHandle = this.valPassword = false;
+        var returnItem = true;
+        if (this.userHandle.length === 0) {
+            returnItem = false;
+            this.valHandle = true;
+        }
+        if (this.userPassword.length === 0) {
+            returnItem = false;
+            this.valPassword = true;
+        }
+        return returnItem;
     };
     return LoginComponent;
 }());

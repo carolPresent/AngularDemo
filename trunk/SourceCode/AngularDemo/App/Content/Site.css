@@ -4,3 +4,17 @@
     overflow-y:auto;
     overflow-wrap:break-word;
 }
+
+.marginTopBottom{
+    margin-top:1px;
+    margin-bottom:1px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight:300;
+}
+
+.gridTopBar{
+    margin-top:5px;
+    background-color:#bdbdbd;
+    border-radius:2px;
+    font-size:16px;
+}

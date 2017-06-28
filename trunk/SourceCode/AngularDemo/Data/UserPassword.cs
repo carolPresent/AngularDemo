@@ -14,10 +14,12 @@ namespace Data
     
     public partial class UserPassword
     {
-        public int PK_UserPasswords { get; set; }
-        public int FK_UserPasswords_Users { get; set; }
-        public string DF_UserPasswords_UserId { get; set; }
-        public string DF_UserPasswords_UserPassword { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string Password { get; set; }
+        public bool Status { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public System.TimeSpan CreationTime { get; set; }
     
         public virtual User User { get; set; }
     }

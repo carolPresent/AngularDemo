@@ -1,7 +1,13 @@
-﻿<div class="form form-horizontal">
+﻿<div class="row">
+    <div class="col-md-12 text-center text-success">
+        <label [hidden]="!showSuccessRegisterMessage">Registered successsfully</label>
+    </div>
+</div>
+
+<div class="form form-horizontal">
     <div class="form-group">
         <div class="col-md-3">
-            <label>First name</label>
+            <label>First name*</label>
         </div>
         <div class="col-md-5">
             <input type="text" [(ngModel)]="firstName" class="form-control" />
@@ -23,7 +29,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            <label>Last name</label>
+            <label>Last name*</label>
         </div>
         <div class="col-md-5">
             <input type="text" [(ngModel)]="lastName" class="form-control" />
@@ -34,18 +40,29 @@
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            <label>User id</label>
+            <label>Handle*</label>
         </div>
         <div class="col-md-5">
-            <input type="text" [(ngModel)]="userId" class="form-control" />
+            <input type="text" [(ngModel)]="userHandle" class="form-control" />
         </div>
         <div class="col-md-3">
-            <label [hidden]="!valUserId" class="text-danger">{{messageOnUserIdInput}}</label>
+            <label [hidden]="!valUserHandle" class="text-danger">{{messageOnUserIdInput}}</label>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-3">
-            <label>Password</label>
+            <label>Email id*</label>
+        </div>
+        <div class="col-md-5">
+            <input type="email" [(ngModel)]="userEmailId" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label [hidden]="!valUserEmail" class="text-danger">Invalid</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <label>Password*</label>
         </div>
         <div class="col-md-5">
             <input type="password" [(ngModel)]="userPassword" class="form-control" />
@@ -55,11 +72,28 @@
         </div>
     </div>
     <div class="form-group">
+        <div class="col-md-3">
+            <label>Confirm password*</label>
+        </div>
+        <div class="col-md-5">
+            <input type="password" [(ngModel)]="userConfirmPassword" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label [hidden]="!valUserConfirmPassword" class="text-danger">Password do not match</label>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-2 col-md-offset-3">
             <input type="submit" class="btn btn-success" (click)="sendRegisterRequest()" value="Register" />
         </div>
         <div class="col-md-3">
             <input type="button" class="btn btn-primary" (click)="navigateToLogin()" value="Back to login" />
         </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <label>* denotes all the required fields</label>
     </div>
 </div>

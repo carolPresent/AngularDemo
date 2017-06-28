@@ -1,12 +1,17 @@
 ﻿//Contains all the constants of the application.
 export class AppSettings {
-    //public static API_END_POINT: string = "http://192.168.0.102:1300/";
-    public static API_END_POINT: string = "http://192.168.11.63:1300/";
+    public static API_END_POINT: string = "http://192.168.0.101:1300/";
+    //public static API_END_POINT: string = "http://localhost:56009/";
+    //public static API_END_POINT: string = "http://192.168.11.63:1300/";
     public static Patient: string = "patient";
     public static Insurance: string = "insurance";
     public static PatientInsurance: string = "patientinsurance";
     public static Login: string = "login";
     public static Account: string = "account";
+    public static ForgotPassword: string = "forgotpassword";
+    public static ResetPassword: string = "resetpassword";
+    public static Verify: string = "verify";
+    public static LoginStatus = "loginstatus";
     public static AuthCookie: string = "httpCookie";
     public static UserName: string = "username";
     public static Password: string = "password";
@@ -25,7 +30,7 @@ export class AppSettings {
     public static UserId: string = "UserId";
     public static UserPassword: string = "UserPassword";
     public static UserAlreadyExist: string = "UserAlreadyExist";
-    public static Invalid: string = "FirstName";
+    public static Invalid: string = "Invalid";
     public static AlreadyTaken: string = "Already taken";
     public static Error: string = "Error";
     public static Space: string = " ";
@@ -47,4 +52,33 @@ export class AppSettings {
     public static Male: string = "Male";
     public static Female: string = "Female";
     public static Gender: string = "Gender";
+    public static UserNotVerified: string = "UserNotVerified";
+    public static Handle: string = "Handle";
+    public static VerificationCode: string = "VerificationCode";
+    public static EmailId: string = "EmailId";
+    public static ForgotPasswordFormHeading: string = "Forgot password";
+    public static ResetPasswordFormHeading: string = "Reset your password";
+    public static TextDanger: string = "text-danger";
+    public static TextSuccess: string = "text-success";
+    public static ForgotPasswordRequestCreatedSuccessfully: string = "Successfully sent mail";
+    public static ResetPasswordSuccessful: string = "Password is reset.";
+    public static Save: string = "Save";
+    public static NewPatient: string = "New patient";
+    public static NewInsurance: string = "New insurance";
+    public static ModifyPatient: string = "Modify patient";
+    public static ModifyInsurance: string = "Modify insurance";
+    public static Modify: string = "Modify";
+    public static PatientUpdated: string = 'Patient updated successfully';
+    public static InsuranceUpdated: string = 'Insurance updated successfully';
+    public static PatientInsuranceUpdated: string = 'Patient insurance updated successfully';
+    public static Unauthorized: string = "Unauthorized";
+    public static UnauthorizedPatienEdit: string = "You can edit only patients created by you.";
+    public static UnauthorizedInsuranceEdit: string = "You can edit only insurances created by you.";
+    public static UnauthorizedPatientInsuranceEdit: string = "You can edit only patient insurances created by you.";
+
+    //Public method to validate email id on UI
+    public static validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
 }

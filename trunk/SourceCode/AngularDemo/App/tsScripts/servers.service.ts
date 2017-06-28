@@ -31,6 +31,13 @@ export class ServerService {
         return this.http.post(url, data, { headers: headers });
     }
 
+    //Public function to make a put request
+    putRequest(url: string, data: any) {
+        let headers = new Headers();
+        this.createHeaders(headers);
+        return this.http.put(url, data, { headers: headers });
+    }
+
     //Public function to make a post request.
     postRequest(url: string, data: any) {
         let headers = new Headers();

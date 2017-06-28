@@ -1,51 +1,104 @@
-﻿<div class="form form-horizontal">
-    <div class="form-group">
-        <div class="col-md-3">
-            <label for="txtName">Name</label>
+﻿<modal #addInsurance>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">{{addInsuranceModalTitle}}</h4>
+    </modal-header>
+    <modal-body>
+        <div class="form form-horizontal">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label for="txtName">Name*</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" id="txtName" [(ngModel)]="insName" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label [hidden]="!valName" class="text-danger">Invalid</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label for="txtAddress">Address*</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" id="txtAddress" [(ngModel)]="insAddress" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label [hidden]="!valAddress" class="text-danger">Invalid</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label for="txtPhone">Phone*</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="number" id="txtPhone" [(ngModel)]="insPhone" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label [hidden]="!valPhone" class="text-danger">Invalid</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <label for="txtPublicId">Public id*</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="tel" maxlength="30" id="txtPublicId" [(ngModel)]="insPublicId" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label [hidden]="!valPublicId" class="text-danger">Invalid</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 col-md-offset-3">
+                    <input type="button" class="btn btn-success" (click)="saveInsurance()" [value]="insuranceModalSaveButtonValue" />
+                </div>
+            </div>
         </div>
-        <div class="col-md-7">
-            <input type="text" id="txtName" [(ngModel)]="insName" class="form-control" />
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <label>* denotes all the required fields</label>
+            </div>
+        </div>
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
+
+<div class="row">
+    <div class="col-md-2">
+        <button class="btn btn-primary" type="button" (click)="toggleInsuranceModal(true)">Add</button>
+    </div>
+</div>
+<div class="listDiv">
+    <div class="row gridTopBar">
+        <div class="col-md-2">
+            <b>Name</b>
+        </div>
+        <div class="col-md-3">
+            <b>Public id</b>
+        </div>
+        <div class="col-md-3">
+            <b>Address</b>
         </div>
         <div class="col-md-2">
-            <label [hidden]="!valName" class="text-danger">Invalid</label>
+            <b>Phone</b>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            <label for="txtAddress">Address</label>
+    <div class="row marginTopBottom" *ngFor="let insurance of insuranceList">
+        <div class="col-md-2">
+            {{insurance.Name}}
         </div>
-        <div class="col-md-7">
-            <input type="text" id="txtAddress" [(ngModel)]="insAddress" class="form-control" />
+        <div class="col-md-3">
+            {{insurance.InsurancePublicId}}
+        </div>
+        <div class="col-md-3">
+            {{insurance.Address}}
         </div>
         <div class="col-md-2">
-            <label [hidden]="!valAddress" class="text-danger">Invalid</label>
+            {{insurance.PhoneNumber}}
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            <label for="txtPhone">Phone</label>
-        </div>
-        <div class="col-md-7">
-            <input type="number" id="txtPhone" [(ngModel)]="insPhone" class="form-control" />
-        </div>
-        <div class="col-md-2">
-            <label [hidden]="!valPhone" class="text-danger">Invalid</label>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            <label for="txtPublicId">Public id</label>
-        </div>
-        <div class="col-md-7">
-            <input type="text" id="txtPublicId" [(ngModel)]="insPublicId" class="form-control" />
-        </div>
-        <div class="col-md-2">
-            <label [hidden]="!valPublicId" class="text-danger">Invalid</label>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-4 col-md-offset-3">
-            <input type="button" class="btn btn-success" (click)="saveInsurance()" value="Save" />
+        <div class="col-md-1">
+            <button class="btn btn-default" (click)="editInsurance(insurance)">Edit</button>
         </div>
     </div>
 </div>

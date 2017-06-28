@@ -19,10 +19,6 @@ var AppComponent = (function () {
         this.loggedIn = false;
     }
     AppComponent.prototype.ngOnInit = function () {
-        this.checkCookie();
-    };
-    //Private function for checking whether user is logged in or not.
-    AppComponent.prototype.checkCookie = function () {
         if (this.getObject(appSettings_1.AppSettings.AuthCookie)) {
             this.loggedIn = true;
         }

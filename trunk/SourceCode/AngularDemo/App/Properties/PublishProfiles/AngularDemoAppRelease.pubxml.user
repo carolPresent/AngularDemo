@@ -13,7 +13,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
     <File Include="bin/App.dll">
-      <publishTime>06/22/2017 14:07:53</publishTime>
+      <publishTime>06/23/2017 12:47:12</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -283,121 +283,121 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/21/2017 09:56:25</publishTime>
     </File>
     <File Include="Scripts/account/login.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/account/login.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/account/logout.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/account/logout.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/account/register.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/account/register.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/app.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/app.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/appSettings.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/appSettings.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/boot.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/boot.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>06/21/2017 09:56:07</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>06/21/2017 09:56:07</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/insurance/insurance.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/insurance/insurance.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
-      <publishTime>06/21/2017 09:56:08</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
-      <publishTime>06/21/2017 09:56:08</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
-      <publishTime>06/21/2017 09:56:08</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>06/21/2017 09:56:16</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>06/21/2017 09:56:16</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>06/21/2017 09:56:16</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>06/21/2017 09:56:16</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/main.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/main.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>06/21/2017 09:56:15</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/patient/patient.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/patient/patient.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/patientinsurance/patientinsurance.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/patientinsurance/patientinsurance.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>06/21/2017 09:56:16</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>06/21/2017 09:56:16</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/server/server.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/server/server.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/servers.service.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/servers.service.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/side-bar/side-bar.js">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/side-bar/side-bar.js.map">
-      <publishTime>06/22/2017 14:07:49</publishTime>
+      <publishTime>06/23/2017 12:47:07</publishTime>
     </File>
     <File Include="Scripts/systemjs.config.js">
-      <publishTime>06/21/2017 09:58:49</publishTime>
+      <publishTime>06/22/2017 09:17:12</publishTime>
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>06/21/2017 10:03:36</publishTime>
@@ -412,7 +412,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/21/2017 10:16:58</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>06/22/2017 13:20:06</publishTime>
+      <publishTime>06/22/2017 15:11:46</publishTime>
     </File>
     <File Include="Views/Home/Main.cshtml">
       <publishTime>06/21/2017 10:16:30</publishTime>
@@ -424,7 +424,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/21/2017 17:04:57</publishTime>
     </File>
     <File Include="Views/Home/Register.cshtml">
-      <publishTime>06/21/2017 18:49:10</publishTime>
+      <publishTime>06/22/2017 14:47:22</publishTime>
     </File>
     <File Include="Views/Home/Servers.cshtml">
       <publishTime>06/21/2017 10:17:18</publishTime>
