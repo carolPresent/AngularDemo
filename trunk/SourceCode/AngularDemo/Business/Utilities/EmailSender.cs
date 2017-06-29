@@ -29,7 +29,7 @@ namespace Business.Utilities
         }
 
         /// <summary>
-        /// Method to send email.
+        /// Method to send email. If an exception occurs then MailLog will log it as false status.
         /// </summary>
         /// <returns>boolean status whether email was sent or not</returns>
         public bool Send()

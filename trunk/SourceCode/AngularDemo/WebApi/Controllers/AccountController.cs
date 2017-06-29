@@ -10,6 +10,7 @@ namespace WebApi.Controllers
 {
     /// <summary>
     /// Web api controller for Account.The controller interacts with business layer to execute basic CRUD operations on users.
+    /// The controller uses CustomException attribute to log exception using elmah.
     /// </summary>
     [CustomException]
     [Route(RouteNames.Account)]

@@ -6,7 +6,8 @@ using System;
 namespace Data.UnitOfWork
 {
     /// <summary>
-    /// Implements IDisposable and IUnitOfWork.
+    /// Implements IDisposable and IUnitOfWork. It is the class which initializes all the required database classes and with the help 
+    /// of repository base performs various CRUD operations on them.
     /// </summary>
     public class UnitOfWork : IUnitOFWork,IDisposable
     {

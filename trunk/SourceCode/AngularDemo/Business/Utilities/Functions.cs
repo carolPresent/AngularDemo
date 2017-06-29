@@ -13,7 +13,7 @@ namespace Business.Utilities
         /// <summary>
         /// Common method to get date
         /// </summary>
-        /// <returns>string having current date</returns>
+        /// <returns>DateTime having current date</returns>
         public static DateTime GetCurrentDate()
         {
             return DateTime.Now.Date;
@@ -22,7 +22,7 @@ namespace Business.Utilities
         /// <summary>
         /// Common method to get time
         /// </summary>
-        /// <returns>string having current time</returns>
+        /// <returns>TimeSpan having current time</returns>
         public static TimeSpan GetCurrentTime()
         {
             return DateTime.Now.TimeOfDay;
@@ -44,7 +44,7 @@ namespace Business.Utilities
         /// <param name="handle">handle is the handle of the user which will be used for logging in to the system.</param>
         /// <param name="emailId">emailId is the email address of the user</param>
         /// <param name="verificationCode">verificationCode i the code which is required by user to verify his account</param>
-        /// <returns></returns>
+        /// <returns>string value denoting the mail body</returns>
         public static string CreateMailBody(string handle, string emailId, string verificationCode)
         {
             var returnItem = Strings.Empty;
@@ -60,7 +60,7 @@ namespace Business.Utilities
         /// </summary>
         /// <param name="emailId">emailId of the patient</param>
         /// <param name="name">name of patient</param>
-        /// <returns></returns>
+        /// <returns>string value denoting the mail body</returns>
         public static string CreateMailBody(string emailId, string name)
         {
             var returnItem = Strings.Empty;
@@ -76,7 +76,7 @@ namespace Business.Utilities
         /// <param name="forgotPasswordDto">forgotPasswordDto contains user handle</param>
         /// <param name="verificationCode">verificationCode is the verification code to send to the user email address</param>
         /// <param name="emailId">emailId is the user email address</param>
-        /// <returns></returns>
+        /// <returns>string value denoting the mail body</returns>
         public static string CreateMailBodyForgotPassword(string handle, string verificationCode, string emailId)
         {
             var returnItem = Strings.Empty;

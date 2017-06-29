@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace DataTransferObject.Models
 {
+    /// <summary>
+    /// This is the email dto which is used to send emails from the system to multiple/single user.
+    /// </summary>
     public class EmailServiceDto
     {
         public string Subject { get; set; }
@@ -14,6 +17,17 @@ namespace DataTransferObject.Models
         public int PortNumber { get; set; }
         public bool HtmlEnabled { get; set; }
 
+        /// <summary>
+        /// This is the constructor for the email service dto where all the variables are assigned there values.
+        /// </summary>
+        /// <param name="subject">subject is email subject that shows in the mail headers.</param>
+        /// <param name="body">body is the main content part of the email. This contains the information that system will impart to the user.</param>
+        /// <param name="emailFrom">emailFrom is the email id of the sender.</param>
+        /// <param name="emailPassword">emailPassword is the password associated to the email id of the sender.</param>
+        /// <param name="emailTo">emailTo is the list string containing email addresses to which the mail has to be delivered.</param>
+        /// <param name="smtpServer">smtpServer is the name of server on which the mail will work upon.</param>
+        /// <param name="portNumber">portNumber is the port number on which the mail server will work.</param>
+        /// <param name="htmlEnabled">htmlEnabled is the boolean variable that specifies that whether body should be rendered as an html page or plain text.</param>
         public EmailServiceDto(string subject, string body, string emailFrom, string emailPassword, List<string> emailTo, string smtpServer, int portNumber, bool htmlEnabled)
         {
             Subject = subject;
@@ -29,7 +43,7 @@ namespace DataTransferObject.Models
         /// <summary>
         /// The method converts list of emails to comma seperated emails so that email can be sent to multiple emails.
         /// </summary>
-        /// <returns>string of comma i.e. ',' emails</returns>
+        /// <returns>string of comma(,) seperated emails</returns>
         public string ListToEmailString()
         {
             //Adding first email address to returnItem which have zero index.

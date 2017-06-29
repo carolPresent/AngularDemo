@@ -25,9 +25,9 @@ namespace Business.Services
         {
             using (var unitOfWork = new UnitOfWork())
             {
+                //Creating a parameter less query model if it is null from request
                 if (patientQuery == null)
                     patientQuery = new PatientQuery(id: CommonString.OptionalStringParamInteger, name: CommonString.OptionalStringParam, phoneNumber: CommonString.OptionalStringParam);
-
                 patientQuery.SetTypedVariables();
                 var result = unitOfWork.Patients.FindAll(QueryExpressions.Patient(patientQuery));
                 result = result.OrderByDescending(m => m.Id).ToList();
@@ -46,7 +46,6 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
-
             newPatientDto = validationStatus.Second;
             using (var unitOfWork = new UnitOfWork())
             {
@@ -79,6 +78,7 @@ namespace Business.Services
 
                 if (findPatient == null)
                     return ReturnStatements.FailedResponse(Strings.NoPatientFound);
+
                 if (!findPatient.UserId.Equals(userId))
                     return ReturnStatements.FailedResponse(Strings.Unauthorized);
                 findPatient = MapForUpdate(oldPatientDto, findPatient);

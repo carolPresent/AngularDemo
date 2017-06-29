@@ -61,7 +61,6 @@ namespace Business.Services
 
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(loginDto));
-
                 SendMail(loginDto.LoginHandle, verificationCode, emailId, false);
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(loginDto));
             }
@@ -79,6 +78,7 @@ namespace Business.Services
             emailList.Add(emailId);
             var mailSubject = Strings.SuccessfullRegistrationSubject;
             var mailBody = Functions.CreateMailBody(handle, emailId, verificationCode);
+
             if (isForgotPasswordMail)
             {
                 mailBody = Functions.CreateMailBodyForgotPassword(handle, verificationCode, emailId);
@@ -114,7 +114,6 @@ namespace Business.Services
                     if (userPassword != null)
                         return ReturnStatements.SuccessLogin(userInfo.Id);
                 }
-
                 return ReturnStatements.FailedLogin(StatusMessages.LoginFailed, StatusCodes.Unauthorized);
             }
         }
@@ -142,6 +141,7 @@ namespace Business.Services
 
                 if (!userPassword.Password.Equals(verificationDto.Password))
                     return ReturnStatements.FailedResponse(Strings.PasswordMismatch);
+
                 if (userList[0].VerificationCode.Equals(verificationDto.VerificationCode))
                 {
                     userList[0].IsVerified = true;
@@ -177,9 +177,9 @@ namespace Business.Services
                 user.ForgotPasswordCode = Functions.GenerateCode().ToString();
                 unitOfWork.Users.Update(user);
                 var saveResponse = unitOfWork.Complete();
+
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(forgotPasswordDto));
-
                 SendMail(forgotPasswordDto.Handle, user.ForgotPasswordCode, user.EmailId, true);
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(forgotPasswordDto));
             }
@@ -203,7 +203,6 @@ namespace Business.Services
                 //Check if no user exist.
                 if (userList.Count.Equals(0))
                     return ReturnStatements.FailedResponse(Strings.UserDoNotExist);
-
                 //Get user at first index. Since handles are unique , therefore only one record will be fetched from database.
                 var user = userList[0];
 

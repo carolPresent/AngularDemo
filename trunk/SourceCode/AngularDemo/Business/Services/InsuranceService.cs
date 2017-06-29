@@ -24,9 +24,9 @@ namespace Business.Services
         {
             using (var unitOfWork = new UnitOfWork())
             {
+                //Creating a parameter less query model if it is null from request
                 if (insuranceQuery == null)
                     insuranceQuery = new InsuranceQuery(id: CommonString.OptionalStringParamInteger, name: CommonString.OptionalStringParam, phoneNumber: CommonString.OptionalStringParam, pubId: CommonString.OptionalStringParam);
-
                 insuranceQuery.SetTypedVariables();
                 var result = unitOfWork.Insurances.FindAll(QueryExpressions.Insurance(insuranceQuery));
                 result = result.OrderByDescending(m => m.Id).ToList();
@@ -45,7 +45,6 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
-
             newInsuranceDto = validationStatus.Second;
             using (var unitOfWork = new UnitOfWork())
             {
@@ -71,7 +70,6 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
-
             oldInsuranceDto = validationStatus.Second;
             using (var unitOfWork = new UnitOfWork())
             {

@@ -13,6 +13,7 @@ namespace WebApi.Controllers
     /// <summary>
     /// Web Api controller for patient.The controller executes basic CRUD operations of patient.
     /// An authorized api.
+    /// The controller uses CustomException attribute to log exception using elmah.
     /// </summary>
     [CustomException]
     [Authorize]

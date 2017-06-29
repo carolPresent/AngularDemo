@@ -25,6 +25,7 @@ namespace Business.Services
         {
             using (var unitOfWork = new UnitOfWork())
             {
+                //Creating a parameter less query model if it is null from request
                 if (patientInsuranceQuery == null)
                     patientInsuranceQuery = new PatientInsuranceQuery(patientId: CommonString.OptionalStringParamInteger, insuranceId: CommonString.OptionalStringParamInteger);
                 patientInsuranceQuery.SetTypedVariables();
@@ -52,6 +53,7 @@ namespace Business.Services
                 var dbPatientInsurance = DtoToDatabase.PatientInsurance(new Pair { First = newPatientInsurance, Second = userId });
                 unitOfWork.PatientInsurances.Add(dbPatientInsurance);
                 var saveResponse = unitOfWork.Complete();
+
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(newPatientInsurance));
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(newPatientInsurance));
@@ -96,6 +98,7 @@ namespace Business.Services
 
                 if (findPatientInsurance == null)
                     return ReturnStatements.FailedResponse(Strings.NoPatientInusranceFound);
+
                 if (!findPatientInsurance.UserId.Equals(userId))
                     return ReturnStatements.FailedResponse(Strings.Unauthorized);
                 findPatientInsurance = MapForUpdate(oldPatientInsurance, findPatientInsurance);
