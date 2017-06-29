@@ -11,9 +11,9 @@ var AppSettings = (function () {
     };
     return AppSettings;
 }());
-AppSettings.API_END_POINT = "http://192.168.0.101:1300/";
+//public static API_END_POINT: string = "http://192.168.0.101:1300/";
 //public static API_END_POINT: string = "http://localhost:56009/";
-//public static API_END_POINT: string = "http://192.168.11.63:1300/";
+AppSettings.API_END_POINT = "http://192.168.11.63:1300/";
 AppSettings.Patient = "patient";
 AppSettings.Insurance = "insurance";
 AppSettings.PatientInsurance = "patientinsurance";

@@ -1,6 +1,5 @@
 ﻿using Business.Services;
 using DataTransferObject.QueryModels;
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
@@ -33,15 +32,8 @@ namespace WebApi.Controllers
         [HttpGet]
         public HttpResponseMessage Get([FromUri]PatientInsuranceQuery patientInsuranceQuery)
         {
-            try
-            {
-                var result = _services.Get(patientInsuranceQuery);
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-            }
+            var result = _services.Get(patientInsuranceQuery);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -52,16 +44,9 @@ namespace WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage Add(AddPatientInsurance newpatientInsurance)
         {
-            try
-            {
-                var userId = UserIdentity.GetUserId((ClaimsIdentity)User.Identity);
-                var result = _services.Add(newpatientInsurance, userId);
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-            }
+            var userId = UserIdentity.GetUserId((ClaimsIdentity)User.Identity);
+            var result = _services.Add(newpatientInsurance, userId);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -72,16 +57,9 @@ namespace WebApi.Controllers
         [HttpPut]
         public HttpResponseMessage Update(AddPatientInsurance oldPatientInsurance)
         {
-            try
-            {
-                var userId = UserIdentity.GetUserId((ClaimsIdentity)User.Identity);
-                var result = _services.Update(oldPatientInsurance, userId);
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch(Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-            }
+            var userId = UserIdentity.GetUserId((ClaimsIdentity)User.Identity);
+            var result = _services.Update(oldPatientInsurance, userId);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
     }
 }

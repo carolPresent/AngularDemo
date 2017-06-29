@@ -1,8 +1,8 @@
 ﻿//Contains all the constants of the application.
 export class AppSettings {
-    public static API_END_POINT: string = "http://192.168.0.101:1300/";
+    //public static API_END_POINT: string = "http://192.168.0.101:1300/";
     //public static API_END_POINT: string = "http://localhost:56009/";
-    //public static API_END_POINT: string = "http://192.168.11.63:1300/";
+    public static API_END_POINT: string = "http://192.168.11.63:1300/";
     public static Patient: string = "patient";
     public static Insurance: string = "insurance";
     public static PatientInsurance: string = "patientinsurance";

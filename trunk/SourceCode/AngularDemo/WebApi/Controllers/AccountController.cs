@@ -1,6 +1,5 @@
 ﻿using Business.Services;
 using DataTransferObject.Models;
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -32,15 +31,8 @@ namespace WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage Add(UserDto newUserDto)
         {
-            try
-            {
-                var result = _services.Add(newUserDto);
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-            }
+            var result = _services.Add(newUserDto);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -53,15 +45,8 @@ namespace WebApi.Controllers
         [Route(RouteNames.Verify)]
         public HttpResponseMessage Verify(VerificationDto verificationDto)
         {
-            try
-            {
-                var result = _services.VerifyUser(verificationDto);
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch(Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-            }
+            var result = _services.VerifyUser(verificationDto);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -74,15 +59,8 @@ namespace WebApi.Controllers
         [Route(RouteNames.ForgotPassword)]
         public HttpResponseMessage ForgotPassword(ForgotPasswordDto forgotPasswordDto)
         {
-            try
-            {
-                var result = _services.ForgotPassword(forgotPasswordDto);
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch(Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-            }
+            var result = _services.ForgotPassword(forgotPasswordDto);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -95,15 +73,8 @@ namespace WebApi.Controllers
         [Route(RouteNames.ResetPassword)]
         public HttpResponseMessage ResetPassword(ResetPasswordDto resetPasswordDto)
         {
-            try
-            {
-                var result = _services.ResetPassword(resetPasswordDto);
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            catch(Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-            }
+            var result = _services.ResetPassword(resetPasswordDto);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
