@@ -28,6 +28,7 @@ namespace Business.Services
                 //Creating a parameter less query model if it is null from request
                 if (patientQuery == null)
                     patientQuery = new PatientQuery(id: CommonString.OptionalStringParamInteger, name: CommonString.OptionalStringParam, phoneNumber: CommonString.OptionalStringParam);
+
                 patientQuery.SetTypedVariables();
                 var result = unitOfWork.Patients.FindAll(QueryExpressions.Patient(patientQuery));
                 result = result.OrderByDescending(m => m.Id).ToList();
@@ -46,7 +47,9 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
+
             newPatientDto = validationStatus.Second;
+
             using (var unitOfWork = new UnitOfWork())
             {
                 var dbPatient = DtoToDatabase.Patient(newPatientDto, userId);
@@ -55,6 +58,7 @@ namespace Business.Services
 
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(newPatientDto));
+
                 SendMail(newPatientDto);
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(newPatientDto));
             }
@@ -71,7 +75,9 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
+
             oldPatientDto = validationStatus.Second;
+
             using (var unitOfWork = new UnitOfWork())
             {
                 var findPatient = unitOfWork.Patients.Find(m => m.Id.Equals(oldPatientDto.Id));
@@ -81,6 +87,7 @@ namespace Business.Services
 
                 if (!findPatient.UserId.Equals(userId))
                     return ReturnStatements.FailedResponse(Strings.Unauthorized);
+
                 findPatient = MapForUpdate(oldPatientDto, findPatient);
                 unitOfWork.Patients.Update(findPatient);
                 var saveResponse = unitOfWork.Complete();
@@ -118,10 +125,11 @@ namespace Business.Services
             emailList.Add(patientDto.EmailId);
             var emailDto = new EmailServiceDto(Strings.PatientRegisteredSubject, Functions.CreateMailBody(patientDto.EmailId, patientDto.FirstName), Strings.UserEmailId, Strings.UserEmailPassword, emailList, Strings.SmtpServer, Integers.PortNumberForEmail, true);
             var emailer = new EmailSender(emailDto);
-            var emailSentStatus = emailer.Send();
+            emailer.Send();
+
             using (var unitOfWork = new UnitOfWork())
             {
-                unitOfWork.EmailLogs.Add(DtoToDatabase.EmailLog(emailDto, emailSentStatus));
+                unitOfWork.EmailLogs.Add(DtoToDatabase.EmailLog(emailDto, true));
                 unitOfWork.Complete();
             }
         }

@@ -32,7 +32,7 @@ namespace Business.Utilities
         /// Method to send email. If an exception occurs then MailLog will log it as false status.
         /// </summary>
         /// <returns>boolean status whether email was sent or not</returns>
-        public bool Send()
+        public void Send()
         {
             var mail = new MailMessage();
             var smtpServer = new SmtpClient(EmailInfo.SmtpServer);
@@ -44,15 +44,16 @@ namespace Business.Utilities
             smtpServer.Port = EmailInfo.PortNumber;
             smtpServer.Credentials = new NetworkCredential(EmailInfo.EmailFrom, EmailInfo.EmailPassword);
             smtpServer.EnableSsl = true;
-            try
-            {
-                smtpServer.Send(mail);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            smtpServer.Send(mail);
+            //try
+            //{
+                
+            //    return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return false;
+            //}
         }
 
     }

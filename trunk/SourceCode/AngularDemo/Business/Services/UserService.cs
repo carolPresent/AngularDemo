@@ -32,36 +32,17 @@ namespace Business.Services
                 if (checkIfUserAlreadyExist)
                     return ReturnStatements.BadRequestResponse(Strings.UserAlreadyExist);
                 var dbUser = DtoToDatabase.User(newUserDto);
-                unitOfWork.Users.Add(dbUser);
-                var saveResponse = unitOfWork.Complete();
-
-                if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
-                    return ReturnStatements.FailedResponse(DynamicListForResponse.Create(newUserDto));
-                //Save credentials
                 var loginDto = new LoginDto(loginHandle: newUserDto.Handle, loginPassword: newUserDto.Password);
-                return AddLoginDetails(loginDto, dbUser.Id, dbUser.VerificationCode, dbUser.EmailId);
-            }
-        }
-
-        /// <summary>
-        /// Private class to add login details of a new user.
-        /// </summary>
-        /// <param name="loginDto">loginDto contains login detail of a new user trying to log in.</param>
-        /// <param name="userId">userId is the Foreign Key used for adding a new password</param>
-        /// <param name="emailId">emailId is the email id of the user who is registering himself on the system</param>
-        /// <param name="verificationCode">verificationCode is the code to send to the user. It is always 6 digits.</param>
-        /// <returns>ResponseModel associated to the addition response of user login details</returns>
-        private ResponseModel AddLoginDetails(LoginDto loginDto, int userId, string verificationCode, string emailId)
-        {
-            var dbUserPassword = DtoToDatabase.UserPassword(loginDto, userId);
-            using (var unitOfWork = new UnitOfWork())
-            {
+                var dbUserPassword = DtoToDatabase.UserPassword(loginDto, dbUser.Id);
+                dbUserPassword.User = dbUser;
                 unitOfWork.UserPasswords.Add(dbUserPassword);
+
                 var saveResponse = unitOfWork.Complete();
 
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(loginDto));
-                SendMail(loginDto.LoginHandle, verificationCode, emailId, false);
+
+                SendMail(loginDto.LoginHandle, dbUser.VerificationCode, dbUser.EmailId, false);
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(loginDto));
             }
         }
@@ -86,10 +67,10 @@ namespace Business.Services
             }
             var emailDto = new EmailServiceDto(mailSubject, mailBody, Strings.UserEmailId, Strings.UserEmailPassword, emailList, Strings.SmtpServer, Integers.PortNumberForEmail, true);
             var emailer = new EmailSender(emailDto);
-            var emailSentStatus = emailer.Send();
+            emailer.Send();
             using (var unitOfWork = new UnitOfWork())
             {
-                unitOfWork.EmailLogs.Add(DtoToDatabase.EmailLog(emailDto, emailSentStatus));
+                unitOfWork.EmailLogs.Add(DtoToDatabase.EmailLog(emailDto, true));
                 unitOfWork.Complete();
             }
         }
@@ -103,17 +84,21 @@ namespace Business.Services
         {
             using (var unitOfWork = new UnitOfWork())
             {
-                var userInfo = unitOfWork.Users.Find(QueryExpressions.UserHandle(loginDto));
+                var userList = unitOfWork.Users.FindOnConstraint(QueryExpressions.UserHandle(loginDto), prop => prop.UserPasswords).ToList();
 
-                if (userInfo != null)
+                if (!userList.Count.Equals(0))
                 {
+                    var userInfo = userList[0];
+
                     if (!userInfo.IsVerified)
                         return ReturnStatements.FailedLogin(StatusMessages.UserNotVerified, StatusCodes.Unauthorized);
 
-                    var userPassword = unitOfWork.UserPasswords.Find(QueryExpressions.UserPassword(loginDto, userInfo.Id));
+                    var userPassword = userInfo.UserPasswords.Where(QueryExpressions.UserPassword(loginDto, userInfo.Id)).ToList()[0];
+
                     if (userPassword != null)
                         return ReturnStatements.SuccessLogin(userInfo.Id);
                 }
+
                 return ReturnStatements.FailedLogin(StatusMessages.LoginFailed, StatusCodes.Unauthorized);
             }
         }
@@ -129,7 +114,9 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
+
             verificationDto = validationStatus.Second;
+
             using (var unitOfWork = new UnitOfWork())
             {
                 var userList = unitOfWork.Users.FindOnConstraint(m => m.Handle.Equals(verificationDto.Handle), prop => prop.UserPasswords).ToList();
@@ -151,6 +138,7 @@ namespace Business.Services
                         return ReturnStatements.FailedResponse(Strings.UnsuccessfullVerification);
                     return ReturnStatements.SuccessResponse(Strings.SuccessfullVerification);
                 }
+
                 return ReturnStatements.FailedResponse(Strings.VerificationCodeMismatch);
             }
         }
@@ -166,6 +154,7 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
+
             forgotPasswordDto = validationStatus.Second;
             using (var unitOfWork = new UnitOfWork())
             {
@@ -173,6 +162,7 @@ namespace Business.Services
 
                 if (user == null)
                     return ReturnStatements.FailedResponse(Strings.UserDoNotExist);
+
                 user.ForgotPasswordFlag = true;
                 user.ForgotPasswordCode = Functions.GenerateCode().ToString();
                 unitOfWork.Users.Update(user);
@@ -180,6 +170,7 @@ namespace Business.Services
 
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(forgotPasswordDto));
+
                 SendMail(forgotPasswordDto.Handle, user.ForgotPasswordCode, user.EmailId, true);
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(forgotPasswordDto));
             }
@@ -196,6 +187,7 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
+
             using (var unitOfWork = new UnitOfWork())
             {
                 var userList = unitOfWork.Users.FindOnConstraint(m => m.Handle.Equals(resetPasswordDto.Handle), prop => prop.UserPasswords).ToList();
@@ -203,11 +195,13 @@ namespace Business.Services
                 //Check if no user exist.
                 if (userList.Count.Equals(0))
                     return ReturnStatements.FailedResponse(Strings.UserDoNotExist);
+
                 //Get user at first index. Since handles are unique , therefore only one record will be fetched from database.
                 var user = userList[0];
 
                 if (!user.ForgotPasswordFlag)
                     return ReturnStatements.FailedResponse(Strings.NoRequestCreated);
+
                 if (user.ForgotPasswordCode.Equals(resetPasswordDto.VerificationCode))
                 {
                     user.ForgotPasswordFlag = false;

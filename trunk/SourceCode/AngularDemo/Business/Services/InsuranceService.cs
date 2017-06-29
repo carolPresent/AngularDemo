@@ -45,7 +45,9 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
+
             newInsuranceDto = validationStatus.Second;
+
             using (var unitOfWork = new UnitOfWork())
             {
                 var dbInsurance = DtoToDatabase.Insurance(newInsuranceDto, userId);
@@ -54,6 +56,7 @@ namespace Business.Services
 
                 if (saveResponse.Equals(Integers.UnsuccessfullDatabaseSave))
                     return ReturnStatements.FailedResponse(DynamicListForResponse.Create(newInsuranceDto));
+
                 return ReturnStatements.SuccessResponse(DynamicListForResponse.Create(newInsuranceDto));
             }
         }
@@ -70,15 +73,19 @@ namespace Business.Services
 
             if (!(bool)validationStatus.First)
                 return ReturnStatements.BadRequestResponse(validationStatus.Second);
+
             oldInsuranceDto = validationStatus.Second;
+
             using (var unitOfWork = new UnitOfWork())
             {
                 var findInsurance = unitOfWork.Insurances.Find(m => m.Id.Equals(oldInsuranceDto.Id));
 
                 if (findInsurance == null)
                     return ReturnStatements.FailedResponse(Strings.NoInusranceFound);
+
                 if (!findInsurance.UserId.Equals(userId))
                     return ReturnStatements.FailedResponse(Strings.Unauthorized);
+
                 findInsurance = MapForUpdate(oldInsuranceDto, findInsurance);
                 unitOfWork.Insurances.Update(findInsurance);
                 var saveResponse = unitOfWork.Complete();
